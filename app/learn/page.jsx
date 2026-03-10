@@ -386,7 +386,7 @@ export default function LearnPage() {
             <p style={{
               fontFamily: 'Fredoka', fontSize: '1.2rem', color: '#9CA3AF',
               textAlign: 'center', marginBottom: 24,
-            }}>Pick a game to play 👇</p>
+            }}>Pick an LSPA Game to Play 👇</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {GAMES.map(g => (
                 <button key={g.id} onClick={() => setGame(g.id)} style={{
