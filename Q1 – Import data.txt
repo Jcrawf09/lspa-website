@@ -1,0 +1,39 @@
+Q1 – Import data
+
+flights <- read_csv("flights.csv", show_col_types = FALSE)
+
+planes imported (either from nycflights13 or planes.csv).
+
+Q2 – Datetime conversion (and overwrite)
+
+R
+
+Q2 - Datetime replaced with the sequence from
+2014-02-01 05:00:00 UTC → 2025-11-01 05:00:00 UTC
+
+Covers all rows (Excel 2–336,777).
+
+Q3 – Month column
+
+Month created from Datetime (1–12).
+
+Q4 – Month as factor
+
+Month converted to an ordered factor with levels 1:12.
+
+Q5 – Average dep_delay by Month
+
+dep_delay_by_month table with
+avg_dep_delay and total_observations by Month.
+
+Q6 – Join flights + planes
+
+flights_join <- flights %>% left_join(planes, by = "tailnum")
+
+Row count matches flights (all lines accounted for).
+
+Q7 – Average dep_delay by plane year
+
+avg_dep_delay_by_year summary from flights_join, grouped by year (plane build year) with avg_dep_delay and total_observations.
+
+All of that lines up with the Module 2 lessons and the

@@ -1,0 +1,11 @@
+notepad app\components\Nav.jsx
+```
+
+When Notepad opens (check your taskbar if you don't see it), find this line near the top:
+```
+const links=[{href:'#home',label:'Home'},{href:'#about',label:'About'},{href:'#programs',label:'Programs'},{href:'#locations',label:'Locations'},{href:'#contact',label:'Contact'}];
+```
+
+Replace it with:
+```
+const links=[{href:'#home',label:'Home'},{href:'#about',label:'About'},{href:'#programs',label:'Programs'},{href:'#locations',label:'Locations'},{href:'#resources',label:'Resources'},{href:'#contact',label:'Contact'}];

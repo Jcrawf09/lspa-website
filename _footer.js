@@ -1,0 +1,1 @@
+const fs=require('fs');const c=["use client","import Link from 'next/link';","","export default function Footer(){","  const links=['About','Programs','Gallery','Enrollment','Contact Us','Careers','Resources'];","  return(","    <footer className="pt-16 pb-6" style={{background:'#0F1D3D'}}>"].join('\n');fs.writeFileSync('app/components/Footer.jsx',c);

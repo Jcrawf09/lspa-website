@@ -1,0 +1,247 @@
+const fs = require('fs');
+
+// Fix en.json trailing comma
+let en = fs.readFileSync('app/i18n/en.json', 'utf8');
+en = en.replace(/"privacyPolicy":\s*"Privacy Policy",(\s*\n\s*\})/g, '"privacyPolicy": "Privacy Policy"$1');
+fs.writeFileSync('app/i18n/en.json', en, 'utf8');
+console.log('en.json fixed.');
+
+// Fully restore es.json from scratch — clean UTF-8
+const es = {
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Nosotros",
+    "programs": "Programas",
+    "locations": "Ubicaciones",
+    "resources": "Recursos",
+    "contact": "Contacto",
+    "enrollNow": "Inscríbete",
+    "ourTeam": "Nuestro Equipo",
+    "call": "Llamar"
+  },
+  "topBar": {
+    "tagline": "Donde los Sueños Pequeños Se Hacen Grandes"
+  },
+  "hero": {
+    "badge": "Preescolar Gratis en Trenton",
+    "heading1": "Donde los Sueños Pequeños",
+    "heading2": "Se Hacen Grandes",
+    "desc": "Educación preescolar gratuita y de alta calidad para familias de Trenton. Dos campus. Sin costo. Oportunidades sin límites.",
+    "cta": "Comienza la Inscripción",
+    "callBtn": "Llama"
+  },
+  "programs": {
+    "badge": "Nuestros Salones",
+    "heading": "Programas para",
+    "headingAccent": "Mentes en Crecimiento",
+    "desc": "Ambos programas siguen el marco del Creative Curriculum alineado con los Estándares de Enseñanza y Aprendizaje Preescolar de NJ. Programas de día completo sin costo para familias de Trenton que califiquen.",
+    "preschool3": "Preescolar 3",
+    "preschool4": "Preescolar 4",
+    "ages34": "Edades 3-4",
+    "ages45": "Edades 4-5",
+    "fullDay": "Día Completo — Lunes a Viernes",
+    "highlights3": ["Desarrollo socioemocional","Fundamentos del lenguaje y lectura","Juego creativo y exploración","Música y movimiento"],
+    "highlights4": ["Preparación para kindergarten","Matemáticas y ciencias básicas","Escritura y narración","Educación física"],
+    "eligibility": "Niños de 3, 4 o 5 años antes del 30 de septiembre. Residentes de Trenton se inscriben sin costo."
+  },
+  "cta": {
+    "heading": "Dale a Tu Hijo el",
+    "headingAccent": "Mejor Comienzo",
+    "desc": "La inscripción está abierta para niños de 3, 4 o 5 años antes del 30 de septiembre. Completamente gratis para residentes de Trenton.",
+    "callBtn": "Llama para Inscribir",
+    "learnMore": "Más Información"
+  },
+  "enrollment": {
+    "badge": "Empieza Aquí",
+    "heading": "Inscribe a Tu",
+    "headingAccent": "Hijo",
+    "desc": "Educación preescolar gratuita y de calidad para familias de Trenton. Sin matrícula. Sin subsidio. Solo oportunidad.",
+    "spanishSubtitle": "Preescolar gratis para familias de Trenton.",
+    "callToEnroll": "Llama para Inscribir",
+    "stepsBadge": "5 Pasos Sencillos",
+    "stepsHeading": "Cómo",
+    "stepsAccent": "Inscribirse",
+    "steps": [
+      {"title":"Contáctanos","desc":"Llama al (609) 396-7171 o envía un correo a lauraspelmanacademy@verizon.net para expresar tu interés y saber sobre los espacios disponibles."},
+      {"title":"Visita un Campus","desc":"Visita nuestro campus en Trenton o Lawrence para conocer a nuestros maestros y ver los salones en acción."},
+      {"title":"Completa los Formularios","desc":"Descarga y completa la solicitud de inscripción y el paquete de registro a continuación."},
+      {"title":"Entrega los Documentos","desc":"Trae los formularios completos junto con el certificado de nacimiento de tu hijo, los registros de vacunas y prueba de residencia en Trenton."},
+      {"title":"¡Bienvenido a LSPA!","desc":"Una vez aprobado, tu hijo se une a la familia LSPA. Programaremos una orientación para comenzar."}
+    ],
+    "formsBadge": "Descarga y Sube",
+    "formsHeading": "Formularios de",
+    "formsAccent": "Inscripción",
+    "formsDesc": "Descarga, imprime, firma y sube tus formularios de forma segura. Recibirás confirmación por correo electrónico.",
+    "forms": [
+      {"title":"Solicitud de Inscripción","titleEs":"Enrollment Application","desc":"Lista de verificación de inscripción del distrito, información del estudiante, verificación de elegibilidad, encuesta de idioma, formularios de salud y encuesta familiar."},
+      {"title":"Paquete de Registro","titleEs":"Registration Packet","desc":"Formularios de registro completos incluyendo información del niño, contactos de emergencia, información médica, políticas y verificación de padres."},
+      {"title":"Autorización de Redes Sociales","titleEs":"Social Media Release","desc":"Formulario de consentimiento para fotografías y grabaciones de video utilizadas en publicaciones escolares y redes sociales."}
+    ],
+    "download": "Descargar",
+    "uploadSigned": "Subir Formulario Firmado",
+    "close": "Cerrar",
+    "secureNote": "Envío seguro — los archivos van directamente a Laura Spelman Preschool Academy. Recibirás confirmación por correo.",
+    "parentName": "Nombre del Padre / Encargado",
+    "email": "Correo Electrónico",
+    "childName": "Nombre del Niño/a",
+    "phone": "Teléfono",
+    "attachForm": "Adjunta Formulario(s) Firmado(s)",
+    "dragDrop": "Haz clic o arrastra archivos aquí",
+    "dropHere": "Suelta los archivos aquí",
+    "fileTypes": "PDF, JPG, PNG, HEIC",
+    "notes": "Notas",
+    "notesPlaceholder": "Preguntas o comentarios",
+    "submit": "Enviar Formulario",
+    "submitting": "Enviando...",
+    "encrypted": "Encriptado",
+    "sentDirectly": "Enviado directamente a LSPA",
+    "success": "¡Enviado Exitosamente!",
+    "successMsg": "Confirmación enviada a tu correo.",
+    "uploadAnother": "Subir Otro",
+    "errorMsg": "Error — Inténtalo de nuevo",
+    "retry": "Reintentar",
+    "required": "Requerido",
+    "invalidEmail": "Correo inválido",
+    "attachError": "Adjunta tu formulario firmado",
+    "troubleMsg": "¿Tienes problemas? Envía los formularios por correo a",
+    "orDropOff": "o entrégalos en cualquiera de los dos campus.",
+    "reqHeading": "Lo Que",
+    "reqAccent": "Necesitas",
+    "requirements": [
+      "El niño debe tener 3, 4 o 5 años antes del 30 de septiembre del año de inscripción",
+      "Prueba de residencia en Trenton (factura de servicios, contrato de alquiler o estado de hipoteca)",
+      "Certificado de nacimiento del niño",
+      "Registros de vacunas al día",
+      "Solicitud de inscripción y paquete de registro completos",
+      "Información de contacto de emergencia",
+      "Formulario de examen físico del doctor del niño"
+    ],
+    "faqHeading": "Preguntas",
+    "faqAccent": "Frecuentes",
+    "faqs": [
+      {"q":"¿Tiene algún costo el programa?","a":"No. LSPA es completamente gratis para todas las familias de Trenton. No hay matrícula, no se requiere subsidio y no hay costos ocultos. Nuestro programa está totalmente financiado por el estado de Nueva Jersey."},
+      {"q":"¿Cuál es el horario escolar?","a":"Nuestro programa es de día completo, de lunes a viernes, siguiendo el calendario de las Escuelas Públicas de Trenton."},
+      {"q":"¿Proveen comida?","a":"Sí. El desayuno, almuerzo y meriendas se ofrecen diariamente sin costo para las familias a través del programa CACFP."},
+      {"q":"¿Qué currículo usan?","a":"Usamos el marco del Creative Curriculum, alineado con los Estándares de Enseñanza y Aprendizaje Preescolar de Nueva Jersey, con enfoque en la preparación para kindergarten."},
+      {"q":"¿Puedo inscribir a mitad de año?","a":"Sí, aceptamos inscripción continua cuando hay espacios disponibles. Contáctanos para verificar la disponibilidad en cualquiera de los campus."},
+      {"q":"¿Todos los maestros tienen certificaciones?","a":"Sí. Todos los maestros principales tienen certificaciones del estado de Nueva Jersey en educación temprana y participan en desarrollo profesional continuo."}
+    ],
+    "readyHeading": "¿Listo para",
+    "readyAccent": "Comenzar?",
+    "readyDesc": "Los espacios se llenan rápido. Contáctanos hoy para asegurar el lugar de tu hijo.",
+    "emailUs": "Envíanos un Correo"
+  },
+  "about": {
+    "badge": "Nuestra Historia",
+    "heading": "La Historia Detrás de",
+    "headingAccent": "Nuestros Salones",
+    "stats": {
+      "campuses": "Campus",
+      "years": "Años Sirviendo a Trenton",
+      "families": "Familias Atendidas Anualmente",
+      "cost": "Gratis"
+    },
+    "timelineNow": "Ahora",
+    "timelineNext": "Próximo",
+    "timeline2526": "Un Año de Crecimiento",
+    "timeline2627": "Mirando Hacia Adelante",
+    "missionLabel": "Nuestra Misión",
+    "missionText": "Proveer a cada niño en Trenton un ambiente de aprendizaje seguro, enriquecedor y acogedor que construya la base para el éxito de toda la vida."
+  },
+  "team": {
+    "badge": "Nuestra Gente",
+    "heading": "Conoce a Nuestro",
+    "headingAccent": "Equipo",
+    "desc": "30 educadores y personal dedicados en dos campus, comprometidos a darle a cada niño el mejor comienzo en la vida.",
+    "classrooms": "Salones",
+    "campuses": "Campus",
+    "teamMembers": "Miembros del Equipo",
+    "all": "Todos",
+    "trentonCampus": "540 N. Olden Ave",
+    "lawrenceCampus": "1040 Spruce St",
+    "oldenAve": "Olden Ave",
+    "spruceSt": "Spruce St",
+    "nameTBD": "Nombre por Confirmar",
+    "directors": "Directores",
+    "teachingStaff": "Maestros",
+    "teacherAssistants": "Asistentes de Maestro",
+    "familyWorkers": "Trabajadores Familiares",
+    "officeStaff": "Personal de Oficina",
+    "security": "Seguridad",
+    "foodService": "Servicio de Alimentos",
+    "roles": {
+      "director": "Director/a",
+      "leadTeacher": "Maestro/a Principal",
+      "teacherAssistant": "Asistente de Maestro",
+      "familyWorker": "Trabajador/a Familiar",
+      "clerical": "Oficinista",
+      "securityGuard": "Guardia de Seguridad",
+      "food": "Servicio de Alimentos"
+    },
+    "joinHeading": "¿Quieres Unirte a Nuestro",
+    "joinAccent": "Equipo?",
+    "joinDesc": "Siempre estamos buscando educadores apasionados para hacer la diferencia.",
+    "viewPositions": "Ver Posiciones Abiertas"
+  },
+  "careers": {
+    "badge": "Carreras",
+    "heading": "Únete a Nuestro",
+    "headingAccent": "Equipo",
+    "desc": "Construye tu carrera mientras construyes futuros. Siempre estamos buscando educadores apasionados para unirse a la familia LSPA.",
+    "whyWork": "Por Qué Trabajar en",
+    "whyAccent": "LSPA?",
+    "openings": "Posiciones",
+    "openingsAccent": "Abiertas",
+    "interested": "¿Interesado en Unirte a",
+    "interestedAccent": "LSPA?",
+    "resumeDesc": "Envía tu resumé y carta de presentación para comenzar.",
+    "emailResume": "Envía tu Resumé"
+  },
+  "gallery": {
+    "badge": "Entra a Nuestro Mundo",
+    "heading1": "Pequeños Momentos,",
+    "heading2": "Grandes Recuerdos",
+    "desc": "Cada sonrisa, cada descubrimiento, cada amistad — capturados en Laura Spelman Preschool Academy.",
+    "visitHeading": "Ven a Vernos en Persona",
+    "visitDesc": "Agenda un recorrido y conoce la diferencia LSPA para tu familia.",
+    "enrollToday": "Inscríbete Hoy"
+  },
+  "resources": {
+    "badge": "Recursos",
+    "heading": "Recursos para",
+    "headingAccent": "Familias",
+    "desc": "Enlaces útiles, información escolar y apoyo comunitario para las familias de LSPA.",
+    "calendar": "Calendario Escolar y Eventos",
+    "njSupport": "Apoyo Familiar de NJ",
+    "learning": "Aprendizaje en Casa",
+    "lookingForForms": "¿Buscas los formularios de inscripción?",
+    "visitEnrollment": "Visita nuestra página de Inscripción para descargar y enviar formularios",
+    "externalLink": "Enlace Externo"
+  },
+  "privacy": {
+    "heading": "Política de Privacidad"
+  },
+  "notFound": {
+    "code": "404",
+    "heading": "¡Página No Encontrada!",
+    "desc": "La página que buscas no existe o fue movida.",
+    "goHome": "Ir al Inicio"
+  },
+  "footer": {
+    "desc": "Ofreciendo educación preescolar gratuita y de calidad en colaboración con la Junta de Educación de Trenton por más de 30 años.",
+    "locations": "Ubicaciones",
+    "quickLinks": "Enlaces Rápidos",
+    "email": "Correo",
+    "copyright": "© 2026 Laura Spelman Preschool Academy",
+    "privacyPolicy": "Política de Privacidad"
+  },
+  "common": {
+    "english": "English",
+    "espanol": "Español",
+    "bilingual": "English / Español (Bilingüe)"
+  }
+};
+
+fs.writeFileSync('app/i18n/es.json', JSON.stringify(es, null, 2), 'utf8');
+console.log('es.json fully restored with clean UTF-8.');
+console.log('Done.');

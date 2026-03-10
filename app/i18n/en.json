@@ -1,0 +1,289 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "locations": "Locations",
+    "resources": "Resources",
+    "contact": "Contact",
+    "enrollNow": "Enroll Now",
+    "ourTeam": "Our Team",
+    "call": "Call"
+  },
+  "topBar": {
+    "tagline": "Where Little Dreams Grow Into Big Futures"
+  },
+  "hero": {
+    "badge": "Trenton's Free Preschool",
+    "heading1": "Where Little Dreams",
+    "heading2": "Grow Into Big Futures",
+    "desc": "Free, high-quality preschool education for Trenton families. Two campuses. Zero cost. Endless possibilities.",
+    "cta": "Start Enrollment",
+    "callBtn": "Call"
+  },
+  "programs": {
+    "badge": "Our Classrooms",
+    "heading": "Programs Built for",
+    "headingAccent": "Growing Minds",
+    "desc": "Both programs follow the Creative Curriculum framework aligned with NJ Preschool Teaching and Learning Standards. Full-day programs at no cost to qualifying Trenton families.",
+    "preschool3": "Preschool 3",
+    "preschool4": "Preschool 4",
+    "ages34": "Ages 3-4",
+    "ages45": "Ages 4-5",
+    "fullDay": "Full Day — Monday through Friday",
+    "highlights3": [
+      "Social-emotional development",
+      "Language & literacy foundations",
+      "Creative play & exploration",
+      "Music & movement"
+    ],
+    "highlights4": [
+      "Kindergarten readiness",
+      "Early math & science",
+      "Writing & storytelling",
+      "Physical education"
+    ],
+    "eligibility": "Children ages 3, 4, or 5 by September 30th. Trenton residents enroll at no cost."
+  },
+  "cta": {
+    "heading": "Give Your Child the",
+    "headingAccent": "Best Start",
+    "desc": "Enrollment is open for children ages 3, 4, or 5 by September 30th. Completely free for Trenton residents.",
+    "callBtn": "Call to Enroll",
+    "learnMore": "Learn More"
+  },
+  "enrollment": {
+    "badge": "Start Here",
+    "heading": "Enroll Your",
+    "headingAccent": "Child",
+    "desc": "Free, high-quality preschool education for Trenton families. No tuition. No subsidy. Just opportunity.",
+    "spanishSubtitle": "Preescolar gratis para familias de Trenton.",
+    "callToEnroll": "Call to Enroll",
+    "stepsBadge": "5 Simple Steps",
+    "stepsHeading": "How to",
+    "stepsAccent": "Enroll",
+    "steps": [
+      {
+        "title": "Contact Us",
+        "desc": "Call (609) 396-7171 or email lauraspelmanacademy@verizon.net to express interest and learn about available spots."
+      },
+      {
+        "title": "Tour a Campus",
+        "desc": "Visit our 540 N. Olden Ave or 1040 Spruce St location to meet our teachers and see our classrooms in action."
+      },
+      {
+        "title": "Complete Your Forms",
+        "desc": "Download and complete the enrollment application and registration packet below."
+      },
+      {
+        "title": "Submit Documents",
+        "desc": "Bring your completed forms along with your child's birth certificate, immunization records, and proof of Trenton residency."
+      },
+      {
+        "title": "Welcome to LSPA!",
+        "desc": "Once approved, your child joins the LSPA family. We will schedule an orientation to get started."
+      }
+    ],
+    "formsBadge": "Download & Upload",
+    "formsHeading": "Enrollment",
+    "formsAccent": "Forms",
+    "formsDesc": "Download, print, sign, and upload your forms securely. You will receive email confirmation.",
+    "forms": [
+      {
+        "title": "Enrollment Application",
+        "titleEs": "Solicitud de Inscripción",
+        "desc": "District enrollment checklist, student information, eligibility verification, language survey, health forms, and family survey."
+      },
+      {
+        "title": "Registration Packet",
+        "titleEs": "Paquete de Registro",
+        "desc": "Complete registration forms including child info, emergency contacts, medical information, policies, and parent verification."
+      },
+      {
+        "title": "Social Media Release",
+        "titleEs": "Autorización de Redes Sociales",
+        "desc": "Consent form for photographs and video recordings used in school publications and social media."
+      }
+    ],
+    "download": "Download",
+    "uploadSigned": "Upload Signed Form",
+    "close": "Close",
+    "secureNote": "Secure submission — files go directly to Laura Spelman Preschool Academy. You will receive email confirmation.",
+    "parentName": "Parent / Guardian Name",
+    "email": "Email",
+    "childName": "Child's Name",
+    "phone": "Phone",
+    "attachForm": "Attach Signed Form(s)",
+    "dragDrop": "Click or drag files here",
+    "dropHere": "Drop files here",
+    "fileTypes": "PDF, JPG, PNG, HEIC",
+    "notes": "Notes",
+    "notesPlaceholder": "Any questions or comments",
+    "submit": "Submit Form",
+    "submitting": "Submitting...",
+    "encrypted": "Encrypted",
+    "sentDirectly": "Sent directly to LSPA",
+    "success": "Submitted Successfully!",
+    "successMsg": "Confirmation sent to your email.",
+    "uploadAnother": "Upload Another",
+    "errorMsg": "Error — Please try again",
+    "retry": "Retry",
+    "required": "Required",
+    "invalidEmail": "Invalid email",
+    "attachError": "Please attach your signed form",
+    "troubleMsg": "Having trouble? Email forms directly to",
+    "orDropOff": "or drop them off at either campus.",
+    "reqHeading": "What You",
+    "reqAccent": "Need",
+    "requirements": [
+      "Child must be age 3, 4, or 5 by September 30th of the enrollment year",
+      "Proof of Trenton residency (utility bill, lease, or mortgage statement)",
+      "Child's birth certificate",
+      "Up-to-date immunization records",
+      "Completed enrollment application and registration packet",
+      "Emergency contact information",
+      "Physical exam form from your child's doctor"
+    ],
+    "faqHeading": "Common",
+    "faqAccent": "Questions",
+    "faqs": [
+      {
+        "q": "Is there a cost for the program?",
+        "a": "No. LSPA is completely free for all Trenton families. There is no tuition, no subsidy required, and no hidden fees. Our program is fully funded through the state of New Jersey."
+      },
+      {
+        "q": "What are the school hours?",
+        "a": "Our program runs full day, Monday through Friday, following the Trenton Public Schools calendar."
+      },
+      {
+        "q": "Do you provide meals?",
+        "a": "Yes. Breakfast, lunch, and snacks are provided daily at no cost to families through the CACFP program."
+      },
+      {
+        "q": "What curriculum do you use?",
+        "a": "We use the Creative Curriculum framework, aligned with the New Jersey Preschool Teaching and Learning Standards, with a focus on kindergarten readiness."
+      },
+      {
+        "q": "Can I enroll mid-year?",
+        "a": "Yes, we accept rolling enrollment when spots are available. Contact us to check current availability at either campus."
+      },
+      {
+        "q": "Do all teachers have certifications?",
+        "a": "Yes. All lead teachers hold New Jersey state certifications in early childhood education and participate in ongoing professional development."
+      }
+    ],
+    "readyHeading": "Ready to Get",
+    "readyAccent": "Started?",
+    "readyDesc": "Spots fill quickly. Contact us today to secure your child's place.",
+    "emailUs": "Email Us"
+  },
+  "about": {
+    "badge": "Our Story",
+    "heading": "The Story Behind",
+    "headingAccent": "Our Classrooms",
+    "stats": {
+      "campuses": "Campuses",
+      "years": "Years Serving Trenton",
+      "families": "Families Served Annually",
+      "cost": "Free"
+    },
+    "timelineNow": "Now",
+    "timelineNext": "Next",
+    "timeline2526": "A Year of Growth",
+    "timeline2627": "Looking Ahead",
+    "missionLabel": "Our Mission",
+    "missionText": "To provide every child in Trenton with a safe, nurturing, and enriching learning environment that builds the foundation for lifelong success."
+  },
+  "team": {
+    "badge": "Our People",
+    "heading": "Meet Our",
+    "headingAccent": "Team",
+    "desc": "30 dedicated educators and staff across two campuses, committed to giving every child the best start in life.",
+    "classrooms": "Classrooms",
+    "campuses": "Campuses",
+    "teamMembers": "Team Members",
+    "all": "All",
+    "trentonCampus": "540 N. Olden Ave",
+    "lawrenceCampus": "1040 Spruce St",
+    "oldenAve": "Olden Ave",
+    "spruceSt": "Spruce St",
+    "nameTBD": "Name TBD",
+    "directors": "Directors",
+    "teachingStaff": "Teaching Staff",
+    "teacherAssistants": "Teacher Assistants",
+    "familyWorkers": "Family Workers",
+    "officeStaff": "Office Staff",
+    "security": "Security",
+    "foodService": "Food Service",
+    "roles": {
+      "director": "Director",
+      "leadTeacher": "Lead Teacher",
+      "teacherAssistant": "Teacher Assistant",
+      "familyWorker": "Family Worker",
+      "clerical": "Clerical",
+      "securityGuard": "Security Guard",
+      "food": "Food Service"
+    },
+    "joinHeading": "Want to Join Our",
+    "joinAccent": "Team?",
+    "joinDesc": "We are always looking for passionate educators to make a difference.",
+    "viewPositions": "View Open Positions"
+  },
+  "careers": {
+    "badge": "Careers",
+    "heading": "Join Our",
+    "headingAccent": "Team",
+    "desc": "Build your career while building futures. We are always looking for passionate educators to join the LSPA family.",
+    "whyWork": "Why Work at",
+    "whyAccent": "LSPA?",
+    "openings": "Current",
+    "openingsAccent": "Openings",
+    "interested": "Interested in Joining",
+    "interestedAccent": "LSPA?",
+    "resumeDesc": "Send your resume and cover letter to get started.",
+    "emailResume": "Email Your Resume"
+  },
+  "gallery": {
+    "badge": "Step Inside Our World",
+    "heading1": "Little Moments,",
+    "heading2": "Big Memories",
+    "desc": "Every smile, every discovery, every friendship — captured at Laura Spelman Preschool Academy.",
+    "visitHeading": "Come See It In Person",
+    "visitDesc": "Schedule a tour and experience the LSPA difference for your family.",
+    "enrollToday": "Enroll Today"
+  },
+  "resources": {
+    "badge": "Resources",
+    "heading": "Family",
+    "headingAccent": "Resources",
+    "desc": "Helpful links, school information, and community support for LSPA families.",
+    "calendar": "School Calendar & Events",
+    "njSupport": "NJ Family Support",
+    "learning": "Learning at Home",
+    "lookingForForms": "Looking for enrollment forms?",
+    "visitEnrollment": "Visit our Enrollment page to download and submit forms",
+    "externalLink": "External Link"
+  },
+  "privacy": {
+    "heading": "Privacy Policy"
+  },
+  "notFound": {
+    "code": "404",
+    "heading": "Oops! Page Not Found",
+    "desc": "The page you are looking for does not exist or has been moved.",
+    "goHome": "Go Home"
+  },
+  "footer": {
+    "desc": "Providing free quality preschool education in partnership with the Trenton Board of Education for over 30 years.",
+    "locations": "Locations",
+    "quickLinks": "Quick Links",
+    "email": "Email",
+    "copyright": "© 2026 Laura Spelman Preschool Academy",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "common": {
+    "english": "English",
+    "espanol": "Español",
+    "bilingual": "English / Español (Bilingual)"
+  }
+}
