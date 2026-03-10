@@ -7,7 +7,7 @@ const ACCESS_KEY="e9658441-788a-4bda-95f9-1abf712fc1a8";
 
 const formsData=[
 {id:'open-enrollment',files:[{label:'English',href:'/forms/LSPA_Open_Enrollment_EN.pdf'},{label:'Espanol',href:'/forms/LSPA_Open_Enrollment_ES.pdf'}],pages:'13',uploadLabel:'Open Enrollment Checklist',comingSoon:true},
-{id:'registration',files:[{label:'English',href:'/forms/LSPA_Registration_Packet_EN.pdf'},{label:'Espanol',href:'/forms/LSPA_Registration_Packet_ES.pdfPaquete_Inscripcion_2025-2026_ES.pdf'}],pages:'8',uploadLabel:'Registration Packet',comingSoon:false},
+{id:'registration',files:[{label:'English',href:'/forms/LSPA_Complete_Registration_Packet_2025-2026.pdf'},{label:'Espanol',href:'/forms//forms/LSPA_Paquete_Registro_2025-2026_ES.pdf'}],pages:'8',uploadLabel:'Registration Packet',comingSoon:false},
 {id:'social-media',files:[{label:'English / Espanol',href:'/forms/LSPA_Social_Media_Release.pdf'}],pages:'1',uploadLabel:'Social Media Release Form',comingSoon:false},
 ];
 
