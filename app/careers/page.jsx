@@ -26,25 +26,32 @@ const openingsEN=[
     type:'Full-Time',
     pay:'$57,922 – $66,651 per year',
     indeed:'https://www.indeed.com/viewjob?jk=4d43e49c2b70eba3',
-    desc:'We are seeking a passionate and dedicated Elementary School Teacher to join our educational team. The ideal candidate will foster a positive and engaging learning environment for students, encouraging their academic growth and personal development. This role involves implementing a curriculum that meets the diverse needs of students, promoting a love for learning, and supporting their social and emotional well-being.',
+    desc:'The Trenton Board of Education, Office of Early Childhood, seeks a qualified P-3 (or higher) certified teacher to join our partnership program at Laura Spelman Preschool Academy. This is a public-school teaching role — not a private daycare position — with full accountability to NJ education standards and Trenton Board of Education requirements. Teachers in this role are accountable to NJDOE standards, Trenton Public Schools curriculum requirements, and Office of Early Childhood policies.',
     duties:[
-      'Develop and implement lesson plans aligned with educational standards',
-      'Utilize effective behavior management techniques',
-      'Support children with autism and other special needs through tailored strategies',
-      'Collaborate with parents, colleagues, and administration',
-      'Assess student progress and adjust teaching strategies accordingly',
-      'Participate in professional development opportunities',
+      'Develop and implement engaging lesson plans aligned with NJ Student Learning Standards, catering to diverse learning styles and needs',
+      'Implement effective classroom management techniques to promote a positive, respectful, and inclusive learning environment',
+      'Utilize learning technology tools to enhance instructional delivery and student engagement',
+      'Assess student progress through formative and summative evaluations, including standardized testing',
+      'Provide individualized support to students requiring additional help, including those with special education needs or early intervention',
+      'Collaborate with colleagues, parents, and specialists to support holistic student development',
+      'Incorporate literacy, math, physical education, and library services into daily lessons',
+      'Support children with autism and other special needs through tailored instructional strategies',
+      'Participate in professional development opportunities including Montessori methods where applicable',
     ],
     reqs:[
-      'NJ P-3 certification required',
-      "Bachelor's degree in Education or related field; teaching certification preferred",
-      'Experience working with children in an educational setting highly desirable',
-      'Strong understanding of childhood development principles',
-      'Excellent communication skills, both verbal and written',
-      'Commitment to fostering a safe, nurturing classroom environment',
+      'NJ P-3 Teaching Certification REQUIRED (CE or CEAS acceptable if actively working toward full certification)',
+      "Bachelor's degree in Education, Early Childhood Education, or related field REQUIRED — official transcripts required",
+      'Minimum 1 year teaching experience required',
+      'All applicable certificates must be submitted: P-3, CE/CEAS, Director Academy, NAC, ParaPro (if applicable)',
+      'Verification of previous preschool employment on school letterhead with exact dates required',
+      'CHRI (Criminal History Review) and CARI (Child Abuse Record Information) required',
+      'DYFS Clearance Letter and Application required',
+      'Must be able to commute to or relocate to Township of Lawrence, NJ 08648',
+      'Bilingual English/Spanish preferred',
     ],
-    benefits:['Health insurance','Dental insurance','Vision insurance','Paid time off'],
-    schedule:'Monday to Friday',
+    docsSendTo:'Laura Spelman Preschool Academy, ATTN: Jessica Toro, 540 N Olden Avenue, Trenton, NJ 08638',
+    benefits:['Paid time off','Professional development assistance'],
+    schedule:'Monday to Friday — Full-Time or Part-Time',
   },
   {
     title:'Retired Elementary School Teacher',
@@ -52,22 +59,32 @@ const openingsEN=[
     type:'Full-Time',
     pay:'$57,922 – $66,651 per year',
     indeed:'https://www.indeed.com/viewjob?jk=e6dbbc0c5f9a0ad2',
-    desc:'Looking for retired school teachers and educators with a passion for teaching and making a difference, interested in reentering the workforce while supplementing their income. Flexible schedules offered and competitive pay. Lots of fun, engagement, and classroom support provided in a nurturing classroom environment.',
+    desc:'The Trenton Board of Education, Office of Early Childhood, seeks retired educators with a passion for teaching who are interested in reentering the workforce while supplementing their income. This is a public-school teaching role in our LSPA partnership program. Flexible schedules, competitive pay, and a nurturing classroom environment with lots of fun and engagement await the right candidate.',
     duties:[
-      'Lead classroom instruction aligned with NJ standards',
-      'Mentor and support fellow educators',
-      'Engage students through proven teaching methods',
-      'Collaborate with administration and families',
-      'Maintain a positive and structured classroom environment',
+      'Develop and implement engaging lesson plans aligned with NJ Student Learning Standards',
+      'Implement effective classroom management techniques promoting a positive, inclusive environment',
+      'Utilize learning technology tools to enhance instructional delivery',
+      'Assess student progress through formative and summative evaluations',
+      'Provide individualized support to students including those with special education needs',
+      'Collaborate with colleagues, parents, and specialists to support holistic student development',
+      'Incorporate literacy, math, physical education, and library services into daily lessons',
+      'Support children with autism and other special needs through tailored strategies',
+      'Participate in professional development opportunities',
     ],
     reqs:[
-      'NJ P-3 certification required',
-      'Must hold a teaching certificate issued by the State of New Jersey',
-      'Experience in elementary education',
-      'Passion for working with young children',
+      'NJ P-3 Teaching Certification REQUIRED (CE or CEAS acceptable if actively working toward full certification)',
+      "Bachelor's degree in Education, Early Childhood Education, or related field REQUIRED — official transcripts required",
+      'Minimum 1 year teaching experience required',
+      'All applicable certificates must be submitted: P-3, CE/CEAS, Director Academy, NAC, ParaPro (if applicable)',
+      'Verification of previous preschool employment on school letterhead with exact dates required',
+      'CHRI (Criminal History Review) and CARI (Child Abuse Record Information) required',
+      'DYFS Clearance Letter and Application required',
+      'Must be able to commute to or relocate to Township of Lawrence, NJ 08648',
+      'Bilingual English/Spanish preferred',
       'Flexible schedule availability',
     ],
-    benefits:['Health insurance','Dental insurance','Vision insurance','Paid time off'],
+    docsSendTo:'Laura Spelman Preschool Academy, ATTN: Jessica Toro, 540 N Olden Avenue, Trenton, NJ 08638',
+    benefits:['Paid time off','Professional development assistance','Flexible scheduling'],
     schedule:'Flexible — Monday to Friday',
   },
   {
@@ -219,9 +236,16 @@ function JobModal({job,onClose,lang}){
               </div>
             </div>
           )}
-          <div style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#6B7280',marginBottom:'1.5rem'}}>
+          <div style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#6B7280',marginBottom:'1.25rem'}}>
             <strong>{lang==='es'?'Horario':'Schedule'}:</strong> {job.schedule}
           </div>
+          {job.docsSendTo&&(
+            <div style={{background:'#FFF8E7',border:'1px solid #F5A623',borderRadius:12,padding:'1rem',marginBottom:'0.5rem'}}>
+              <div style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1.05rem',fontWeight:700,marginBottom:6}}>⚠️ {lang==='es'?'Enviar Documentos a':'Submit Documents To'}</div>
+              <div style={{fontFamily:'DM Sans',color:'#374151',fontSize:'0.88rem',lineHeight:1.6}}>{job.docsSendTo}</div>
+              <div style={{fontFamily:'DM Sans',color:'#92400E',fontSize:'0.8rem',marginTop:6,fontWeight:600}}>{lang==='es'?'No inicie el proceso sin tener todos los documentos listos.':'Do NOT begin the application process without all required documents ready.'}</div>
+            </div>
+          )}
         </div>
         {/* Footer */}
         <div style={{padding:'1.25rem 2rem',borderTop:'1px solid #e5e7eb',flexShrink:0,background:'#FAFAFA',display:'flex',flexDirection:'column',gap:10}}>
@@ -319,6 +343,3 @@ export default function Careers(){
           <a href='mailto:lauraspelmanacademy@verizon.net?subject=Career%20Inquiry' className='inline-block px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',background:'linear-gradient(to right,#F7C948,#F5A623)',color:'#0F1D3D',textDecoration:'none'}}>{t('careers.emailResume')}</a>
         </div>
       </section>
-    </div>
-  );
-}
