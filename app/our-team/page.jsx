@@ -34,6 +34,7 @@ const staffData=[
 {name:'Juanny Peralta',campus:'540 N. Olden Ave'},
 {name:'Kavita Bharti',campus:'1040 Spruce St'},
 {name:'Celeste Sarmiento',campus:'1040 Spruce St'},
+{name:'__OPEN__',campus:'1040 Spruce St'},
 ]},
 {catKey:'familyWorkers',color:'#9C27B0',icon:String.fromCodePoint(0x1F46A),people:[
 {name:'Samira Jurado',campus:'540 N. Olden Ave'},
