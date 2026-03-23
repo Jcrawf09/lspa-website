@@ -21,7 +21,7 @@ const staffData=[
 {name:'Vasundhara Singh',campus:'1040 Spruce St'},
 {name:'__OPEN__',campus:'1040 Spruce St'},
 ]},
-{catKey:'floatersubstituteTeachers',color:'#8BC34A',icon:String.fromCodePoint(0x1F4D6),people:[
+{catKey:'floaterteacherassistant',color:'#8BC34A',icon:String.fromCodePoint(0x1F4D6),people:[
 {name:'Joelliz Brisita',campus:'Both Locations'},
 ]},
 {catKey:'teacherAssistants',color:'#4BA3E3',icon:String.fromCodePoint(0x1F91D),people:[
@@ -138,7 +138,7 @@ const catNames={
 directors:lang==='es'?'Directores':'Directors',
 teachingStaff:lang==='es'?'Maestros':'Teachers',
 substituteTeachers:lang==='es'?'Maestros Sustitutos':'Substitute Teachers',
-floatersubstituteTeachers:lang==='es'?'Maestra Flotante':'Floater Substitute Teacher',
+floaterteacherassistant:lang==='es'?'Maestra Flotante':'Floater Teacher Assistant',
 familyWorkers:lang==='es'?'Trabajadores Familiares':'Family Workers',
 };
 const campusDisplay=(c)=>c==='540 N. Olden Ave'?'Olden Ave':'Spruce St';
