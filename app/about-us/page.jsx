@@ -14,21 +14,21 @@ const timeline2526es=[
 'Materiales de aprendizaje y muebles mejorados en ambos campus',
 'Areas de juego al aire libre mejoradas con equipo apropiado para la edad',
 'Implementacion de unidades enriquecidas del Creative Curriculum alineadas con los Estandares de NJ',
-'Lanzamiento de nuevas herramientas de comunicacion para padres y sitio web escolar',
+'Ampliando el acceso a herramientas de aprendizaje en linea y recursos digitales para las familias',
 'Fortalecimiento del desarrollo profesional de maestros con alianzas de coaching del distrito',
 'Expansion de recursos bilingues para familias de habla inglesa y espanola'
 ];
 const timeline2627=[
 'Expanding classroom capacity to serve more Trenton families',
-'Introducing STEAM-focused enrichment activities',
+'Introducing Learning Strategies-based enrichment activities',
 'Developing a mobile app for real-time family updates',
-'Launching after-school enrichment programming',
+'Expanding access to online learning tools and digital resources for families',
 'Building new community partnerships for family support services',
 'Investing in advanced teacher training and leadership development'
 ];
 const timeline2627es=[
 'Expansion de la capacidad de los salones para servir a mas familias de Trenton',
-'Introduccion de actividades de enriquecimiento enfocadas en STEAM',
+'Introduccion de actividades de enriquecimiento basadas en Estrategias de Aprendizaje',
 'Desarrollo de una aplicacion movil para actualizaciones en tiempo real',
 'Lanzamiento de programacion de enriquecimiento despues de clases',
 'Construccion de nuevas alianzas comunitarias para servicios de apoyo familiar',
