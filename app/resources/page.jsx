@@ -4,11 +4,11 @@ import{useState}from'react';
 import{useLanguage}from'../i18n/LanguageProvider';
 
 const calendarDocs=[
-  {title:'2025-2026 School Year Calendar',file:'/documents/school-calendar-2025-2026.pdf',tag:'Official Document'},
+  {title:'2025-2026 School Year Calendar',file:'/forms/2025-2026-School-Year-Calendar.pdf',tag:'Official Document'},
 ];
 
 const happeningDocs=[
-  {title:'Bedtime Routines Workshop Flyer',file:'/documents/bedtime-routines-workshop.pdf',date:'March 11, 2026',tag:'Workshop'},
+  {title:'Bedtime Routines Workshop Flyer',file:'/forms/bedtime-routines-workshop.pdf',date:'March 11, 2026',tag:'Workshop'},
 ];
 
 function PdfModal({title,docs,onClose,lang,accent}){
