@@ -210,17 +210,17 @@ function FlyerLibrary({lang}){
 }
 
 const sectionsEN=[
-  {category:'School Calendar & Events',icon:String.fromCodePoint(0x1F4C5),items:[
+  {category:'School Calendar & Events',icon:String.fromCodePoint(0x1F4C5),bg:'#FFFBF0',cardBg:'linear-gradient(135deg,rgba(245,166,35,0.06),rgba(247,201,72,0.04))',externalAccent:'#F5A623',items:[
     {name:'2025-2026 School Calendar',desc:'Key dates, holidays, and closings',type:'calendar',accent:'#F5A623',icon:'\u{1F4C5}'},
     {name:'Upcoming Events',desc:'Family nights, field trips, and celebrations',type:'upcoming',accent:'#4BA3E3',icon:'\u{1F389}'},
   ]},
-  {category:'NJ Family Support',icon:String.fromCodePoint(0x1F3E0),items:[
+  {category:'NJ Family Support',icon:String.fromCodePoint(0x1F3E0),bg:'#F0F7FF',cardBg:'linear-gradient(135deg,rgba(75,163,227,0.07),rgba(75,163,227,0.03))',externalAccent:'#4BA3E3',items:[
     {name:'NJ Child Care Assistance',desc:'Financial help for working families',link:'https://www.childcarenj.gov',type:'external'},
     {name:'WIC Program',desc:'Nutrition assistance for women, infants & children',link:'https://www.nj.gov/health/fhs/wic/',type:'external'},
     {name:'NJ 211',desc:'Connect to local health and human services',link:'https://www.nj211.org',type:'external'},
     {name:'Trenton Public Schools',desc:'District information and updates',link:'https://www.trentonk12.org',type:'external'},
   ]},
-  {category:'Learning at Home',icon:String.fromCodePoint(0x1F393),items:[
+  {category:'Learning at Home',icon:String.fromCodePoint(0x1F393),bg:'#F0FFF4',cardBg:'linear-gradient(135deg,rgba(76,175,80,0.07),rgba(76,175,80,0.03))',externalAccent:'#4CAF50',items:[
     {name:'PBS Kids Games',desc:'Educational games for preschool learners',link:'https://pbskids.org',type:'external'},
     {name:'Starfall',desc:'Reading and math activities for young children',link:'https://www.starfall.com',type:'external'},
     {name:'Trenton Free Public Library',desc:'Free books, programs, and digital resources',link:'https://www.trentonfpl.org',type:'external'},
@@ -229,17 +229,17 @@ const sectionsEN=[
 ];
 
 const sectionsES=[
-  {category:'Calendario Escolar y Eventos',icon:String.fromCodePoint(0x1F4C5),items:[
+  {category:'Calendario Escolar y Eventos',icon:String.fromCodePoint(0x1F4C5),bg:'#FFFBF0',cardBg:'linear-gradient(135deg,rgba(245,166,35,0.06),rgba(247,201,72,0.04))',externalAccent:'#F5A623',items:[
     {name:'Calendario Escolar 2025-2026',desc:'Fechas importantes, feriados y cierres',type:'calendar',accent:'#F5A623'},
     {name:'Proximos Eventos',desc:'Noches familiares, excursiones y celebraciones',type:'upcoming',accent:'#4BA3E3'},
   ]},
-  {category:'Apoyo Familiar de NJ',icon:String.fromCodePoint(0x1F3E0),items:[
+  {category:'Apoyo Familiar de NJ',icon:String.fromCodePoint(0x1F3E0),bg:'#F0F7FF',cardBg:'linear-gradient(135deg,rgba(75,163,227,0.07),rgba(75,163,227,0.03))',externalAccent:'#4BA3E3',items:[
     {name:'Asistencia de Cuidado Infantil de NJ',desc:'Ayuda financiera para familias trabajadoras',link:'https://www.childcarenj.gov',type:'external'},
     {name:'Programa WIC',desc:'Asistencia nutricional para mujeres, infantes y ninos',link:'https://www.nj.gov/health/fhs/wic/',type:'external'},
     {name:'NJ 211',desc:'Conexion con servicios de salud y servicios humanos locales',link:'https://www.nj211.org',type:'external'},
     {name:'Escuelas Publicas de Trenton',desc:'Informacion y actualizaciones del distrito',link:'https://www.trentonk12.org',type:'external'},
   ]},
-  {category:'Aprendizaje en Casa',icon:String.fromCodePoint(0x1F393),items:[
+  {category:'Aprendizaje en Casa',icon:String.fromCodePoint(0x1F393),bg:'#F0FFF4',cardBg:'linear-gradient(135deg,rgba(76,175,80,0.07),rgba(76,175,80,0.03))',externalAccent:'#4CAF50',items:[
     {name:'PBS Kids Games',desc:'Juegos educativos para aprendices preescolares',link:'https://pbskids.org',type:'external'},
     {name:'Starfall',desc:'Actividades de lectura y matematicas para ninos pequenos',link:'https://www.starfall.com',type:'external'},
     {name:'Biblioteca Publica de Trenton',desc:'Libros gratis, programas y recursos digitales',link:'https://www.trentonfpl.org',type:'external'},
@@ -266,13 +266,16 @@ export default function Resources(){
         </div>
       </section>
 
-      <section className='py-16 md:py-24' style={{background:'#FFFFFF'}}>
+      <section className='py-16 md:py-24' style={{background:'#F8FAFB'}}>
         <div className='max-w-5xl mx-auto px-4 md:px-8'>
 
           {/* Calendar & Events + other sections */}
           {sections.map((section,si)=>(
-            <div key={si} className='mb-12'>
-              <h2 className='font-bold text-lg mb-4 flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}><span className='text-2xl'>{section.icon}</span>{section.category}</h2>
+            <div key={si} className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(0,0,0,0.06)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
+              <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(0,0,0,0.05)'}}>
+                <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}><span className='text-2xl'>{section.icon}</span>{section.category}</h2>
+              </div>
+              <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 1.5rem'}}>
               <div className='grid md:grid-cols-2 gap-4'>
                 {section.items.map((item,j)=>{
                   if(['calendar','upcoming'].includes(item.type)){
@@ -305,27 +308,32 @@ export default function Resources(){
                     );
                   }
                   return(
-                    <a key={j} href={item.link} target='_blank' rel='noopener noreferrer' className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'#e5e7eb',textDecoration:'none'}}>
+                    <a key={j} href={item.link} target='_blank' rel='noopener noreferrer' className='block p-5 rounded-2xl border hover:shadow-lg transition-all' style={{borderColor:(section.externalAccent||'#e5e7eb')+'44',textDecoration:'none',background:section.cardBg||'#fff'}}>
                       <div className='font-bold mb-1' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
                       <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem'}}>{item.desc}</div>
-                      <div className='mt-2 text-xs font-semibold' style={{color:'#F7C948'}}>&#8599; {t('resources.externalLink')}</div>
+                      <div className='mt-2 text-xs font-semibold' style={{color:section.externalAccent||'#F7C948'}}>&#8599; {t('resources.externalLink')}</div>
                     </a>
                   );
                 })}
+              </div>
               </div>
             </div>
           ))}
 
           {/* What's Happening — Flyer Library */}
-          <div className='mb-12'>
-            <h2 className='font-bold text-lg mb-2 flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>
-              <span className='text-2xl'>📢</span>
-              {lang==='es'?'Lo Que Pasa en LSPA':"What's Happening at LSPA"}
-            </h2>
-            <p style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#9CA3AF',marginBottom:16}}>
-              {lang==='es'?'Talleres, volantes y actualizaciones comunitarias — mas recientes primero.':'Workshops, flyers, and community updates — newest first.'}
-            </p>
-            <FlyerLibrary lang={lang}/>
+          <div className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(139,92,246,0.15)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
+            <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(139,92,246,0.1)'}}>
+              <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}>
+                <span className='text-2xl'>📢</span>
+                {lang==='es'?'Lo Que Pasa en LSPA':"What's Happening at LSPA"}
+              </h2>
+              <p style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#9CA3AF',margin:'4px 0 0'}}>
+                {lang==='es'?'Talleres, volantes y actualizaciones comunitarias — mas recientes primero.':'Workshops, flyers, and community updates — newest first.'}
+              </p>
+            </div>
+            <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 1.5rem'}}>
+              <FlyerLibrary lang={lang}/>
+            </div>
           </div>
 
         </div>
