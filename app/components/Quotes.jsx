@@ -114,7 +114,7 @@ export default function Quotes() {
         @keyframes sparkle  { 0%,100%{transform:scale(0) rotate(0deg);opacity:0} 50%{transform:scale(1) rotate(180deg);opacity:1} }
         .qc { cursor:pointer; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
         .qc:hover { transform:translateY(-5px) scale(1.04) !important; box-shadow:0 14px 32px rgba(0,0,0,.14) !important; }
-@media(max-width:640px){.side-float{display:none!important}.quotes-inner{padding:14px 16px 18px!important}}
+@media(max-width:640px){.side-float{width:28px!important;height:28px!important;left:2px!important}.quotes-inner{padding:14px 20px 18px!important}.quotes-grid{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}}
 `}</style>
 
       {/* Main backdrop */}
@@ -134,7 +134,7 @@ export default function Quotes() {
         <div style={{
           width:"100%", maxWidth:1040,
           background:"#FFFDF7", borderRadius:26,
-          position:"relative", pointerEvents:"auto", overflow:"visible",
+          position:"relative", pointerEvents:"auto", overflow:"hidden",
           transition:"opacity .36s ease, transform .36s cubic-bezier(.34,1.3,.64,1)",
           opacity: vis ? 1 : 0,
           transform: vis ? "translateY(0) scale(1)" : "translateY(48px) scale(.94)",
