@@ -30,7 +30,7 @@ const timeline2627es=[
 'Expansion de la capacidad de los salones para servir a mas familias de Trenton',
 'Introduccion de actividades de enriquecimiento basadas en Estrategias de Aprendizaje',
 'Desarrollo de una aplicacion movil para actualizaciones en tiempo real',
-'Lanzamiento de programacion de enriquecimiento despues de clases',
+'Ampliando el acceso a herramientas de aprendizaje en linea y recursos digitales para las familias',
 'Construccion de nuevas alianzas comunitarias para servicios de apoyo familiar',
 'Inversion en capacitacion avanzada de maestros y desarrollo de liderazgo'
 ];
