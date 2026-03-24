@@ -50,83 +50,30 @@ return(<div style={{width:72,height:72,borderRadius:'50%',background:color+'18',
 
 function OpenPositionCard({color,lang}){
 return(
-<div
-  className="relative group"
-  style={{cursor:"default"}}
->
-  {/* ── Hover Popup ────────────────────────────── */}
-  <div
-    className="absolute left-1/2 bottom-full mb-0 z-20
-                opacity-0 translate-y-2
-                group-hover:opacity-100 group-hover:translate-y-0
-                transition-all duration-250 pointer-events-none group-hover:pointer-events-auto"
-    style={{transform:"translateX(-50%)",minWidth:180}}
-  >
+  <a href="/careers" style={{textDecoration:'none'}}>
     <div
-      className="rounded-2xl shadow-2xl p-4 text-center"
-      style={{background:"#ffffff",border:"2px solid "+color+"40"}}
+      className="text-center p-4 rounded-2xl border-2 border-dashed transition-all active:scale-95"
+      style={{
+        borderColor:color+"50",
+        background:"linear-gradient(135deg,"+color+"08,"+color+"15)",
+        WebkitTapHighlightColor:'transparent',
+        cursor:'pointer',
+      }}
     >
       <div
-        className="text-sm font-bold mb-1"
-        style={{color:"#1a2e4a",fontFamily:"Fredoka, sans-serif",fontSize:"1rem"}}
+        className="w-12 h-12 rounded-full flex items-center justify-center text-2xl font-light mx-auto mb-2"
+        style={{background:color+"20",color:color}}
       >
-        We are Hiring!
+        +
       </div>
-      <div className="text-xs mb-3" style={{color:"#666"}}>
-        Join our team of early childhood educators and make a difference.
+      <div className="text-xs font-bold mb-1" style={{color:color+"cc",fontFamily:"Fredoka, sans-serif",fontSize:"0.9rem"}}>
+        {lang==='es'?'Únete al Equipo':'Join Our Team'}
       </div>
-      <a
-        href="/careers"
-        className="inline-block text-xs font-bold py-1.5 px-4 rounded-full"
-        style={{
-          background:"linear-gradient(135deg,"+color+","+color+"cc)",
-          color:"#ffffff",
-          textDecoration:"none",
-          letterSpacing:"0.04em"
-        }}
-      >
-        View Openings &rarr;
-      </a>
+      <div className="text-xs" style={{color:"#666",fontFamily:"DM Sans, sans-serif"}}>
+        {lang==='es'?'Ver posiciones →':'View openings →'}
+      </div>
     </div>
-    {/* Invisible bridge — keeps mouse in hover zone between popup and card */}
-    <div
-      className="absolute left-0 right-0"
-      style={{bottom:-16,height:16,background:"transparent"}}
-    />
-    {/* Diamond arrow pointing down toward the card */}
-    <div
-      className="absolute left-1/2"
-      style={{
-        bottom:-6,
-        transform:"translateX(-50%) rotate(45deg)",
-        width:12,
-        height:12,
-        background:"#ffffff",
-        borderRight:"2px solid "+color+"40",
-        borderBottom:"2px solid "+color+"40"
-      }}
-    />
-  </div>
-
-  {/* ── The + Card ─────────────────────────────── */}
-  <div
-    className="text-center p-4 rounded-2xl border-2 border-dashed transition-all"
-    style={{
-      borderColor:color+"50",
-      background:"linear-gradient(135deg,"+color+"08,"+color+"15)"
-    }}
-  >
-    <div
-      className="w-12 h-12 rounded-full flex items-center justify-center text-2xl font-light mx-auto mb-2 transition-all group-hover:scale-110"
-      style={{background:color+"20",color:color}}
-    >
-      +
-    </div>
-    <div className="text-xs font-semibold" style={{color:color+"cc"}}>
-      Join Our Team
-    </div>
-  </div>
-</div>
+  </a>
 );
 }
 
