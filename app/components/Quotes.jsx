@@ -129,12 +129,12 @@ export default function Quotes() {
       <div style={{
         position:"fixed", inset:0, zIndex:9001,
         display:"flex", alignItems:"center", justifyContent:"center",
-        padding:"10px clamp(8px,5vw,56px)", pointerEvents:"none",
+        padding:"10px clamp(8px,5vw,56px)", pointerEvents:"none", overflowY:"auto",
       }}>
         <div style={{
           width:"100%", maxWidth:1040,
           background:"#FFFDF7", borderRadius:26,
-          position:"relative", pointerEvents:"auto", overflow:"hidden",
+          position:"relative", pointerEvents:"auto", overflow:"auto",
           transition:"opacity .36s ease, transform .36s cubic-bezier(.34,1.3,.64,1)",
           opacity: vis ? 1 : 0,
           transform: vis ? "translateY(0) scale(1)" : "translateY(48px) scale(.94)",
@@ -185,7 +185,7 @@ export default function Quotes() {
           ))}
 
           {/* Content */}
-          <div className="quotes-inner" style={{padding:"18px 52px 22px", position:"relative", zIndex:2}}>
+          <div className="quotes-inner" style={{padding:"18px 52px 22px", position:"relative", zIndex:2, overflowY:"auto", maxHeight:"calc(100vh - 80px)"}}>
             <div style={{textAlign:"center", marginBottom:16}}>
               <div style={{
                 display:"inline-block",
@@ -219,7 +219,7 @@ export default function Quotes() {
                     animation:`cPop .38s ease both`,
                     animationDelay:`${i*.045}s`,
                     border: `2px solid transparent`,
-                    height:"auto", minHeight:150,                  /* fixed height — no layout shift */
+                                      /* fixed height — no layout shift */
                     boxSizing:"border-box",
                     display:"flex", flexDirection:"column",
                     alignItems:"center", justifyContent:"center",
