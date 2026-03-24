@@ -129,7 +129,7 @@ export default function Quotes() {
       <div style={{
         position:"fixed", inset:0, zIndex:9001,
         display:"flex", alignItems:"center", justifyContent:"center",
-        padding:"10px 56px", pointerEvents:"none",
+        padding:"10px clamp(8px,5vw,56px)", pointerEvents:"none",
       }}>
         <div style={{
           width:"100%", maxWidth:1040,
@@ -162,7 +162,7 @@ export default function Quotes() {
 
           {/* Side floating faces */}
           {sideFloats.map((p,i) => (
-            <div key={i} style={{
+            <div key={i} className="side-float" style={{
               position:"absolute", width:42, height:42,
               borderRadius:"50%", overflow:"hidden",
               border:"2.5px solid white",
@@ -185,7 +185,7 @@ export default function Quotes() {
           ))}
 
           {/* Content */}
-          <div style={{padding:"18px 52px 22px", position:"relative", zIndex:2}}>
+          <div className="quotes-inner" style={{padding:"18px 52px 22px", position:"relative", zIndex:2}}>
             <div style={{textAlign:"center", marginBottom:16}}>
               <div style={{
                 display:"inline-block",
