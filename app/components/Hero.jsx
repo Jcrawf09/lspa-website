@@ -38,7 +38,7 @@ export default function Hero() {
               <button onClick={() => window.dispatchEvent(new Event("openQuotesModal"))} className="px-8 py-4 rounded-full border-2 font-semibold text-lg" style={{fontFamily:'Fredoka,sans-serif',borderColor:'rgba(27,45,91,0.18)',color:'#1B2D5B',background:'white',cursor:'pointer'}}>{lang==='es'?'Explorar LSPA':'Explore LSPA'}</button>
             </div>
           </div>
-          <div className="hidden lg:flex justify-center" style={anim(0.5)}>
+          <div className="flex justify-center" style={{...anim(0.5), marginTop:'2rem'}}>
             <div style={{padding:3,borderRadius:28,background:'linear-gradient(90deg,#4BA3E3,#4CAF50,#F7C948,#F5A623,#9B59B6,#E54B4B,#4BA3E3)',backgroundSize:'300% 300%',animation:'rainbowBorder 4s ease infinite',boxShadow:'0 8px 40px rgba(27,45,91,0.12)'}}>
               <div className="bg-white relative overflow-hidden" style={{borderRadius:26,maxWidth:380,width:'100%'}}>
                 <div className="absolute top-0 left-0 right-0 rainbow-bar" style={{height:6}} />
