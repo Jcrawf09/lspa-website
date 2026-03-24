@@ -7,9 +7,32 @@ const calendarDocs=[
   {title:'2025-2026 School Year Calendar',file:'/forms/2025-2026-School-Year-Calendar.pdf',tag:'Official Document'},
 ];
 
-const happeningDocs=[
-  {title:'Bedtime Routines Workshop Flyer',file:'/forms/bedtime-routines-workshop.pdf',date:'March 11, 2026',tag:'Workshop'},
+// ── FLYER LIBRARY ──────────────────────────────────────────────
+// To add a new flyer, add a new entry at the TOP of this array.
+// Fields: title, titleEs, file, date, tag, tagEs, accent
+// tag options: Workshop, Event, Notice, Newsletter, Holiday
+// ──────────────────────────────────────────────────────────────
+const flyerLibrary=[
+  {
+    title:'Bedtime Routines Workshop',
+    titleEs:'Taller de Rutinas para Dormir',
+    file:'/forms/bedtime-routines-workshop.pdf',
+    date:'March 11, 2026',
+    dateEs:'11 de marzo de 2026',
+    tag:'Workshop',
+    tagEs:'Taller',
+    accent:'#8B5CF6',
+    icon:'🌙',
+  },
 ];
+
+const TAG_COLORS={
+  Workshop:{bg:'#F5F3FF',color:'#8B5CF6',border:'#DDD6FE'},
+  Event:{bg:'#EFF6FF',color:'#3B82F6',border:'#BFDBFE'},
+  Notice:{bg:'#FFF7ED',color:'#F97316',border:'#FED7AA'},
+  Newsletter:{bg:'#F0FDF4',color:'#22C55E',border:'#BBF7D0'},
+  Holiday:{bg:'#FFF1F2',color:'#F43F5E',border:'#FECDD3'},
+};
 
 function PdfModal({title,docs,onClose,lang,accent}){
   const[active,setActive]=useState(0);
@@ -18,13 +41,8 @@ function PdfModal({title,docs,onClose,lang,accent}){
   return(
     <div onClick={onClose} style={{position:'fixed',inset:0,zIndex:2000,display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(5,10,30,0.92)',backdropFilter:'blur(12px)',padding:'0.75rem'}}>
       <div onClick={e=>e.stopPropagation()} style={{background:'#0F1E3D',borderRadius:20,width:'100%',maxWidth:'96vw',height:'94vh',display:'flex',flexDirection:'column',overflow:'hidden',boxShadow:'0 40px 120px rgba(0,0,0,0.7)',border:'1px solid rgba(255,255,255,0.06)'}}>
-
-        {/* Dramatic Header */}
         <div style={{background:'linear-gradient(135deg,#0F1E3D 0%,#1B2D5B 60%,#1B4A6B 100%)',flexShrink:0,position:'relative',overflow:'hidden'}}>
-          {/* Glow orb */}
           <div style={{position:'absolute',top:-60,right:-60,width:200,height:200,borderRadius:'50%',background:'radial-gradient(circle,rgba(75,163,227,0.12),transparent 70%)',pointerEvents:'none'}}/>
-          <div style={{position:'absolute',bottom:-40,left:80,width:160,height:160,borderRadius:'50%',background:'radial-gradient(circle,rgba(247,201,72,0.07),transparent 70%)',pointerEvents:'none'}}/>
-          {/* Top accent bar */}
           <div style={{height:4,background:'linear-gradient(90deg,'+col+',#4BA3E3,'+col+')',width:'100%'}}/>
           <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'1.1rem 1.5rem 1.1rem 2rem',position:'relative',zIndex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:14}}>
@@ -43,8 +61,6 @@ function PdfModal({title,docs,onClose,lang,accent}){
               <button onClick={onClose} style={{background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.15)',color:'#fff',borderRadius:'50%',width:36,height:36,fontSize:'1rem',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center'}}>&#x2715;</button>
             </div>
           </div>
-
-          {/* Tab strip - multi doc */}
           {docs.length>1&&(
             <div style={{display:'flex',gap:6,padding:'0 2rem 1rem',overflowX:'auto'}}>
               {docs.map((d,i)=>(
@@ -52,8 +68,6 @@ function PdfModal({title,docs,onClose,lang,accent}){
               ))}
             </div>
           )}
-
-          {/* Single doc meta strip */}
           {docs.length===1&&(
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 2rem 0.85rem',position:'relative',zIndex:1}}>
               <div style={{display:'flex',alignItems:'center',gap:8}}>
@@ -66,22 +80,13 @@ function PdfModal({title,docs,onClose,lang,accent}){
             </div>
           )}
         </div>
-
-        {/* PDF Viewer - takes all remaining height */}
         <div style={{flex:1,background:'#2C2C2C',position:'relative',minHeight:0}}>
-          <iframe
-            src={current.file+'#toolbar=1&navpanes=0&scrollbar=1&view=FitH'}
-            style={{width:'100%',height:'100%',border:'none',display:'block'}}
-            title={current.title}
-          />
+          <iframe src={current.file+'#toolbar=1&navpanes=0&scrollbar=1&view=FitH'} style={{width:'100%',height:'100%',border:'none',display:'block'}} title={current.title}/>
         </div>
-
-        {/* Slim footer */}
         <div style={{background:'#0a1428',padding:'0.55rem 2rem',display:'flex',alignItems:'center',justifyContent:'space-between',flexShrink:0,borderTop:'1px solid rgba(255,255,255,0.05)'}}>
           <span style={{fontFamily:'DM Sans',fontSize:'0.72rem',color:'rgba(255,255,255,0.3)'}}>{lang==='es'?'Si el PDF no carga, usa el boton de descarga.':'If the PDF does not load, use the Download button above.'}</span>
           <span style={{fontFamily:'DM Sans',fontSize:'0.72rem',color:col,fontWeight:600,letterSpacing:'1px'}}>LSPA</span>
         </div>
-
       </div>
     </div>
   );
@@ -91,43 +96,28 @@ function UpcomingModal({onClose,lang}){
   return(
     <div onClick={onClose} style={{position:'fixed',inset:0,zIndex:2000,display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(5,10,30,0.92)',backdropFilter:'blur(12px)',padding:'1.5rem'}}>
       <div onClick={e=>e.stopPropagation()} style={{position:'relative',borderRadius:28,maxWidth:520,width:'100%',overflow:'hidden',boxShadow:'0 40px 120px rgba(0,0,0,0.7)'}}>
-        {/* Bg */}
         <div style={{position:'absolute',inset:0,background:'linear-gradient(145deg,#0F1E3D 0%,#1B2D5B 50%,#2A5451 100%)'}}/>
-        {/* Orbs */}
         <div style={{position:'absolute',top:-80,right:-80,width:300,height:300,borderRadius:'50%',background:'radial-gradient(circle,rgba(75,163,227,0.15),transparent 70%)',pointerEvents:'none'}}/>
-        <div style={{position:'absolute',bottom:-60,left:-60,width:240,height:240,borderRadius:'50%',background:'radial-gradient(circle,rgba(247,201,72,0.1),transparent 70%)',pointerEvents:'none'}}/>
-        {/* Top bar */}
         <div style={{height:5,background:'linear-gradient(90deg,#F7C948,#F5A623,#4BA3E3,#F7C948)',backgroundSize:'200% 100%',position:'relative',zIndex:1}}/>
         <div style={{padding:'2.5rem 2rem 2.25rem',textAlign:'center',position:'relative',zIndex:1}}>
           <button onClick={onClose} style={{position:'absolute',top:16,right:16,background:'rgba(255,255,255,0.08)',border:'1px solid rgba(255,255,255,0.12)',color:'rgba(255,255,255,0.7)',borderRadius:'50%',width:34,height:34,fontSize:'0.95rem',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center'}}>&#x2715;</button>
-          {/* Icon cluster */}
           <div style={{marginBottom:'1.25rem'}}>
             <div style={{fontSize:'3rem',lineHeight:1}}>&#x1F389;</div>
-            <div style={{display:'flex',justifyContent:'center',gap:8,marginTop:8}}>
-              {['\u2B50','\u2728','\u2B50'].map((s,i)=>(
-                <span key={i} style={{fontSize:'1rem',opacity:0.7+i*0.15}}>{s}</span>
-              ))}
-            </div>
           </div>
-          {/* Badge */}
           <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(247,201,72,0.12)',border:'1px solid rgba(247,201,72,0.3)',borderRadius:999,padding:'5px 18px',marginBottom:'1.5rem'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:'#F7C948'}}/>
             <span style={{fontFamily:'DM Sans',fontSize:'0.68rem',fontWeight:700,letterSpacing:'2.5px',textTransform:'uppercase',color:'#F7C948'}}>{lang==='es'?'Muy Pronto':'Coming Soon'}</span>
           </div>
-          {/* Headline */}
           <h2 style={{fontFamily:'Fredoka',fontSize:'clamp(26px,5vw,38px)',color:'#FFFFFF',fontWeight:700,lineHeight:1.15,marginBottom:'1.1rem'}}>
             {lang==='es'?'Algo Especial':'Something Special'}
             <br/><span style={{background:'linear-gradient(90deg,#F7C948,#F5A623)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>{lang==='es'?'esta en camino':'is on its way'}</span>
           </h2>
-          {/* Divider */}
           <div style={{width:56,height:3,background:'linear-gradient(90deg,#F7C948,#4BA3E3)',borderRadius:99,margin:'0 auto 1.25rem'}}/>
-          {/* Body */}
           <p style={{fontFamily:'DM Sans',color:'rgba(255,255,255,0.72)',fontSize:'0.95rem',lineHeight:1.8,maxWidth:360,margin:'0 auto 1.75rem'}}>
             {lang==='es'
-              ?'Estamos preparando noches familiares increibles, excursiones y celebraciones especiales para nuestras familias. Mantente atento a tu correo y a esta pagina.'
+              ?'Estamos preparando noches familiares increibles, excursiones y celebraciones especiales para nuestras familias.'
               :'We are putting together incredible family nights, field trips, and special celebrations for our LSPA families. Stay tuned to your inbox and check back here.'}
           </p>
-          {/* CTA hint */}
           <div style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:14,padding:'0.9rem 1.25rem',display:'inline-block'}}>
             <div style={{fontFamily:'Fredoka',fontSize:'0.9rem',color:'rgba(255,255,255,0.5)',letterSpacing:0.3}}>{lang==='es'?'Actualizaciones proximamente':'Updates coming soon'}</div>
             <div style={{fontFamily:'Fredoka',fontSize:'1rem',color:'#F7C948',fontWeight:600,marginTop:2}}>Laura Spelman Preschool Academy</div>
@@ -138,11 +128,91 @@ function UpcomingModal({onClose,lang}){
   );
 }
 
+// ── FLYER LIBRARY SECTION ─────────────────────────────────────
+function FlyerLibrary({lang}){
+  const[activeFlyer,setActiveFlyer]=useState(null);
+  const[filter,setFilter]=useState('All');
+
+  const tags=lang==='es'
+    ?['Todos','Taller','Evento','Aviso','Boletin','Feriado']
+    :['All','Workshop','Event','Notice','Newsletter','Holiday'];
+
+  const filtered=filter==='All'||filter==='Todos'
+    ? flyerLibrary
+    : flyerLibrary.filter(f=>(lang==='es'?f.tagEs:f.tag)===filter);
+
+  return(
+    <div>
+      {activeFlyer&&(
+        <PdfModal
+          title={lang==='es'?activeFlyer.titleEs:activeFlyer.title}
+          docs={[{title:lang==='es'?activeFlyer.titleEs:activeFlyer.title,file:activeFlyer.file,tag:lang==='es'?activeFlyer.tagEs:activeFlyer.tag,date:lang==='es'?activeFlyer.dateEs:activeFlyer.date}]}
+          onClose={()=>setActiveFlyer(null)}
+          lang={lang}
+          accent={activeFlyer.accent}
+        />
+      )}
+
+      {/* Filter chips */}
+      <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:20}}>
+        {tags.map(tag=>(
+          <button key={tag} onClick={()=>setFilter(tag)} style={{fontFamily:'DM Sans',fontSize:'0.78rem',fontWeight:700,padding:'5px 14px',borderRadius:999,border:'1px solid',cursor:'pointer',transition:'all 0.2s',background:filter===tag?'#1B2D5B':'transparent',color:filter===tag?'#fff':'#6B7280',borderColor:filter===tag?'#1B2D5B':'#e5e7eb'}}>
+            {tag}
+          </button>
+        ))}
+      </div>
+
+      {filtered.length===0?(
+        <div style={{textAlign:'center',padding:'2rem',color:'#9CA3AF',fontFamily:'DM Sans',fontSize:'0.9rem'}}>
+          {lang==='es'?'No hay elementos en esta categoria.':'No items in this category yet.'}
+        </div>
+      ):(
+        <div style={{display:'grid',gap:14}}>
+          {filtered.map((flyer,i)=>{
+            const tagKey=flyer.tag;
+            const tc=TAG_COLORS[tagKey]||TAG_COLORS['Notice'];
+            return(
+              <div key={i} style={{background:'#fff',border:'1px solid #e5e7eb',borderRadius:16,overflow:'hidden',boxShadow:'0 1px 4px rgba(0,0,0,0.06)',transition:'all 0.2s'}}>
+                <div style={{height:4,background:'linear-gradient(90deg,'+flyer.accent+','+flyer.accent+'88)'}}/>
+                <div style={{padding:'1rem 1.25rem',display:'flex',alignItems:'center',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
+                  <div style={{display:'flex',alignItems:'center',gap:12,flex:1,minWidth:0}}>
+                    <div style={{fontSize:'1.5rem',flexShrink:0}}>{flyer.icon}</div>
+                    <div style={{minWidth:0}}>
+                      <div style={{fontFamily:'Fredoka',fontSize:'1rem',fontWeight:700,color:'#1B2D5B',marginBottom:3}}>
+                        {lang==='es'?flyer.titleEs:flyer.title}
+                      </div>
+                      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+                        <span style={{fontFamily:'DM Sans',fontSize:'0.72rem',color:'#9CA3AF'}}>
+                          📅 {lang==='es'?flyer.dateEs:flyer.date}
+                        </span>
+                        <span style={{fontFamily:'DM Sans',fontSize:'0.7rem',fontWeight:700,padding:'2px 10px',borderRadius:999,background:tc.bg,color:tc.color,border:'1px solid '+tc.border}}>
+                          {lang==='es'?flyer.tagEs:flyer.tag}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{display:'flex',gap:8,flexShrink:0}}>
+                    <button onClick={()=>setActiveFlyer(flyer)} style={{fontFamily:'DM Sans',fontSize:'0.78rem',fontWeight:700,padding:'7px 16px',borderRadius:999,border:'1px solid '+flyer.accent+'44',background:flyer.accent+'12',color:flyer.accent,cursor:'pointer',transition:'all 0.2s',whiteSpace:'nowrap'}}>
+                      {lang==='es'?'Ver':'View'} &#8594;
+                    </button>
+                    <a href={flyer.file} download style={{fontFamily:'DM Sans',fontSize:'0.78rem',fontWeight:700,padding:'7px 16px',borderRadius:999,border:'1px solid #e5e7eb',background:'#F8FAFB',color:'#6B7280',textDecoration:'none',display:'flex',alignItems:'center',gap:4,whiteSpace:'nowrap',transition:'all 0.2s'}}>
+                      &#8595; {lang==='es'?'Descargar':'Download'}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 const sectionsEN=[
   {category:'School Calendar & Events',icon:String.fromCodePoint(0x1F4C5),items:[
     {name:'2025-2026 School Calendar',desc:'Key dates, holidays, and closings',type:'calendar',accent:'#F5A623',icon:'\u{1F4C5}'},
     {name:'Upcoming Events',desc:'Family nights, field trips, and celebrations',type:'upcoming',accent:'#4BA3E3',icon:'\u{1F389}'},
-    {name:"What's Happening at LSPA",desc:'Workshops, flyers, and community updates',type:'happening',accent:'#F7C948',icon:'\u{1F4E2}'},
   ]},
   {category:'NJ Family Support',icon:String.fromCodePoint(0x1F3E0),items:[
     {name:'NJ Child Care Assistance',desc:'Financial help for working families',link:'https://www.childcarenj.gov',type:'external'},
@@ -162,7 +232,6 @@ const sectionsES=[
   {category:'Calendario Escolar y Eventos',icon:String.fromCodePoint(0x1F4C5),items:[
     {name:'Calendario Escolar 2025-2026',desc:'Fechas importantes, feriados y cierres',type:'calendar',accent:'#F5A623'},
     {name:'Proximos Eventos',desc:'Noches familiares, excursiones y celebraciones',type:'upcoming',accent:'#4BA3E3'},
-    {name:'Lo Que Pasa en LSPA',desc:'Talleres, volantes y actualizaciones comunitarias',type:'happening',accent:'#F7C948'},
   ]},
   {category:'Apoyo Familiar de NJ',icon:String.fromCodePoint(0x1F3E0),items:[
     {name:'Asistencia de Cuidado Infantil de NJ',desc:'Ayuda financiera para familias trabajadoras',link:'https://www.childcarenj.gov',type:'external'},
@@ -185,10 +254,8 @@ export default function Resources(){
 
   return(
     <div style={{minHeight:'100vh'}}>
-
       {modal==='calendar'&&<PdfModal title={lang==='es'?'Calendario Escolar 2025-2026':'2025-2026 School Calendar'} docs={calendarDocs} onClose={()=>setModal(null)} lang={lang} accent='#F5A623'/>}
       {modal==='upcoming'&&<UpcomingModal onClose={()=>setModal(null)} lang={lang}/>}
-      {modal==='happening'&&<PdfModal title={lang==='es'?'Lo Que Pasa en LSPA':"What's Happening at LSPA"} docs={happeningDocs} onClose={()=>setModal(null)} lang={lang} accent='#F7C948'/>}
 
       <section className='relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden' style={{background:'linear-gradient(135deg,#1B2D5B 0%,#1B4A6B 50%,#2A5451 100%)'}}>
         <div className='absolute inset-0' style={{background:'radial-gradient(ellipse at 40% 50%,rgba(75,163,227,0.08),transparent 60%)'}}/>
@@ -201,15 +268,17 @@ export default function Resources(){
 
       <section className='py-16 md:py-24' style={{background:'#FFFFFF'}}>
         <div className='max-w-5xl mx-auto px-4 md:px-8'>
+
+          {/* Calendar & Events + other sections */}
           {sections.map((section,si)=>(
             <div key={si} className='mb-12'>
               <h2 className='font-bold text-lg mb-4 flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}><span className='text-2xl'>{section.icon}</span>{section.category}</h2>
               <div className='grid md:grid-cols-2 gap-4'>
                 {section.items.map((item,j)=>{
-                  if(['calendar','upcoming','happening'].includes(item.type)){
+                  if(['calendar','upcoming'].includes(item.type)){
                     const ac=item.accent||'#F7C948';
                     return(
-                      <button key={j} onClick={()=>setModal(item.type)} className='text-left w-full group' style={{background:'#fff',border:'1px solid #e5e7eb',borderRadius:16,padding:0,cursor:'pointer',overflow:'hidden',transition:'all 0.25s',boxShadow:'0 1px 4px rgba(0,0,0,0.06)'}}>
+                      <button key={j} onClick={()=>setModal(item.type)} className='text-left w-full' style={{background:'#fff',border:'1px solid #e5e7eb',borderRadius:16,padding:0,cursor:'pointer',overflow:'hidden',transition:'all 0.25s',boxShadow:'0 1px 4px rgba(0,0,0,0.06)'}}>
                         <div style={{height:5,background:'linear-gradient(90deg,'+ac+','+ac+'99)'}}/>
                         <div style={{padding:'1.1rem 1.25rem 1.25rem'}}>
                           <div style={{fontFamily:'Fredoka',fontSize:'1.05rem',fontWeight:700,color:'#1B2D5B',marginBottom:4}}>{item.name}</div>
@@ -223,23 +292,7 @@ export default function Resources(){
                   }
                   if(item.type==='internal'){
                     return(
-                      <a key={j} href={item.link}
-                        className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'rgba(75,163,227,0.35)',textDecoration:'none',background:'linear-gradient(135deg,rgba(75,163,227,0.05),rgba(34,197,94,0.04))'}}>
-                        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:4}}>
-                          <span style={{fontSize:'1.4rem'}}>🎮</span>
-                          <div className='font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
-                        </div>
-                        <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem',marginBottom:8}}>{item.desc}</div>
-                        <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.3)',borderRadius:999,padding:'4px 12px'}}>
-                          <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#4BA3E3'}}>{lang==='es'?'Jugar ahora ▶':'Play now ▶'}</span>
-                        </div>
-                      </a>
-                    );
-                  }
-                  if(item.type==='internal'){
-                    return(
-                      <a key={j} href={item.link}
-                        className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'rgba(75,163,227,0.35)',textDecoration:'none',background:'linear-gradient(135deg,rgba(75,163,227,0.05),rgba(34,197,94,0.04))'}}>
+                      <a key={j} href={item.link} className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'rgba(75,163,227,0.35)',textDecoration:'none',background:'linear-gradient(135deg,rgba(75,163,227,0.05),rgba(34,197,94,0.04))'}}>
                         <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:4}}>
                           <span style={{fontSize:'1.4rem'}}>🎮</span>
                           <div className='font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
@@ -252,8 +305,7 @@ export default function Resources(){
                     );
                   }
                   return(
-                    <a key={j} href={item.link} target='_blank' rel='noopener noreferrer'
-                      className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'#e5e7eb',textDecoration:'none'}}>
+                    <a key={j} href={item.link} target='_blank' rel='noopener noreferrer' className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'#e5e7eb',textDecoration:'none'}}>
                       <div className='font-bold mb-1' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
                       <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem'}}>{item.desc}</div>
                       <div className='mt-2 text-xs font-semibold' style={{color:'#F7C948'}}>&#8599; {t('resources.externalLink')}</div>
@@ -263,6 +315,19 @@ export default function Resources(){
               </div>
             </div>
           ))}
+
+          {/* What's Happening — Flyer Library */}
+          <div className='mb-12'>
+            <h2 className='font-bold text-lg mb-2 flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>
+              <span className='text-2xl'>📢</span>
+              {lang==='es'?'Lo Que Pasa en LSPA':"What's Happening at LSPA"}
+            </h2>
+            <p style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#9CA3AF',marginBottom:16}}>
+              {lang==='es'?'Talleres, volantes y actualizaciones comunitarias — mas recientes primero.':'Workshops, flyers, and community updates — newest first.'}
+            </p>
+            <FlyerLibrary lang={lang}/>
+          </div>
+
         </div>
       </section>
 
@@ -272,7 +337,6 @@ export default function Resources(){
           <Link href='/enrollment' className='text-sm font-bold hover:underline' style={{fontFamily:'Fredoka',color:'#4BA3E3'}}>{t('resources.visitEnrollment')} &#8594;</Link>
         </div>
       </section>
-
     </div>
   );
 }
