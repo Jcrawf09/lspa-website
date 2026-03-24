@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
         <div className="border-t pt-5" style={{borderColor:"rgba(255,255,255,0.06)"}}>
           <div className="flex flex-wrap justify-between gap-3 mb-3">
-            <div className="text-xs" style={{color:"rgba(255,255,255,0.25)"}}>{t('footer.copyright')}</div>
+            <div className="text-xs" style={{color:"rgba(255,255,255,0.25)"}}>{t('footer.copyright')} {lang==='es'?'Todos los Derechos Reservados.':'All Rights Reserved.'}</div>
             <div className="flex gap-4">
               <Link href="/privacy-policy" className="text-xs hover:underline" style={{color:"rgba(255,255,255,0.25)"}}>{t('footer.privacyPolicy')}</Link>
             </div>
