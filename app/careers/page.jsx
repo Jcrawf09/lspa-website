@@ -468,7 +468,7 @@ export default function Careers(){
           </div>
           <div className='space-y-5'>
             {openings.map((job,i)=>(
-              <div key={i} onClick={()=>setSelectedJob(job)} className='p-6 rounded-2xl border bg-white cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all' style={{borderColor:'#e5e7eb'}}>
+              <div key={i} onClick={()=>setSelectedJob(job)} className='p-6 rounded-2xl border bg-white cursor-pointer transition-all active:scale-95' style={{borderColor:'#e5e7eb',WebkitTapHighlightColor:'transparent'}}>
                 <div className='flex justify-between flex-wrap gap-2 mb-2'>
                   <div className='font-bold text-lg' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{job.title}</div>
                   <div className='flex gap-2 flex-wrap'>
