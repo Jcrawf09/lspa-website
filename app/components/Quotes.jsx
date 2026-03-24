@@ -114,7 +114,8 @@ export default function Quotes() {
         @keyframes sparkle  { 0%,100%{transform:scale(0) rotate(0deg);opacity:0} 50%{transform:scale(1) rotate(180deg);opacity:1} }
         .qc { cursor:pointer; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
         .qc:hover { transform:translateY(-5px) scale(1.04) !important; box-shadow:0 14px 32px rgba(0,0,0,.14) !important; }
-      `}</style>
+@media(max-width:640px){.side-float{display:none!important}.quotes-inner{padding:14px 16px 18px!important}}
+`}</style>
 
       {/* Main backdrop */}
       <div onClick={close} style={{
