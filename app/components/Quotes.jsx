@@ -114,7 +114,7 @@ export default function Quotes() {
         @keyframes sparkle  { 0%,100%{transform:scale(0) rotate(0deg);opacity:0} 50%{transform:scale(1) rotate(180deg);opacity:1} }
         .qc { cursor:pointer; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
         .qc:hover { transform:translateY(-5px) scale(1.04) !important; box-shadow:0 14px 32px rgba(0,0,0,.14) !important; }
-@media(max-width:640px){.side-float{width:28px!important;height:28px!important;left:2px!important}.quotes-inner{padding:14px 20px 18px!important}.quotes-grid{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}}
+@media(max-width:640px){.side-float{width:28px!important;height:28px!important}.quotes-inner{padding:14px 20px 18px!important}.quotes-grid{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}}
 `}</style>
 
       {/* Main backdrop */}
@@ -219,7 +219,7 @@ export default function Quotes() {
                     animation:`cPop .38s ease both`,
                     animationDelay:`${i*.045}s`,
                     border: `2px solid transparent`,
-                    height:210,                  /* fixed height — no layout shift */
+                    height:"auto", minHeight:150,                  /* fixed height — no layout shift */
                     boxSizing:"border-box",
                     display:"flex", flexDirection:"column",
                     alignItems:"center", justifyContent:"center",
