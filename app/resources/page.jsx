@@ -14,6 +14,20 @@ const calendarDocs=[
 // ──────────────────────────────────────────────────────────────
 const flyerLibrary=[
   {
+    title:'Scholastic Early Childhood Resources',
+    titleEs:'Recursos Educativos Scholastic',
+    titleHt:'Resous Edikasyon Scholastic',
+    file:'/forms/scholastic-early-childhood-resources-2025-2026.pdf',
+    date:'March 25, 2026',
+    dateEs:'25 de marzo de 2026',
+    dateHt:'25 mas 2026',
+    tag:'Partner',
+    tagEs:'Patnè',
+    tagHt:'Patnè',
+    accent:'#E53E3E',
+    icon:'📚',
+  },
+  {
     title:'Bedtime Routines Workshop',
     titleEs:'Taller de Rutinas para Dormir',
     file:'/forms/bedtime-routines-workshop.pdf',
