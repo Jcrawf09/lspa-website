@@ -41,7 +41,6 @@ const flyerLibrary=[
 ];
 
 const TAG_COLORS={
- const TAG_COLORS={
   Workshop:{bg:'#F5F3FF',color:'#8B5CF6',border:'#DDD6FE'},
   Event:{bg:'#EFF6FF',color:'#3B82F6',border:'#BFDBFE'},
   Notice:{bg:'#FFF7ED',color:'#F97316',border:'#FED7AA'},
