@@ -17,7 +17,7 @@ const flyerLibrary=[
     title:'Scholastic Early Childhood Resources',
     titleEs:'Recursos Educativos Scholastic',
     titleHt:'Resous Edikasyon Scholastic',
-    file:'/forms/scholastic-early-childhood-resources-2025-2026.pdf',
+    file:'/forms/SCHOOLASTIC04024220260325141351.pdf',
     date:'March 25, 2026',
     dateEs:'25 de marzo de 2026',
     dateHt:'25 mas 2026',
