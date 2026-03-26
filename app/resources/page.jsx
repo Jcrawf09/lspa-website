@@ -41,11 +41,13 @@ const flyerLibrary=[
 ];
 
 const TAG_COLORS={
+ const TAG_COLORS={
   Workshop:{bg:'#F5F3FF',color:'#8B5CF6',border:'#DDD6FE'},
   Event:{bg:'#EFF6FF',color:'#3B82F6',border:'#BFDBFE'},
   Notice:{bg:'#FFF7ED',color:'#F97316',border:'#FED7AA'},
   Newsletter:{bg:'#F0FDF4',color:'#22C55E',border:'#BBF7D0'},
   Holiday:{bg:'#FFF1F2',color:'#F43F5E',border:'#FECDD3'},
+  Partner:{bg:'#FFF5F5',color:'#E53E3E',border:'#FED7D7'},
 };
 
 function PdfModal({title,docs,onClose,lang,accent}){
