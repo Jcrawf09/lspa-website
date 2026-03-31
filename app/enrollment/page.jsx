@@ -223,7 +223,7 @@ return(
 </div>
 );})}
 </div>
-<div className='text-center mt-8'><p className='text-sm' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{t('enrollment.troubleMsg')} <a href='mailto:lauraspelmanacademy@verizon.net' className='font-semibold' style={{color:'#4BA3E3'}}>lauraspelmanacademy@verizon.net</a> {t('enrollment.orDropOff')}</p></div>
+<div className='text-center mt-8'><p className='text-sm' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{t('enrollment.troubleMsg')} <a href='mailto:lauraspelmanacademy@gmail.com' className='font-semibold' style={{color:'#4BA3E3'}}>lauraspelmanacademy@gmail.com</a> {t('enrollment.orDropOff')}</p></div>
 </div>
 </section>
 
@@ -261,7 +261,7 @@ return(
 <p className='mb-6' style={{fontFamily:'DM Sans',color:'rgba(255,255,255,0.6)'}}>{t('enrollment.readyDesc')}</p>
 <div className='flex gap-4 justify-center flex-wrap'>
 <a href='tel:6093967171' className='px-8 py-3 rounded-full font-bold shadow-lg hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',background:'linear-gradient(to right,#F7C948,#F5A623)',color:'#0F1D3D'}}>{t('enrollment.callToEnroll')} (609) 396-7171</a>
-<a href='mailto:lauraspelmanacademy@verizon.net' className='px-8 py-3 rounded-full font-bold border-2 hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',borderColor:'rgba(255,255,255,0.3)',color:'#FFFFFF'}}>{t('enrollment.emailUs')}</a>
+<a href='mailto:lauraspelmanacademy@gmail.com' className='px-8 py-3 rounded-full font-bold border-2 hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',borderColor:'rgba(255,255,255,0.3)',color:'#FFFFFF'}}>{t('enrollment.emailUs')}</a>
 </div>
 </div>
 </section>
