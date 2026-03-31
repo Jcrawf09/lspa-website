@@ -18,7 +18,8 @@ const staffData=[
 {name:'Lisa Verdi',campus:'540 N. Olden Ave'},
 {name:'Julie Moyer',campus:'1040 Spruce St'},
 {name:'Pamela Rodriguez',campus:'1040 Spruce St'},
-{name:'Vasundhara Singh',campus:'1040 Spruce St'},
+{name:'Vasundhara Singh',campus:'1040 Spruce St',pending:true},
+{name:'Sapna Porwal',campus:'1040 Spruce St',pending:true},
 {name:'__OPEN__',campus:'1040 Spruce St'},
 ]},
 {catKey:'floaterteacherassistant',color:'#8BC34A',icon:String.fromCodePoint(0x1F4D6),people:[
@@ -124,7 +125,7 @@ return(
 </section>
 
 {staffData.map((cat,ci)=>{
-const filtered=filter==='All'?cat.people:cat.people.filter(p=>p.campus===filter);
+const filtered=filter==='All'?cat.people:cat.people.filter(p=>p.campus===filter||p.campus==='Both Locations');
 if(filtered.length===0)return null;
 return(
 <section key={ci} className='py-10 md:py-14' style={{background:ci%2===0?'#FFFFFF':'#F8FAFB'}}>
@@ -139,7 +140,16 @@ return(
 {filtered.map((person,pi)=>(
 person.name==='__OPEN__'
 ? <OpenPositionCard key={pi} color={cat.color} lang={lang}/>
-: <div key={pi} className='text-center p-4 rounded-2xl border hover:shadow-lg transition-all group' style={{borderColor:'#e5e7eb',background:'#FFFFFF'}}>
+: <div key={pi} className='text-center p-4 rounded-2xl border hover:shadow-lg transition-all group' style={{borderColor:'#e5e7eb',background:'#FFFFFF',position:'relative',overflow:'hidden'}}>
+{person.pending&&(
+  <div style={{position:'absolute',inset:0,zIndex:10,borderRadius:14,backdropFilter:'blur(3px)',background:'rgba(248,250,252,0.88)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:8}}>
+    <div style={{background:'linear-gradient(135deg,#F5A623,#F7C948)',borderRadius:999,padding:'5px 16px',display:'inline-flex',alignItems:'center',gap:6,boxShadow:'0 4px 12px rgba(245,166,35,0.3)'}}>
+      <span style={{fontSize:'0.75rem'}}>&#x23F3;</span>
+      <span style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#0F1D3D',letterSpacing:0.5}}>{lang==='es'?'Próximamente':'Joining Soon'}</span>
+    </div>
+    <p style={{fontFamily:'DM Sans',fontSize:'0.7rem',color:'#6B7280',textAlign:'center',maxWidth:120,lineHeight:1.5,margin:0}}>{person.name}</p>
+  </div>
+)}
 <div className='flex justify-center mb-3 group-hover:-translate-y-1 transition-transform'><Avatar color={cat.color} name={person.name}/></div>
 <div className='font-bold text-sm mb-0.5' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{person.name}</div>
 {person.room&&<div className='text-xs mb-1' style={{fontFamily:'DM Sans',color:'#9CA3AF'}}>{roomLabel}{person.room}</div>}
@@ -161,4 +171,5 @@ person.name==='__OPEN__'
 </section>
 
 </div>
-);}
+);
+}
