@@ -27,7 +27,7 @@ return(
 {!spanishLine&&<div className='mb-8'/>}
 <div className='flex gap-4 justify-center flex-wrap'>
 <a href='tel:6093967171' className='inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',background:'linear-gradient(to right,#F7C948,#F5A623)',color:'#0F1D3D',textDecoration:'none'}}>{String.fromCodePoint(0x1F4DE)} {callBtn} (609) 396-7171</a>
-<a href='mailto:lauraspelmanacademy@verizon.net' className='inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg border-2 hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',borderColor:'rgba(255,255,255,0.25)',color:'#FFFFFF',textDecoration:'none'}}>{String.fromCodePoint(0x2709)} {emailBtn}</a>
+<a href='mailto:lauraspelmanacademy@gmail.com' className='inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg border-2 hover:-translate-y-1 transition-all' style={{fontFamily:'Fredoka',borderColor:'rgba(255,255,255,0.25)',color:'#FFFFFF',textDecoration:'none'}}>{String.fromCodePoint(0x2709)} {emailBtn}</a>
 </div>
 </div>
 </div>
