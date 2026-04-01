@@ -138,14 +138,25 @@ const form=forms[fi]||{title:fd.id,titleEs:'',desc:''};
 return(
 <div key={fd.id} className='rounded-2xl border-2 overflow-hidden transition-all' style={{borderColor:fd.comingSoon?'#e5e7eb':expandedForm===fd.id?'#F5A623':'#e5e7eb',boxShadow:expandedForm===fd.id?'0 8px 30px rgba(27,42,74,0.1)':'0 1px 4px rgba(0,0,0,0.04)',position:'relative'}}>
 {fd.comingSoon&&(
-  <div style={{position:'absolute',inset:0,zIndex:10,borderRadius:14,backdropFilter:'blur(3px)',background:'rgba(248,250,252,0.88)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:10}}>
-    <div style={{background:'linear-gradient(135deg,#1B2D5B,#1B4A6B)',borderRadius:999,padding:'6px 20px',display:'inline-flex',alignItems:'center',gap:8,boxShadow:'0 4px 16px rgba(27,42,74,0.25)'}}>
-      <span style={{fontSize:'0.9rem'}}>&#x1F512;</span>
-      <span style={{fontFamily:'Fredoka',fontSize:'0.95rem',fontWeight:700,color:'#fff',letterSpacing:0.5}}>{lang==='es'?'Proximo Disponible':'Coming Soon'}</span>
+  <div style={{position:'absolute',inset:0,zIndex:10,borderRadius:14,backdropFilter:'blur(3px)',background:'rgba(248,250,252,0.92)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:10,padding:'1rem'}}>
+    <div style={{background:'linear-gradient(135deg,#F5A623,#F7C948)',borderRadius:999,padding:'6px 20px',display:'inline-flex',alignItems:'center',gap:8,boxShadow:'0 4px 16px rgba(245,166,35,0.35)'}}>
+      <span style={{fontSize:'0.9rem'}}>&#x1F4C5;</span>
+      <span style={{fontFamily:'Fredoka',fontSize:'0.95rem',fontWeight:700,color:'#0F1D3D',letterSpacing:0.5}}>{lang==='es'?'Abre 1 de Mayo':'Opens May 1, 2026'}</span>
     </div>
-    <p style={{fontFamily:'DM Sans',fontSize:'0.78rem',color:'#6B7280',textAlign:'center',maxWidth:220,lineHeight:1.5,margin:0}}>
-      {lang==='es'?'Este formulario sera actualizado por el distrito. Vuelve pronto.':'This form is being updated by the district. Check back soon.'}
+    <p style={{fontFamily:'Fredoka',fontSize:'1rem',fontWeight:700,color:'#1B2D5B',textAlign:'center',maxWidth:240,lineHeight:1.4,margin:0}}>
+      {lang==='es'?'Los cupos se llenan rapido. Contactanos ahora.':'Spots fill fast. Contact us now to get ahead.'}
     </p>
+    <p style={{fontFamily:'DM Sans',fontSize:'0.75rem',color:'#6B7280',textAlign:'center',maxWidth:220,lineHeight:1.5,margin:0}}>
+      {lang==='es'?'Llama o escribe hoy para asegurar el lugar de tu hijo.':'Call or email today to secure your child\'s place before enrollment opens.'}
+    </p>
+    <div style={{display:'flex',gap:8,flexWrap:'wrap',justifyContent:'center'}}>
+      <a href='tel:6093967171' style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#0F1D3D',background:'linear-gradient(to right,#F7C948,#F5A623)',borderRadius:999,padding:'6px 16px',textDecoration:'none',boxShadow:'0 2px 8px rgba(245,166,35,0.3)'}}>
+        {lang==='es'?'Llama Ahora':'Call Now'}
+      </a>
+      <a href='mailto:lauraspelmanacademy@gmail.com' style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#1B2D5B',background:'#fff',border:'2px solid #1B2D5B',borderRadius:999,padding:'6px 16px',textDecoration:'none'}}>
+        {lang==='es'?'Escribenos':'Email Us'}
+      </a>
+    </div>
   </div>
 )}
 <div className='p-6'>
