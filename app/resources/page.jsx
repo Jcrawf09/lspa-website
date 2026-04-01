@@ -7,11 +7,6 @@ const calendarDocs=[
   {title:'2025-2026 School Year Calendar',file:'/forms/2025-2026-School-Year-Calendar.pdf',tag:'Official Document'},
 ];
 
-// ── FLYER LIBRARY ──────────────────────────────────────────────
-// To add a new flyer, add a new entry at the TOP of this array.
-// Fields: title, titleEs, file, date, tag, tagEs, accent
-// tag options: Workshop, Event, Notice, Newsletter, Holiday
-// ──────────────────────────────────────────────────────────────
 const flyerLibrary=[
   {
     title:'Scholastic Early Childhood Resources',
@@ -143,7 +138,68 @@ function UpcomingModal({onClose,lang}){
   );
 }
 
-// ── FLYER LIBRARY SECTION ─────────────────────────────────────
+function MTTCard({lang}){
+  const[hovered,setHovered]=useState(false);
+  const tooltip=lang==='es'
+    ?'LSPALearn es una plataforma de aprendizaje movil adaptativa desarrollada por Madison Thomas Technologies. Extiende el salon de clases de LSPA al hogar — con alfabetizacion, codificacion e inteligencia artificial desde los tres anos.'
+    :'LSPALearn is a personalized, pace-adaptive mobile learning platform built by Madison Thomas Technologies. It extends LSPA\'s classroom into every home — delivering literacy, coding, and AI foundations starting at age three. Launching soon.';
+  return(
+    <div
+      className='mb-5 rounded-2xl overflow-hidden'
+      style={{position:'relative',border:'1px solid rgba(27,45,91,0.15)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}
+      onMouseEnter={()=>setHovered(true)}
+      onMouseLeave={()=>setHovered(false)}
+    >
+      {hovered&&(
+        <div style={{position:'absolute',bottom:'calc(100% + 10px)',left:'50%',transform:'translateX(-50%)',zIndex:100,width:320,background:'#0F1E3D',borderRadius:14,padding:'1rem 1.25rem',boxShadow:'0 16px 40px rgba(0,0,0,0.3)',border:'1px solid rgba(75,163,227,0.2)',pointerEvents:'none'}}>
+          <div style={{height:3,background:'linear-gradient(90deg,#1B2D5B,#4BA3E3,#C9A84C)',borderRadius:99,marginBottom:'0.75rem'}}/>
+          <p style={{fontFamily:'DM Sans',fontSize:'0.82rem',color:'rgba(255,255,255,0.82)',lineHeight:1.7,margin:0}}>{tooltip}</p>
+          <div style={{position:'absolute',bottom:-7,left:'50%',transform:'translateX(-50%)',width:14,height:14,background:'#0F1E3D',border:'1px solid rgba(75,163,227,0.2)',borderTop:'none',borderLeft:'none',rotate:'45deg'}}/>
+        </div>
+      )}
+      <div style={{background:'linear-gradient(135deg,#0F1E3D 0%,#1B2D5B 60%,#1B4A6B 100%)',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(75,163,227,0.15)'}}>
+        <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#FFFFFF',margin:0}}>
+          <span className='text-2xl'>&#x1F4F1;</span>
+          {lang==='es'?'Plataforma Digital — MTT':'Digital Learning Platform — MTT'}
+        </h2>
+      </div>
+      <div style={{background:'linear-gradient(135deg,#0F1E3D,#1B2D5B)',padding:'1.5rem'}}>
+        <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',textAlign:'center',padding:'1.5rem 1rem',borderRadius:20,border:'1px dashed rgba(75,163,227,0.25)',background:'rgba(255,255,255,0.03)',position:'relative',overflow:'hidden'}}>
+          <div style={{position:'absolute',top:-40,right:-40,width:160,height:160,borderRadius:'50%',background:'radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%)',pointerEvents:'none'}}/>
+          <div style={{position:'absolute',bottom:-40,left:-40,width:160,height:160,borderRadius:'50%',background:'radial-gradient(circle,rgba(75,163,227,0.08),transparent 70%)',pointerEvents:'none'}}/>
+          <div style={{width:60,height:60,borderRadius:'50%',background:'linear-gradient(135deg,#1B2D5B,#1B4A6B)',border:'2px solid rgba(201,168,76,0.4)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.75rem',marginBottom:'1rem',boxShadow:'0 8px 24px rgba(0,0,0,0.3)'}}>
+            &#x1F9E0;
+          </div>
+          <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(201,168,76,0.12)',border:'1px solid rgba(201,168,76,0.3)',borderRadius:999,padding:'4px 16px',marginBottom:'0.85rem'}}>
+            <div style={{width:6,height:6,borderRadius:'50%',background:'#C9A84C'}}/>
+            <span style={{fontFamily:'DM Sans',fontSize:'0.68rem',fontWeight:700,letterSpacing:'2.5px',textTransform:'uppercase',color:'#C9A84C'}}>
+              {lang==='es'?'EN DESARROLLO':'IN DEVELOPMENT'}
+            </span>
+          </div>
+          <div style={{fontFamily:'Fredoka',fontSize:'1.4rem',fontWeight:700,color:'#FFFFFF',marginBottom:'0.4rem',letterSpacing:0.3}}>
+            LSPALearn
+          </div>
+          <div style={{fontFamily:'DM Sans',fontSize:'0.82rem',color:'rgba(255,255,255,0.5)',marginBottom:'1.25rem',maxWidth:320,lineHeight:1.6}}>
+            {lang==='es'
+              ?'Powered by Madison Thomas Technologies — aprendizaje adaptativo, codificacion e IA para la proxima generacion de Trenton.'
+              :'Powered by Madison Thomas Technologies — adaptive learning, coding, and AI literacy for Trenton\'s next generation.'}
+          </div>
+          <div style={{display:'flex',gap:10,flexWrap:'wrap',justifyContent:'center'}}>
+            {['Adaptive Learning','AI Literacy','Coding Foundations'].map((tag,i)=>(
+              <span key={i} style={{fontFamily:'DM Sans',fontSize:'0.72rem',fontWeight:700,padding:'3px 12px',borderRadius:999,background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.2)',color:'#4BA3E3'}}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div style={{marginTop:'1.25rem',fontFamily:'DM Sans',fontSize:'0.75rem',color:'rgba(255,255,255,0.3)'}}>
+            {lang==='es'?'Pasa el cursor para saber mas · madisonthomastechnologies.com':'Hover to learn more · madisonthomastechnologies.com'}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function FlyerLibrary({lang}){
   const[activeFlyer,setActiveFlyer]=useState(null);
   const[filter,setFilter]=useState('All');
@@ -167,8 +223,6 @@ function FlyerLibrary({lang}){
           accent={activeFlyer.accent}
         />
       )}
-
-      {/* Filter chips */}
       <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:20}}>
         {tags.map(tag=>(
           <button key={tag} onClick={()=>setFilter(tag)} style={{fontFamily:'DM Sans',fontSize:'0.78rem',fontWeight:700,padding:'5px 14px',borderRadius:999,border:'1px solid',cursor:'pointer',transition:'all 0.2s',background:filter===tag?'#1B2D5B':'transparent',color:filter===tag?'#fff':'#6B7280',borderColor:filter===tag?'#1B2D5B':'#e5e7eb'}}>
@@ -176,7 +230,6 @@ function FlyerLibrary({lang}){
           </button>
         ))}
       </div>
-
       {filtered.length===0?(
         <div style={{textAlign:'center',padding:'2rem',color:'#9CA3AF',fontFamily:'DM Sans',fontSize:'0.9rem'}}>
           {lang==='es'?'No hay elementos en esta categoria.':'No items in this category yet.'}
@@ -284,7 +337,6 @@ export default function Resources(){
       <section className='py-16 md:py-24' style={{background:'#F8FAFB'}}>
         <div className='max-w-5xl mx-auto px-4 md:px-8'>
 
-          {/* Calendar & Events + other sections */}
           {sections.map((section,si)=>(
             <div key={si} className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(0,0,0,0.06)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
               <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(0,0,0,0.05)'}}>
@@ -335,7 +387,6 @@ export default function Resources(){
             </div>
           ))}
 
-          {/* What's Happening — Flyer Library */}
           <div className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(139,92,246,0.15)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
             <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(139,92,246,0.1)'}}>
               <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}>
@@ -350,6 +401,8 @@ export default function Resources(){
               <FlyerLibrary lang={lang}/>
             </div>
           </div>
+
+          <MTTCard lang={lang}/>
 
         </div>
       </section>
