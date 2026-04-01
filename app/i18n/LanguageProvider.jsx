@@ -11,22 +11,27 @@ const[loaded,setLoaded]=useState(false);
 const[showModal,setShowModal]=useState(false);
 
 useEffect(()=>{
+if(typeof window==='undefined')return;
+try{
 const saved=localStorage.getItem('lspa-lang');
 if(saved&&translations[saved]){
 setLang(saved);
 setLoaded(true);
 setShowModal(false);
-return;
-}
-// No saved preference — show the modal
+}else{
 setShowModal(true);
 setLoaded(true);
+}
+}catch(e){
+setShowModal(true);
+setLoaded(true);
+}
 },[]);
 
 const choose=(newLang)=>{
 if(translations[newLang]){
 setLang(newLang);
-localStorage.setItem('lspa-lang',newLang);
+try{localStorage.setItem('lspa-lang',newLang);}catch(e){}
 setShowModal(false);
 }
 };
@@ -34,7 +39,7 @@ setShowModal(false);
 const switchLanguage=(newLang)=>{
 if(translations[newLang]){
 setLang(newLang);
-localStorage.setItem('lspa-lang',newLang);
+try{localStorage.setItem('lspa-lang',newLang);}catch(e){}
 }
 };
 
@@ -57,6 +62,8 @@ else return null;
 }
 return val;
 };
+
+if(!loaded)return null;
 
 return(
 <LanguageContext.Provider value={{lang,switchLanguage,t,tObj,loaded}}>
