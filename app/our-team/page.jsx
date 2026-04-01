@@ -19,7 +19,7 @@ const staffData=[
 {name:'Julie Moyer',campus:'1040 Spruce St'},
 {name:'Pamela Rodriguez',campus:'1040 Spruce St'},
 {name:'Vasundhara Singh',campus:'1040 Spruce St',pending:true},
-{name:'Sapna Porwal',campus:'1040 Spruce St',pending:true},
+{name:'Sapna Porwal',campus:'1040 Spruce St'},
 {name:'__OPEN__',campus:'1040 Spruce St'},
 ]},
 {catKey:'floaterteacherassistant',color:'#8BC34A',icon:String.fromCodePoint(0x1F4D6),people:[
