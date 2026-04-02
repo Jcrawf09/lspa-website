@@ -1,6 +1,6 @@
 'use client';
 import Link from'next/link';
-import{useState}from'react';
+import{useState,useEffect,useRef}from'react';
 import{useLanguage}from'../i18n/LanguageProvider';
 
 const calendarDocs=[
@@ -139,117 +139,192 @@ function UpcomingModal({onClose,lang}){
 }
 
 function MTTCard({lang}){
-  const[hovered,setHovered]=useState(false);
-  const[tagHover,setTagHover]=useState(null);
-
-  const tooltip=lang==='es'
-    ?'LSPALearn es una plataforma de aprendizaje movil adaptativa desarrollada por Madison Thomas Technologies. Extiende el salon de clases de LSPA al hogar — con alfabetizacion, codificacion e inteligencia artificial desde los tres anos.'
-    :'LSPALearn is a personalized, pace-adaptive mobile learning platform built by Madison Thomas Technologies. It extends LSPA\'s classroom into every home — delivering literacy, coding, and AI foundations starting at age three. Launching soon.';
+  const[activeTag,setActiveTag]=useState(null);
+  const canvasRef=useRef(null);
+  const cardRef=useRef(null);
+  const isTouch=typeof window!=='undefined'?('ontouchstart' in window||navigator.maxTouchPoints>0):false;
 
   const tags=[
     {
       label:'Adaptive Learning',
       labelEs:'Aprendizaje Adaptativo',
+      em:false,
       tip:lang==='es'
-        ?'La aplicacion esta disenada para adaptarse al ritmo individual de cada nino. Ningun nino es apresurado. Ningun nino es detenido. Los estandares estan alineados con NJBOE, TBOE y OOEC.'
-        :'The application adapts to each child\'s individual pace. No child is rushed past understanding. No child is held back from advancing. Standards are aligned with NJBOE, TBOE, and OOEC frameworks.',
+        ?'LSPALearn está construido sobre los marcos establecidos por el OOEC y TBOE — pero va más allá del currículo. Es un entorno de aprendizaje adaptativo al ritmo individual de cada niño. Ningún niño es apresurado y ningún niño es detenido.'
+        :'LSPALearn is built upon the frameworks established by the OOEC and TBOE — but goes above and beyond the curriculum. It is a personalized, pace-adaptive environment built to follow children home. No child is rushed past understanding and no child is held back from advancing.',
     },
     {
       label:'AI Literacy',
-      labelEs:'Alfabetizacion en IA',
+      labelEs:'Alfabetización en IA',
+      em:true,
       tip:lang==='es'
-        ?'Queremos que los ninos aprendan lo que impulsa todo esto: IA y codificacion. No como una materia electiva. No como una opcion futura. Como una alfabetizacion fundamental, comenzando desde el nivel preescolar.'
+        ?'Queremos que los niños aprendan lo que impulsa todo esto — IA y codificación. No como una materia electiva. No como una opción futura. Como una alfabetización fundamental, comenzando desde el nivel preescolar.'
         :'We want children to learn what fuels all of this — AI and coding. Not as an elective. Not as a future option. As a foundational literacy, beginning at the preschool level.',
     },
     {
       label:'Coding Foundations',
-      labelEs:'Fundamentos de Codificacion',
+      labelEs:'Fundamentos de Codificación',
+      em:false,
       tip:lang==='es'
-        ?'La codificacion no solo ensena una habilidad. Le ensena al nino que las herramientas que impulsan el mundo no son fijas — que pueden entenderse, modificarse y crearse.'
-        :'Coding does not just teach a child a skill. It teaches them that the tools driving the world around them are not fixed — that they can be understood, modified, and created.',
+        ?'La codificación no solo enseña una habilidad. Le enseña al niño que las herramientas que impulsan el mundo no son fijas — que pueden entenderse, modificarse y crearse.'
+        :'Coding does not just teach a child a skill. It teaches them that the tools driving the world around them are not fixed — that they can be understood, modified, and created. It lets a child shape their world of learning to their specific needs, their culture, their language, and their age.',
     },
   ];
 
+  useEffect(()=>{
+    const canvas=canvasRef.current;
+    const card=cardRef.current;
+    if(!canvas||!card)return;
+    const gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
+    if(!gl)return;
+    const sync=()=>{canvas.width=card.offsetWidth;canvas.height=card.offsetHeight;gl.viewport(0,0,canvas.width,canvas.height);};
+    sync();
+    window.addEventListener('resize',sync);
+    const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}`;
+    const fs=`
+precision mediump float;
+uniform float u_t;uniform vec2 u_r;
+float h(float n){return fract(sin(n)*43758.5453);}
+float ns(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i.x+i.y*57.),h(i.x+1.+i.y*57.),f.x),mix(h(i.x+(i.y+1.)*57.),h(i.x+1.+(i.y+1.)*57.),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*ns(p);p*=2.1;a*=.5;}return v;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_r;float t=u_t*.00038;
+  vec3 col=vec3(.012,.031,.062);
+  float n1=fbm(vec2(uv.x*2.8+t*.7,uv.y*1.8+t*.5));
+  float n2=fbm(vec2(uv.x*1.9-t*.5,uv.y*2.4+t*.8));
+  float w1=sin(uv.x*3.6+t*1.1)*.45+sin(uv.x*7.2+t*1.7)*.25+sin(uv.x*1.8+t*.7)*.3;
+  float y1=.3+w1*.1+n1*.06;
+  float d1=smoothstep(.22+sin(t*.8+uv.x*2.)*.05,0.,abs(uv.y-y1));
+  col+=vec3(.016,.20,.10)*d1*(.6+.28*sin(t*1.3+uv.x*3.2));
+  float w2=sin(uv.x*2.4+t*.85+1.2)*.5+sin(uv.x*5.+t*1.4+.8)*.25+sin(uv.x*1.1+t*.6+2.)*.25;
+  float y2=.6+w2*.09+n2*.05;
+  float d2=smoothstep(.18,0.,abs(uv.y-y2));
+  col+=vec3(.010,.10,.20)*d2*(.48+.26*sin(t+1.8+uv.x*2.5));
+  float w3=sin(uv.x*4.8+t*1.5+2.4)*.4+sin(uv.x*9.+t*2.2+.3)*.3;
+  float y3=.15+w3*.07+n1*.04;
+  float d3=smoothstep(.12,0.,abs(uv.y-y3));
+  col+=vec3(.028,.44,.22)*d3*(.4+.32*sin(t*1.6+3.2+uv.x*5.5));
+  col+=vec3(.28,.18,.04)*smoothstep(.08,0.,abs(uv.y-y3+.04))*(sin(t*5.+uv.x*14.)*.5+.5)*.2;
+  vec2 vp=uv-.5;col*=clamp(1.-dot(vp,vp)*2.2,0.,1.);
+  gl_FragColor=vec4(clamp(col,0.,1.),1.);
+}`;
+    const compile=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;};
+    const prog=gl.createProgram();
+    gl.attachShader(prog,compile(gl.VERTEX_SHADER,vs));
+    gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,fs));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+    const buf=gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+    const ap=gl.getAttribLocation(prog,'p');
+    gl.enableVertexAttribArray(ap);
+    gl.vertexAttribPointer(ap,2,gl.FLOAT,false,0,0);
+    const ut=gl.getUniformLocation(prog,'u_t');
+    const ur=gl.getUniformLocation(prog,'u_r');
+    let raf;
+    const loop=(ts)=>{
+      const w=card.offsetWidth,h=card.offsetHeight;
+      if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}
+      gl.uniform1f(ut,ts);gl.uniform2f(ur,w,h);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+      raf=requestAnimationFrame(loop);
+    };
+    raf=requestAnimationFrame(loop);
+    return()=>{cancelAnimationFrame(raf);window.removeEventListener('resize',sync);};
+  },[]);
+
+  const handlePillClick=(i)=>setActiveTag(activeTag===i?null:i);
+  const handlePillEnter=(i)=>{if(!isTouch)setActiveTag(i);};
+  const handlePillLeave=()=>{if(!isTouch)setActiveTag(null);};
+
+  const S={
+    wrap:{width:'100%',display:'flex',justifyContent:'center',padding:'0 0 20px 0',fontFamily:"'Barlow Condensed', sans-serif",WebkitFontSmoothing:'antialiased'},
+    card:{position:'relative',width:'100%',maxWidth:'100%',overflow:'hidden',borderRadius:2},
+    aurora:{position:'absolute',inset:0,width:'100%',height:'100%',zIndex:0,pointerEvents:'none'},
+    inner:{position:'relative',zIndex:2,background:'rgba(7,17,43,0.70)',border:'1px solid rgba(200,164,74,0.2)',backdropFilter:'blur(20px)',WebkitBackdropFilter:'blur(20px)',padding:'52px 48px 44px',display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center'},
+    topLine:{position:'absolute',top:0,left:0,right:0,height:2,background:'linear-gradient(to right, transparent, #C8A44A, transparent)'},
+    corner:(pos)=>({position:'absolute',width:12,height:12,zIndex:3,...(pos==='tl'?{top:14,left:14,borderTop:'1px solid rgba(200,164,74,.35)',borderLeft:'1px solid rgba(200,164,74,.35)'}:{}),...(pos==='tr'?{top:14,right:14,borderTop:'1px solid rgba(200,164,74,.35)',borderRight:'1px solid rgba(200,164,74,.35)'}:{}),...(pos==='bl'?{bottom:14,left:14,borderBottom:'1px solid rgba(200,164,74,.35)',borderLeft:'1px solid rgba(200,164,74,.35)'}:{}),...(pos==='br'?{bottom:14,right:14,borderBottom:'1px solid rgba(200,164,74,.35)',borderRight:'1px solid rgba(200,164,74,.35)'}:{})}),
+    badge:{display:'inline-flex',alignItems:'center',gap:8,fontFamily:"'IBM Plex Mono', monospace",fontSize:8,letterSpacing:'0.32em',textTransform:'uppercase',color:'#C8A44A',fontWeight:400,border:'1px solid rgba(200,164,74,0.2)',padding:'7px 16px',marginBottom:28},
+    dot:{width:6,height:6,borderRadius:'50%',background:'#16A865',flexShrink:0},
+    title:{fontFamily:"'Barlow Condensed', sans-serif",fontWeight:800,fontSize:52,letterSpacing:'0.04em',textTransform:'uppercase',color:'#E8ECF4',lineHeight:0.95,margin:'0 0 18px 0'},
+    sub:{fontFamily:"'IBM Plex Mono', monospace",fontSize:9.5,letterSpacing:'0.14em',color:'#8C96B0',fontWeight:300,lineHeight:1.9,marginBottom:32,maxWidth:420,textTransform:'uppercase'},
+    divider:{width:'100%',height:1,background:'linear-gradient(to right, transparent, rgba(200,164,74,0.15), transparent)',marginBottom:28},
+    pills:{display:'flex',gap:10,flexWrap:'wrap',justifyContent:'center',marginBottom:32,position:'relative'},
+    pillWrap:{position:'relative'},
+    pill:(active,em)=>({fontFamily:"'IBM Plex Mono', monospace",fontSize:8,letterSpacing:'0.22em',textTransform:'uppercase',color:active?(em?'#16A865':'#C8A44A'):(em?'#8C96B0':'#E8ECF4'),fontWeight:300,padding:'9px 18px',border:`1px solid ${active?(em?'rgba(22,168,101,0.55)':'rgba(200,164,74,0.55)'):(em?'rgba(22,168,101,0.22)':'rgba(200,164,74,0.22)')}`,background:active?(em?'rgba(22,168,101,0.08)':'rgba(200,164,74,0.1)'):(em?'rgba(22,168,101,0.03)':'rgba(200,164,74,0.05)'),cursor:'pointer',transition:'all 0.25s',userSelect:'none',WebkitTapHighlightColor:'transparent'}),
+    popup:(visible,em)=>({position:'absolute',bottom:'calc(100% + 12px)',left:'50%',transform:`translateX(-50%) translateY(${visible?0:6}px)`,width:290,background:'rgba(4,8,15,0.97)',border:`1px solid ${em?'rgba(22,168,101,0.3)':'rgba(200,164,74,0.3)'}`,padding:'18px 20px',zIndex:200,pointerEvents:visible?'auto':'none',opacity:visible?1:0,transition:'opacity 0.25s, transform 0.25s',textAlign:'left'}),
+    popLine:(em)=>({height:1,background:`linear-gradient(to right, transparent, ${em?'#16A865':'#C8A44A'}, transparent)`,marginBottom:10}),
+    popLabel:(em)=>({fontFamily:"'IBM Plex Mono', monospace",fontSize:7,letterSpacing:'0.28em',textTransform:'uppercase',color:em?'#16A865':'#C8A44A',fontWeight:400,marginBottom:10}),
+    popText:{fontFamily:"'IBM Plex Mono', monospace",fontSize:8.5,letterSpacing:'0.1em',color:'#8C96B0',fontWeight:300,lineHeight:1.85},
+    foot:{display:'flex',flexDirection:'column',alignItems:'center',gap:6},
+    note:{fontFamily:"'IBM Plex Mono', monospace",fontSize:7.5,letterSpacing:'0.22em',color:'#5C6680',textTransform:'uppercase',fontWeight:300},
+    domain:{fontFamily:"'IBM Plex Mono', monospace",fontSize:7.5,letterSpacing:'0.22em',color:'rgba(200,164,74,0.38)',textTransform:'uppercase',fontWeight:300},
+  };
+
   return(
-    <div
-      className='mb-5 rounded-2xl'
-      style={{position:'relative',border:'1px solid rgba(27,45,91,0.15)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)',borderRadius:16}}
-      onMouseEnter={()=>setHovered(true)}
-      onMouseLeave={()=>{setHovered(false);setTagHover(null);}}
-    >
-      {hovered&&tagHover===null&&(
-        <div style={{position:'absolute',bottom:'calc(100% + 10px)',left:'50%',transform:'translateX(-50%)',zIndex:100,width:320,background:'#0F1E3D',borderRadius:14,padding:'1rem 1.25rem',boxShadow:'0 16px 40px rgba(0,0,0,0.3)',border:'1px solid rgba(75,163,227,0.2)',pointerEvents:'none'}}>
-          <div style={{height:3,background:'linear-gradient(90deg,#1B2D5B,#4BA3E3,#C9A84C)',borderRadius:99,marginBottom:'0.75rem'}}/>
-          <p style={{fontFamily:'DM Sans',fontSize:'0.82rem',color:'rgba(255,255,255,0.82)',lineHeight:1.7,margin:0}}>{tooltip}</p>
-          <div style={{position:'absolute',bottom:-7,left:'50%',transform:'translateX(-50%)',width:14,height:14,background:'#0F1E3D',border:'1px solid rgba(75,163,227,0.2)',borderTop:'none',borderLeft:'none',rotate:'45deg'}}/>
-        </div>
-      )}
-      <div style={{background:'linear-gradient(135deg,#0F1E3D 0%,#1B2D5B 60%,#1B4A6B 100%)',borderRadius:'16px 16px 0 0',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(75,163,227,0.15)'}}>
-        <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#FFFFFF',margin:0}}>
-          <span className='text-2xl'>&#x1F4F1;</span>
-          {lang==='es'?'Plataforma Digital — MTT':'Digital Learning Platform — MTT'}
-        </h2>
-      </div>
-      <div style={{background:'linear-gradient(135deg,#0F1E3D,#1B2D5B)',borderRadius:'0 0 16px 16px',padding:'1.5rem'}}>
-        <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',textAlign:'center',padding:'1.5rem 1rem',borderRadius:20,border:'1px dashed rgba(75,163,227,0.25)',background:'rgba(255,255,255,0.03)',position:'relative',overflow:'visible'}}>
-          <div style={{position:'absolute',top:-40,right:-40,width:160,height:160,borderRadius:'50%',background:'radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%)',pointerEvents:'none'}}/>
-          <div style={{position:'absolute',bottom:-40,left:-40,width:160,height:160,borderRadius:'50%',background:'radial-gradient(circle,rgba(75,163,227,0.08),transparent 70%)',pointerEvents:'none'}}/>
-          <div style={{width:60,height:60,borderRadius:'50%',background:'linear-gradient(135deg,#1B2D5B,#1B4A6B)',border:'2px solid rgba(201,168,76,0.4)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.75rem',marginBottom:'1rem',boxShadow:'0 8px 24px rgba(0,0,0,0.3)'}}>
-            &#x1F9E0;
-          </div>
-          <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(201,168,76,0.12)',border:'1px solid rgba(201,168,76,0.3)',borderRadius:999,padding:'4px 16px',marginBottom:'0.85rem'}}>
-            <div style={{width:6,height:6,borderRadius:'50%',background:'#C9A84C'}}/>
-            <span style={{fontFamily:'DM Sans',fontSize:'0.68rem',fontWeight:700,letterSpacing:'2.5px',textTransform:'uppercase',color:'#C9A84C'}}>
-              {lang==='es'?'EN DESARROLLO':'IN DEVELOPMENT'}
-            </span>
-          </div>
-          <div style={{fontFamily:'Fredoka',fontSize:'1.4rem',fontWeight:700,color:'#FFFFFF',marginBottom:'0.4rem',letterSpacing:0.3}}>
-            LSPALearn
-          </div>
-          <div style={{fontFamily:'DM Sans',fontSize:'0.82rem',color:'rgba(255,255,255,0.5)',marginBottom:'1rem',maxWidth:320,lineHeight:1.6}}>
-            {lang==='es'
-              ?'Powered by Madison Thomas Technologies — aprendizaje adaptativo, codificacion e IA para la proxima generacion de Trenton.'
-              :'Powered by Madison Thomas Technologies — adaptive learning, coding, and AI literacy for Trenton\'s next generation.'}
-          </div>
-          <div style={{display:'flex',alignItems:'center',gap:10,background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:14,padding:'0.65rem 1.1rem',marginBottom:'1.25rem',maxWidth:340}}>
-            <span style={{fontSize:'1.3rem',flexShrink:0}}>&#x1F3E0;</span>
-            <div style={{textAlign:'left'}}>
-              <div style={{fontFamily:'Fredoka',fontSize:'0.88rem',fontWeight:700,color:'rgba(255,255,255,0.85)',lineHeight:1.3}}>
-                {lang==='es'?'Disenado para el hogar':'Built for the home'}
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;700;800&family=IBM+Plex+Mono:wght@300;400&display=swap');
+        @keyframes ll-pulse{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+        @keyframes ll-scan{0%{top:-2px;opacity:0}5%{opacity:1}95%{opacity:1}100%{top:101%;opacity:0}}
+        .ll-dot-anim{animation:ll-pulse 2s ease-in-out infinite}
+        .ll-scan-anim{position:absolute;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(200,164,74,.18),transparent);animation:ll-scan 8s ease-in-out infinite;z-index:3;pointer-events:none}
+        .ll-popup-arrow{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:rgba(4,8,15,.97)}
+        .ll-popup-arrow.gold{border-right:1px solid rgba(200,164,74,.3);border-bottom:1px solid rgba(200,164,74,.3)}
+        .ll-popup-arrow.em{border-right:1px solid rgba(22,168,101,.3);border-bottom:1px solid rgba(22,168,101,.3)}
+      `}</style>
+      <div style={S.wrap}>
+        <div ref={cardRef} style={S.card}>
+          <canvas ref={canvasRef} style={S.aurora}/>
+          <div style={S.inner}>
+            <div style={S.topLine}/>
+            <div className="ll-scan-anim"/>
+            {['tl','tr','bl','br'].map(p=><div key={p} style={S.corner(p)}/>)}
+            <div style={S.badge}>
+              <span className="ll-dot-anim" style={S.dot}/>
+              {lang==='es'?'En Desarrollo':'In Development'}
+            </div>
+            <h2 style={S.title}>LSPALearn</h2>
+            <p style={S.sub}>
+              <strong style={{color:'#E8ECF4',fontWeight:400}}>Powered by Madison Thomas Technologies</strong>
+              <br/>
+              {lang==='es'
+                ?'Aprendizaje adaptativo, codificación e IA para la próxima generación de Trenton.'
+                :'Adaptive learning, coding, and AI literacy for Trenton\'s next generation.'}
+            </p>
+            <div style={S.divider}/>
+            <div style={S.pills}>
+              {tags.map((tag,i)=>(
+                <div key={i} style={S.pillWrap}>
+                  <div style={S.popup(activeTag===i,tag.em)}>
+                    <div style={S.popLine(tag.em)}/>
+                    <div style={S.popLabel(tag.em)}>{lang==='es'?tag.labelEs:tag.label}</div>
+                    <p style={S.popText}>{tag.tip}</p>
+                    <div className={`ll-popup-arrow ${tag.em?'em':'gold'}`}/>
+                  </div>
+                  <span
+                    style={S.pill(activeTag===i,tag.em)}
+                    onClick={()=>handlePillClick(i)}
+                    onMouseEnter={()=>handlePillEnter(i)}
+                    onMouseLeave={handlePillLeave}
+                  >
+                    {lang==='es'?tag.labelEs:tag.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div style={S.foot}>
+              <div style={S.note}>
+                {isTouch
+                  ?(lang==='es'?'Toca para saber más':'Tap a pill to learn more')
+                  :(lang==='es'?'Pasa el cursor para saber más':'Hover a pill to learn more')}
               </div>
-              <div style={{fontFamily:'DM Sans',fontSize:'0.73rem',color:'rgba(255,255,255,0.4)',lineHeight:1.4,marginTop:2}}>
-                {lang==='es'
-                  ?'El aprendizaje no termina cuando suena el timbre. LSPALearn sigue a tu hijo a casa.'
-                  :'Learning doesn\'t stop when the bell rings. LSPALearn follows your child home.'}
-              </div>
+              <div style={S.domain}>madisonthomastechnologies.com</div>
             </div>
           </div>
-          <div style={{display:'flex',gap:10,flexWrap:'wrap',justifyContent:'center',position:'relative',zIndex:10}}>
-            {tags.map((tag,i)=>(
-              <div key={i} style={{position:'relative'}}>
-                {tagHover===i&&(
-                  <div style={{position:'absolute',bottom:'calc(100% + 10px)',left:'50%',transform:'translateX(-50%)',zIndex:200,width:280,background:'#0F1E3D',borderRadius:14,padding:'0.85rem 1rem',boxShadow:'0 16px 40px rgba(0,0,0,0.4)',border:'1px solid rgba(201,168,76,0.25)',pointerEvents:'none'}}>
-                    <div style={{height:2,background:'linear-gradient(90deg,#C9A84C,#4BA3E3)',borderRadius:99,marginBottom:'0.6rem'}}/>
-                    <div style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#C9A84C',marginBottom:'0.35rem'}}>{lang==='es'?tag.labelEs:tag.label}</div>
-                    <p style={{fontFamily:'DM Sans',fontSize:'0.78rem',color:'rgba(255,255,255,0.8)',lineHeight:1.65,margin:0}}>{tag.tip}</p>
-                    <div style={{position:'absolute',bottom:-7,left:'50%',transform:'translateX(-50%)',width:12,height:12,background:'#0F1E3D',border:'1px solid rgba(201,168,76,0.25)',borderTop:'none',borderLeft:'none',rotate:'45deg'}}/>
-                  </div>
-                )}
-                <span
-                  onMouseEnter={()=>setTagHover(i)}
-                  onMouseLeave={()=>setTagHover(null)}
-                  style={{display:'inline-block',fontFamily:'DM Sans',fontSize:'0.72rem',fontWeight:700,padding:'3px 12px',borderRadius:999,background:tagHover===i?'rgba(201,168,76,0.2)':'rgba(75,163,227,0.1)',border:'1px solid '+(tagHover===i?'rgba(201,168,76,0.4)':'rgba(75,163,227,0.2)'),color:tagHover===i?'#C9A84C':'#4BA3E3',cursor:'default',transition:'all 0.2s'}}>
-                  {lang==='es'?tag.labelEs:tag.label}
-                </span>
-              </div>
-            ))}
-          </div>
-          <div style={{marginTop:'1.25rem',fontFamily:'DM Sans',fontSize:'0.75rem',color:'rgba(255,255,255,0.3)'}}>
-            {lang==='es'?'Pasa el cursor para saber mas · madisonthomastechnologies.com':'Hover to learn more · madisonthomastechnologies.com'}
-          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -342,130 +417,4 @@ const sectionsEN=[
     {name:'Trenton Public Schools',desc:'District information and updates',link:'https://www.trentonk12.org',type:'external'},
   ]},
   {category:'Learning at Home',icon:String.fromCodePoint(0x1F393),bg:'#F0FFF4',cardBg:'linear-gradient(135deg,rgba(76,175,80,0.07),rgba(76,175,80,0.03))',externalAccent:'#4CAF50',items:[
-    {name:'PBS Kids Games',desc:'Educational games for preschool learners',link:'https://pbskids.org',type:'external'},
-    {name:'Starfall',desc:'Reading and math activities for young children',link:'https://www.starfall.com',type:'external'},
-    {name:'Trenton Free Public Library',desc:'Free books, programs, and digital resources',link:'https://www.trentonfpl.org',type:'external'},
-    {name:'LSPA Learning Games',desc:'ABC · Colors · Counting — play right here on the LSPA site',link:'/learn',type:'internal'},
-  ]},
-];
-
-const sectionsES=[
-  {category:'Calendario Escolar y Eventos',icon:String.fromCodePoint(0x1F4C5),bg:'#FFFBF0',cardBg:'linear-gradient(135deg,rgba(245,166,35,0.06),rgba(247,201,72,0.04))',externalAccent:'#F5A623',items:[
-    {name:'Calendario Escolar 2025-2026',desc:'Fechas importantes, feriados y cierres',type:'calendar',accent:'#F5A623'},
-    {name:'Proximos Eventos',desc:'Noches familiares, excursiones y celebraciones',type:'upcoming',accent:'#4BA3E3'},
-  ]},
-  {category:'Apoyo Familiar de NJ',icon:String.fromCodePoint(0x1F3E0),bg:'#F0F7FF',cardBg:'linear-gradient(135deg,rgba(75,163,227,0.07),rgba(75,163,227,0.03))',externalAccent:'#4BA3E3',items:[
-    {name:'Asistencia de Cuidado Infantil de NJ',desc:'Ayuda financiera para familias trabajadoras',link:'https://www.childcarenj.gov',type:'external'},
-    {name:'Programa WIC',desc:'Asistencia nutricional para mujeres, infantes y ninos',link:'https://www.nj.gov/health/fhs/wic/',type:'external'},
-    {name:'NJ 211',desc:'Conexion con servicios de salud y servicios humanos locales',link:'https://www.nj211.org',type:'external'},
-    {name:'Escuelas Publicas de Trenton',desc:'Informacion y actualizaciones del distrito',link:'https://www.trentonk12.org',type:'external'},
-  ]},
-  {category:'Aprendizaje en Casa',icon:String.fromCodePoint(0x1F393),bg:'#F0FFF4',cardBg:'linear-gradient(135deg,rgba(76,175,80,0.07),rgba(76,175,80,0.03))',externalAccent:'#4CAF50',items:[
-    {name:'PBS Kids Games',desc:'Juegos educativos para aprendices preescolares',link:'https://pbskids.org',type:'external'},
-    {name:'Starfall',desc:'Actividades de lectura y matematicas para ninos pequenos',link:'https://www.starfall.com',type:'external'},
-    {name:'Biblioteca Publica de Trenton',desc:'Libros gratis, programas y recursos digitales',link:'https://www.trentonfpl.org',type:'external'},
-    {name:'Juegos de Aprendizaje LSPA',desc:'ABC · Colores · Contar — juega aqui mismo en el sitio de LSPA',link:'/learn',type:'internal'},
-  ]},
-];
-
-export default function Resources(){
-  const{t,lang}=useLanguage();
-  const sections=lang==='es'?sectionsES:sectionsEN;
-  const[modal,setModal]=useState(null);
-
-  return(
-    <div style={{minHeight:'100vh'}}>
-      {modal==='calendar'&&<PdfModal title={lang==='es'?'Calendario Escolar 2025-2026':'2025-2026 School Calendar'} docs={calendarDocs} onClose={()=>setModal(null)} lang={lang} accent='#F5A623'/>}
-      {modal==='upcoming'&&<UpcomingModal onClose={()=>setModal(null)} lang={lang}/>}
-
-      <section className='relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden' style={{background:'linear-gradient(135deg,#1B2D5B 0%,#1B4A6B 50%,#2A5451 100%)'}}>
-        <div className='absolute inset-0' style={{background:'radial-gradient(ellipse at 40% 50%,rgba(75,163,227,0.08),transparent 60%)'}}/>
-        <div className='max-w-3xl mx-auto px-4 md:px-8 text-center relative z-10'>
-          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6' style={{background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.2)'}}><span className='text-xs font-bold tracking-[2.5px] uppercase' style={{fontFamily:'DM Sans',color:'#4BA3E3'}}>{t('resources.badge')}</span></div>
-          <h1 className='font-bold text-white mb-4' style={{fontFamily:'Fredoka',fontSize:'clamp(32px,5vw,56px)'}}>{t('resources.heading')} <span style={{color:'#F5A623'}}>{t('resources.headingAccent')}</span></h1>
-          <p className='text-lg' style={{fontFamily:'DM Sans',color:'rgba(255,255,255,0.75)',maxWidth:550,margin:'0 auto'}}>{t('resources.desc')}</p>
-        </div>
-      </section>
-
-      <section className='py-16 md:py-24' style={{background:'#F8FAFB'}}>
-        <div className='max-w-5xl mx-auto px-4 md:px-8'>
-
-          {sections.map((section,si)=>(
-            <div key={si} className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(0,0,0,0.06)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
-              <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(0,0,0,0.05)'}}>
-                <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}><span className='text-2xl'>{section.icon}</span>{section.category}</h2>
-              </div>
-              <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 1.5rem'}}>
-              <div className='grid md:grid-cols-2 gap-4'>
-                {section.items.map((item,j)=>{
-                  if(['calendar','upcoming'].includes(item.type)){
-                    const ac=item.accent||'#F7C948';
-                    return(
-                      <button key={j} onClick={()=>setModal(item.type)} className='text-left w-full' style={{background:'#fff',border:'1px solid #e5e7eb',borderRadius:16,padding:0,cursor:'pointer',overflow:'hidden',transition:'all 0.25s',boxShadow:'0 1px 4px rgba(0,0,0,0.06)'}}>
-                        <div style={{height:5,background:'linear-gradient(90deg,'+ac+','+ac+'99)'}}/>
-                        <div style={{padding:'1.1rem 1.25rem 1.25rem'}}>
-                          <div style={{fontFamily:'Fredoka',fontSize:'1.05rem',fontWeight:700,color:'#1B2D5B',marginBottom:4}}>{item.name}</div>
-                          <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.88rem',marginBottom:12}}>{item.desc}</div>
-                          <div style={{display:'inline-flex',alignItems:'center',gap:6,background:ac+'18',border:'1px solid '+ac+'44',borderRadius:999,padding:'4px 12px'}}>
-                            <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:ac}}>{lang==='es'?'Ver documentos':'View documents'} &#8594;</span>
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  }
-                  if(item.type==='internal'){
-                    return(
-                      <a key={j} href={item.link} className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'rgba(75,163,227,0.35)',textDecoration:'none',background:'linear-gradient(135deg,rgba(75,163,227,0.05),rgba(34,197,94,0.04))'}}>
-                        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:4}}>
-                          <span style={{fontSize:'1.4rem'}}>🎮</span>
-                          <div className='font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
-                        </div>
-                        <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem',marginBottom:8}}>{item.desc}</div>
-                        <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.3)',borderRadius:999,padding:'4px 12px'}}>
-                          <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#4BA3E3'}}>{lang==='es'?'Jugar ahora ▶':'Play now ▶'}</span>
-                        </div>
-                      </a>
-                    );
-                  }
-                  return(
-                    <a key={j} href={item.link} target='_blank' rel='noopener noreferrer' className='block p-5 rounded-2xl border hover:shadow-lg transition-all' style={{borderColor:(section.externalAccent||'#e5e7eb')+'44',textDecoration:'none',background:section.cardBg||'#fff'}}>
-                      <div className='font-bold mb-1' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
-                      <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem'}}>{item.desc}</div>
-                      <div className='mt-2 text-xs font-semibold' style={{color:section.externalAccent||'#F7C948'}}>&#8599; {t('resources.externalLink')}</div>
-                    </a>
-                  );
-                })}
-              </div>
-              </div>
-            </div>
-          ))}
-
-          <div className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(139,92,246,0.15)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
-            <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(139,92,246,0.1)'}}>
-              <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}>
-                <span className='text-2xl'>📢</span>
-                {lang==='es'?'Lo Que Pasa en LSPA':"What's Happening at LSPA"}
-              </h2>
-              <p style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#9CA3AF',margin:'4px 0 0'}}>
-                {lang==='es'?'Talleres, volantes y actualizaciones comunitarias — mas recientes primero.':'Workshops, flyers, and community updates — newest first.'}
-              </p>
-            </div>
-            <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 1.5rem'}}>
-              <FlyerLibrary lang={lang}/>
-            </div>
-          </div>
-
-          <MTTCard lang={lang}/>
-
-        </div>
-      </section>
-
-      <section className='py-12' style={{background:'#F8FAFB'}}>
-        <div className='max-w-3xl mx-auto px-4 md:px-8 text-center'>
-          <p className='text-sm mb-3' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{t('resources.lookingForForms')}</p>
-          <Link href='/enrollment' className='text-sm font-bold hover:underline' style={{fontFamily:'Fredoka',color:'#4BA3E3'}}>{t('resources.visitEnrollment')} &#8594;</Link>
-        </div>
-      </section>
-    </div>
-  );
-}
+    {name:'PBS Kids Games',desc:'Educational games for preschool learners',link:'https://pbskids.org',type:'e
