@@ -206,10 +206,23 @@ function MTTCard({lang}){
           <div style={{fontFamily:'Fredoka',fontSize:'1.4rem',fontWeight:700,color:'#FFFFFF',marginBottom:'0.4rem',letterSpacing:0.3}}>
             LSPALearn
           </div>
-          <div style={{fontFamily:'DM Sans',fontSize:'0.82rem',color:'rgba(255,255,255,0.5)',marginBottom:'1.25rem',maxWidth:320,lineHeight:1.6}}>
+          <div style={{fontFamily:'DM Sans',fontSize:'0.82rem',color:'rgba(255,255,255,0.5)',marginBottom:'1rem',maxWidth:320,lineHeight:1.6}}>
             {lang==='es'
               ?'Powered by Madison Thomas Technologies — aprendizaje adaptativo, codificacion e IA para la proxima generacion de Trenton.'
               :'Powered by Madison Thomas Technologies — adaptive learning, coding, and AI literacy for Trenton\'s next generation.'}
+          </div>
+          <div style={{display:'flex',alignItems:'center',gap:10,background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:14,padding:'0.65rem 1.1rem',marginBottom:'1.25rem',maxWidth:340}}>
+            <span style={{fontSize:'1.3rem',flexShrink:0}}>&#x1F3E0;</span>
+            <div style={{textAlign:'left'}}>
+              <div style={{fontFamily:'Fredoka',fontSize:'0.88rem',fontWeight:700,color:'rgba(255,255,255,0.85)',lineHeight:1.3}}>
+                {lang==='es'?'Disenado para el hogar':'Built for the home'}
+              </div>
+              <div style={{fontFamily:'DM Sans',fontSize:'0.73rem',color:'rgba(255,255,255,0.4)',lineHeight:1.4,marginTop:2}}>
+                {lang==='es'
+                  ?'El aprendizaje no termina cuando suena el timbre. LSPALearn sigue a tu hijo a casa.'
+                  :'Learning doesn\'t stop when the bell rings. LSPALearn follows your child home.'}
+              </div>
+            </div>
           </div>
           <div style={{display:'flex',gap:10,flexWrap:'wrap',justifyContent:'center',position:'relative',zIndex:10}}>
             {tags.map((tag,i)=>(
