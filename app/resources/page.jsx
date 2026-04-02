@@ -187,4 +187,184 @@ function FlyerLibrary({lang}){
                       <div style={{fontFamily:'Fredoka',fontSize:'1rem',fontWeight:700,color:'#1B2D5B',marginBottom:3}}>
                         {lang==='es'?flyer.titleEs:flyer.title}
                       </div>
-                      <div style={{display:'flex',alignIte
+                      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+                        <span style={{fontFamily:'DM Sans',fontSize:'0.72rem',color:'#9CA3AF'}}>
+                          📅 {lang==='es'?flyer.dateEs:flyer.date}
+                        </span>
+                        <span style={{fontFamily:'DM Sans',fontSize:'0.7rem',fontWeight:700,padding:'2px 10px',borderRadius:999,background:tc.bg,color:tc.color,border:'1px solid '+tc.border}}>
+                          {lang==='es'?flyer.tagEs:flyer.tag}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{display:'flex',gap:8,flexShrink:0}}>
+                    <button onClick={()=>setActiveFlyer(flyer)} style={{fontFamily:'DM Sans',fontSize:'0.78rem',fontWeight:700,padding:'7px 16px',borderRadius:999,border:'1px solid '+flyer.accent+'44',background:flyer.accent+'12',color:flyer.accent,cursor:'pointer',transition:'all 0.2s',whiteSpace:'nowrap'}}>
+                      {lang==='es'?'Ver':'View'} &#8594;
+                    </button>
+                    <a href={flyer.file} download style={{fontFamily:'DM Sans',fontSize:'0.78rem',fontWeight:700,padding:'7px 16px',borderRadius:999,border:'1px solid #e5e7eb',background:'#F8FAFB',color:'#6B7280',textDecoration:'none',display:'flex',alignItems:'center',gap:4,whiteSpace:'nowrap',transition:'all 0.2s'}}>
+                      &#8595; {lang==='es'?'Descargar':'Download'}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const sectionsEN=[
+  {category:'School Calendar & Events',icon:String.fromCodePoint(0x1F4C5),bg:'#FFFBF0',cardBg:'linear-gradient(135deg,rgba(245,166,35,0.06),rgba(247,201,72,0.04))',externalAccent:'#F5A623',items:[
+    {name:'2025-2026 School Calendar',desc:'Key dates, holidays, and closings',type:'calendar',accent:'#F5A623',icon:'\u{1F4C5}'},
+    {name:'Upcoming Events',desc:'Family nights, field trips, and celebrations',type:'upcoming',accent:'#4BA3E3',icon:'\u{1F389}'},
+  ]},
+  {category:'NJ Family Support',icon:String.fromCodePoint(0x1F3E0),bg:'#F0F7FF',cardBg:'linear-gradient(135deg,rgba(75,163,227,0.07),rgba(75,163,227,0.03))',externalAccent:'#4BA3E3',items:[
+    {name:'NJ Child Care Assistance',desc:'Financial help for working families',link:'https://www.childcarenj.gov',type:'external'},
+    {name:'WIC Program',desc:'Nutrition assistance for women, infants & children',link:'https://www.nj.gov/health/fhs/wic/',type:'external'},
+    {name:'NJ 211',desc:'Connect to local health and human services',link:'https://www.nj211.org',type:'external'},
+    {name:'Trenton Public Schools',desc:'District information and updates',link:'https://www.trentonk12.org',type:'external'},
+  ]},
+  {category:'Learning at Home',icon:String.fromCodePoint(0x1F393),bg:'#F0FFF4',cardBg:'linear-gradient(135deg,rgba(76,175,80,0.07),rgba(76,175,80,0.03))',externalAccent:'#4CAF50',items:[
+    {name:'PBS Kids Games',desc:'Educational games for preschool learners',link:'https://pbskids.org',type:'external'},
+    {name:'Starfall',desc:'Reading and math activities for young children',link:'https://www.starfall.com',type:'external'},
+    {name:'Trenton Free Public Library',desc:'Free books, programs, and digital resources',link:'https://www.trentonfpl.org',type:'external'},
+    {name:'LSPA Learning Games',desc:'ABC · Colors · Counting — play right here on the LSPA site',link:'/learn',type:'internal'},
+    {name:'LSPALearn App',desc:'A personalized learning app by MTT — adaptive learning, coding, and AI literacy for Trenton families.',type:'mtt'},
+  ]},
+];
+
+const sectionsES=[
+  {category:'Calendario Escolar y Eventos',icon:String.fromCodePoint(0x1F4C5),bg:'#FFFBF0',cardBg:'linear-gradient(135deg,rgba(245,166,35,0.06),rgba(247,201,72,0.04))',externalAccent:'#F5A623',items:[
+    {name:'Calendario Escolar 2025-2026',desc:'Fechas importantes, feriados y cierres',type:'calendar',accent:'#F5A623'},
+    {name:'Proximos Eventos',desc:'Noches familiares, excursiones y celebraciones',type:'upcoming',accent:'#4BA3E3'},
+  ]},
+  {category:'Apoyo Familiar de NJ',icon:String.fromCodePoint(0x1F3E0),bg:'#F0F7FF',cardBg:'linear-gradient(135deg,rgba(75,163,227,0.07),rgba(75,163,227,0.03))',externalAccent:'#4BA3E3',items:[
+    {name:'Asistencia de Cuidado Infantil de NJ',desc:'Ayuda financiera para familias trabajadoras',link:'https://www.childcarenj.gov',type:'external'},
+    {name:'Programa WIC',desc:'Asistencia nutricional para mujeres, infantes y ninos',link:'https://www.nj.gov/health/fhs/wic/',type:'external'},
+    {name:'NJ 211',desc:'Conexion con servicios de salud y servicios humanos locales',link:'https://www.nj211.org',type:'external'},
+    {name:'Escuelas Publicas de Trenton',desc:'Informacion y actualizaciones del distrito',link:'https://www.trentonk12.org',type:'external'},
+  ]},
+  {category:'Aprendizaje en Casa',icon:String.fromCodePoint(0x1F393),bg:'#F0FFF4',cardBg:'linear-gradient(135deg,rgba(76,175,80,0.07),rgba(76,175,80,0.03))',externalAccent:'#4CAF50',items:[
+    {name:'PBS Kids Games',desc:'Juegos educativos para aprendices preescolares',link:'https://pbskids.org',type:'external'},
+    {name:'Starfall',desc:'Actividades de lectura y matematicas para ninos pequenos',link:'https://www.starfall.com',type:'external'},
+    {name:'Biblioteca Publica de Trenton',desc:'Libros gratis, programas y recursos digitales',link:'https://www.trentonfpl.org',type:'external'},
+    {name:'Juegos de Aprendizaje LSPA',desc:'ABC · Colores · Contar — juega aqui mismo en el sitio de LSPA',link:'/learn',type:'internal'},
+    {name:'App LSPALearn',desc:'Una app de aprendizaje adaptativo por MTT — para las familias de Trenton.',type:'mtt'},
+  ]},
+];
+
+export default function Resources(){
+  const{t,lang}=useLanguage();
+  const sections=lang==='es'?sectionsES:sectionsEN;
+  const[modal,setModal]=useState(null);
+
+  return(
+    <div style={{minHeight:'100vh'}}>
+      {modal==='calendar'&&<PdfModal title={lang==='es'?'Calendario Escolar 2025-2026':'2025-2026 School Calendar'} docs={calendarDocs} onClose={()=>setModal(null)} lang={lang} accent='#F5A623'/>}
+      {modal==='upcoming'&&<UpcomingModal onClose={()=>setModal(null)} lang={lang}/>}
+
+      <section className='relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden' style={{background:'linear-gradient(135deg,#1B2D5B 0%,#1B4A6B 50%,#2A5451 100%)'}}>
+        <div className='absolute inset-0' style={{background:'radial-gradient(ellipse at 40% 50%,rgba(75,163,227,0.08),transparent 60%)'}}/>
+        <div className='max-w-3xl mx-auto px-4 md:px-8 text-center relative z-10'>
+          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6' style={{background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.2)'}}><span className='text-xs font-bold tracking-[2.5px] uppercase' style={{fontFamily:'DM Sans',color:'#4BA3E3'}}>{t('resources.badge')}</span></div>
+          <h1 className='font-bold text-white mb-4' style={{fontFamily:'Fredoka',fontSize:'clamp(32px,5vw,56px)'}}>{t('resources.heading')} <span style={{color:'#F5A623'}}>{t('resources.headingAccent')}</span></h1>
+          <p className='text-lg' style={{fontFamily:'DM Sans',color:'rgba(255,255,255,0.75)',maxWidth:550,margin:'0 auto'}}>{t('resources.desc')}</p>
+        </div>
+      </section>
+
+      <section className='py-16 md:py-24' style={{background:'#F8FAFB'}}>
+        <div className='max-w-5xl mx-auto px-4 md:px-8'>
+
+          {sections.map((section,si)=>(
+            <div key={si} className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(0,0,0,0.06)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
+              <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(0,0,0,0.05)'}}>
+                <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}><span className='text-2xl'>{section.icon}</span>{section.category}</h2>
+              </div>
+              <div style={{background:section.bg||'#F8FAFB',padding:'1rem 1.5rem 1.5rem'}}>
+              <div className='grid md:grid-cols-2 gap-4'>
+                {section.items.map((item,j)=>{
+                  if(['calendar','upcoming'].includes(item.type)){
+                    const ac=item.accent||'#F7C948';
+                    return(
+                      <button key={j} onClick={()=>setModal(item.type)} className='text-left w-full' style={{background:'#fff',border:'1px solid #e5e7eb',borderRadius:16,padding:0,cursor:'pointer',overflow:'hidden',transition:'all 0.25s',boxShadow:'0 1px 4px rgba(0,0,0,0.06)'}}>
+                        <div style={{height:5,background:'linear-gradient(90deg,'+ac+','+ac+'99)'}}/>
+                        <div style={{padding:'1.1rem 1.25rem 1.25rem'}}>
+                          <div style={{fontFamily:'Fredoka',fontSize:'1.05rem',fontWeight:700,color:'#1B2D5B',marginBottom:4}}>{item.name}</div>
+                          <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.88rem',marginBottom:12}}>{item.desc}</div>
+                          <div style={{display:'inline-flex',alignItems:'center',gap:6,background:ac+'18',border:'1px solid '+ac+'44',borderRadius:999,padding:'4px 12px'}}>
+                            <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:ac}}>{lang==='es'?'Ver documentos':'View documents'} &#8594;</span>
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  }
+                  if(item.type==='internal'){
+                    return(
+                      <a key={j} href={item.link} className='block p-5 rounded-2xl border bg-white hover:shadow-lg transition-all' style={{borderColor:'rgba(75,163,227,0.35)',textDecoration:'none',background:'linear-gradient(135deg,rgba(75,163,227,0.05),rgba(34,197,94,0.04))'}}>
+                        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:4}}>
+                          <span style={{fontSize:'1.4rem'}}>🎮</span>
+                          <div className='font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
+                        </div>
+                        <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem',marginBottom:8}}>{item.desc}</div>
+                        <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.3)',borderRadius:999,padding:'4px 12px'}}>
+                          <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#4BA3E3'}}>{lang==='es'?'Jugar ahora ▶':'Play now ▶'}</span>
+                        </div>
+                      </a>
+                    );
+                  }
+                  if(item.type==='mtt'){
+                    return(
+                      <button key={j} onClick={()=>setModal('mtt')} className='text-left w-full hover:shadow-lg transition-all' style={{background:'linear-gradient(135deg,rgba(200,164,74,0.06),rgba(27,45,91,0.04))',border:'1px solid rgba(200,164,74,0.3)',borderRadius:16,padding:'1.25rem',cursor:'pointer',textAlign:'left'}}>
+                        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:4}}>
+                          <span style={{fontSize:'1.4rem'}}>&#x1F9E0;</span>
+                          <div className='font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
+                        </div>
+                        <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem',marginBottom:8}}>{item.desc}</div>
+                        <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(200,164,74,0.1)',border:'1px solid rgba(200,164,74,0.3)',borderRadius:999,padding:'4px 12px'}}>
+                          <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#C9A84C'}}>{lang==='es'?'Proximamente ▶':'Coming Soon ▶'}</span>
+                        </div>
+                      </button>
+                    );
+                  }
+                  return(
+                    <a key={j} href={item.link} target='_blank' rel='noopener noreferrer' className='block p-5 rounded-2xl border hover:shadow-lg transition-all' style={{borderColor:(section.externalAccent||'#e5e7eb')+'44',textDecoration:'none',background:section.cardBg||'#fff'}}>
+                      <div className='font-bold mb-1' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'1rem'}}>{item.name}</div>
+                      <div style={{fontFamily:'DM Sans',color:'#6B7280',fontSize:'0.9rem'}}>{item.desc}</div>
+                      <div className='mt-2 text-xs font-semibold' style={{color:section.externalAccent||'#F7C948'}}>&#8599; {t('resources.externalLink')}</div>
+                    </a>
+                  );
+                })}
+              </div>
+              </div>
+            </div>
+          ))}
+
+          <div className='mb-5 rounded-2xl overflow-hidden' style={{border:'1px solid rgba(139,92,246,0.15)',boxShadow:'0 2px 8px rgba(0,0,0,0.04)'}}>
+            <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 0.75rem',borderBottom:'1px solid rgba(139,92,246,0.1)'}}>
+              <h2 className='font-bold text-lg flex items-center gap-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',margin:0}}>
+                <span className='text-2xl'>📢</span>
+                {lang==='es'?'Lo Que Pasa en LSPA':"What's Happening at LSPA"}
+              </h2>
+              <p style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#9CA3AF',margin:'4px 0 0'}}>
+                {lang==='es'?'Talleres, volantes y actualizaciones comunitarias — mas recientes primero.':'Workshops, flyers, and community updates — newest first.'}
+              </p>
+            </div>
+            <div style={{background:'#FAF5FF',padding:'1rem 1.5rem 1.5rem'}}>
+              <FlyerLibrary lang={lang}/>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section className='py-12' style={{background:'#F8FAFB'}}>
+        <div className='max-w-3xl mx-auto px-4 md:px-8 text-center'>
+          <p className='text-sm mb-3' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{t('resources.lookingForForms')}</p>
+          <Link href='/enrollment' className='text-sm font-bold hover:underline' style={{fontFamily:'Fredoka',color:'#4BA3E3'}}>{t('resources.visitEnrollment')} &#8594;</Link>
+        </div>
+      </section>
+    </div>
+  );
+}
