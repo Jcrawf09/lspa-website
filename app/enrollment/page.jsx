@@ -6,7 +6,7 @@ import{useLanguage}from'../i18n/LanguageProvider';
 const ACCESS_KEY="e9658441-788a-4bda-95f9-1abf712fc1a8";
 
 const formsData=[
-{id:'open-enrollment',files:[{label:'Download Packet',href:'/forms/LSPA_Registration_Packet_2026-2027_ALL.docx'}],pages:'29',uploadLabel:'2026-2027 Registration Open Enrollment Packet',comingSoon:false},
+{id:'open-enrollment',files:[{label:'Download Packet',href:'/forms/2026-2027 Registration Open Enrollment Packet - ALL STUDENTS.pdf'}],pages:'29',uploadLabel:'2026-2027 Registration Open Enrollment Packet',comingSoon:false},
 {id:'social-media',files:[{label:'English / Espanol',href:'/forms/LSPA_Social_Media_Release.pdf'}],pages:'1',uploadLabel:'Social Media Release Form',comingSoon:false},
 ];
 
@@ -250,4 +250,3 @@ return(
 
 </div>
 );}
-
