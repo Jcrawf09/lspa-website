@@ -6,8 +6,7 @@ import{useLanguage}from'../i18n/LanguageProvider';
 const ACCESS_KEY="e9658441-788a-4bda-95f9-1abf712fc1a8";
 
 const formsData=[
-{id:'open-enrollment',files:[{label:'English',href:'/forms/LSPA_Open_Enrollment_EN.pdf'},{label:'Espanol',href:'/forms/LSPA_Open_Enrollment_ES.pdf'}],pages:'13',uploadLabel:'Open Enrollment Checklist',comingSoon:true},
-{id:'registration',files:[{label:'English',href:'/forms/LSPA_Complete_Registration_Packet_2025-2026.pdf'},{label:'Espanol',href:'/forms/LSPA_Paquete_Registro_2025-2026_ES.pdf'}],pages:'8',uploadLabel:'Registration Packet',comingSoon:false},
+{id:'open-enrollment',files:[{label:'Download Packet',href:'/forms/LSPA_Registration_Packet_2026-2027_ALL.docx'}],pages:'29',uploadLabel:'2026-2027 Registration Open Enrollment Packet',comingSoon:false},
 {id:'social-media',files:[{label:'English / Espanol',href:'/forms/LSPA_Social_Media_Release.pdf'}],pages:'1',uploadLabel:'Social Media Release Form',comingSoon:false},
 ];
 
@@ -38,7 +37,7 @@ if(!formData.childName.trim())errs.childName=t('enrollment.required');
 if(files.length===0)errs.files=t('enrollment.attachError');
 return errs;
 };
-const handleFiles=(nf)=>{const arr=Array.from(nf).filter(f=>{const e=f.name.toLowerCase();return(e.endsWith('.pdf')||e.endsWith('.jpg')||e.endsWith('.jpeg')||e.endsWith('.png')||e.endsWith('.heic'))&&f.size<=10*1024*1024;});setFiles(prev=>[...prev,...arr].slice(0,5));};
+const handleFiles=(nf)=>{const arr=Array.from(nf).filter(f=>{const e=f.name.toLowerCase();return(e.endsWith('.pdf')||e.endsWith('.jpg')||e.endsWith('.jpeg')||e.endsWith('.png')||e.endsWith('.heic')||e.endsWith('.docx'))&&f.size<=10*1024*1024;});setFiles(prev=>[...prev,...arr].slice(0,5));};
 const removeFile=(i)=>setFiles(prev=>prev.filter((_,idx)=>idx!==i));
 const handleDrag=(e)=>{e.preventDefault();e.stopPropagation();if(e.type==='dragenter'||e.type==='dragover')setDragActive(true);else if(e.type==='dragleave')setDragActive(false);};
 const handleDrop=(e)=>{e.preventDefault();e.stopPropagation();setDragActive(false);if(e.dataTransfer.files?.length)handleFiles(e.dataTransfer.files);};
@@ -104,65 +103,36 @@ return(
 <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5' style={{background:'rgba(75,163,227,0.08)',border:'1px solid rgba(75,163,227,0.15)'}}><span className='text-xs font-bold tracking-[2.5px] uppercase' style={{fontFamily:'DM Sans',color:'#4BA3E3'}}>{t('enrollment.formsBadge')}</span></div>
 <h2 className='font-bold mb-2' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'clamp(26px,3.5vw,40px)'}}>{t('enrollment.formsHeading')} <span style={{color:'#4BA3E3'}}>{t('enrollment.formsAccent')}</span></h2>
 <p className='text-sm mb-8' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{t('enrollment.formsDesc')}</p>
-<div style={{background:'linear-gradient(135deg,#FFF8E7,#FFF3CD)',border:'2px solid #F5A623',borderRadius:16,padding:'1.25rem 1.5rem',marginBottom:'2rem',display:'flex',gap:'1rem',alignItems:'flex-start'}}>
-  <div style={{fontSize:'1.5rem',flexShrink:0,marginTop:2}}>&#x26A0;&#xFE0F;</div>
-  <div>
-    <div style={{fontFamily:'Fredoka',fontSize:'1.05rem',fontWeight:700,color:'#92400E',marginBottom:'0.35rem'}}>
-      {lang==='es'?'Formularios en papel requeridos':'Original Hard Copy Required'}
-    </div>
-    <div style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#78350F',lineHeight:1.65}}>
-      {lang==='es'
-        ?'Todos los formularios deben ser impresos, completados a mano y entregados en persona en nuestra oficina. La carga de archivos en este sitio es solo para revision previa. Siempre se requiere el original en papel.'
-        :'All enrollment forms must be printed, completed by hand, and brought in as original copies to our office. Uploading your forms here is for pre-review only — the original hard copy is always required to complete enrollment.'}
-    </div>
-    <div style={{display:'flex',gap:12,marginTop:'0.75rem',flexWrap:'wrap'}}>
-      <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(245,166,35,0.15)',border:'1px solid rgba(245,166,35,0.4)',borderRadius:999,padding:'4px 12px'}}>
-        <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#92400E'}}>&#x2460; Print the form</span>
-      </div>
-      <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(245,166,35,0.15)',border:'1px solid rgba(245,166,35,0.4)',borderRadius:999,padding:'4px 12px'}}>
-        <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#92400E'}}>&#x2461; Fill by hand</span>
-      </div>
-      <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(245,166,35,0.15)',border:'1px solid rgba(245,166,35,0.4)',borderRadius:999,padding:'4px 12px'}}>
-        <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#92400E'}}>&#x2462; Bring original to LSPA</span>
-      </div>
-      <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(75,163,227,0.12)',border:'1px solid rgba(75,163,227,0.3)',borderRadius:999,padding:'4px 12px'}}>
-        <span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#1B4A6B'}}>&#x2463; Upload below for pre-review (optional)</span>
-      </div>
-    </div>
-  </div>
+<div style={{background:'linear-gradient(135deg,#FFF8E7,#FFF3CD)',border:'2px solid #F5A623',borderRadius:16,padding:'1.25rem 1.5rem',marginBottom:'2rem',display:'flex',gap:'1rem',alignItems:'flex-start',textAlign:'left'}}>
+<div style={{fontSize:'1.5rem',flexShrink:0,marginTop:2}}>&#x26A0;&#xFE0F;</div>
+<div>
+<div style={{fontFamily:'Fredoka',fontSize:'1.05rem',fontWeight:700,color:'#92400E',marginBottom:'0.35rem'}}>
+{lang==='es'?'Formularios en papel requeridos':'Original Hard Copy Required'}
+</div>
+<div style={{fontFamily:'DM Sans',fontSize:'0.88rem',color:'#78350F',lineHeight:1.65}}>
+{lang==='es'
+?'Todos los formularios deben ser impresos, completados a mano y entregados en persona en nuestra oficina. La carga de archivos en este sitio es solo para revision previa. Siempre se requiere el original en papel.'
+:'All enrollment forms must be printed, completed by hand, and brought in as original copies to our office. Uploading your forms here is for pre-review only \u2014 the original hard copy is always required to complete enrollment.'}
+</div>
+<div style={{display:'flex',gap:12,marginTop:'0.75rem',flexWrap:'wrap'}}>
+<div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(245,166,35,0.15)',border:'1px solid rgba(245,166,35,0.4)',borderRadius:999,padding:'4px 12px'}}><span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#92400E'}}>&#x2460; Print the form</span></div>
+<div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(245,166,35,0.15)',border:'1px solid rgba(245,166,35,0.4)',borderRadius:999,padding:'4px 12px'}}><span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#92400E'}}>&#x2461; Fill by hand</span></div>
+<div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(245,166,35,0.15)',border:'1px solid rgba(245,166,35,0.4)',borderRadius:999,padding:'4px 12px'}}><span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#92400E'}}>&#x2462; Bring original to LSPA</span></div>
+<div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(75,163,227,0.12)',border:'1px solid rgba(75,163,227,0.3)',borderRadius:999,padding:'4px 12px'}}><span style={{fontFamily:'DM Sans',fontSize:'0.75rem',fontWeight:700,color:'#1B4A6B'}}>&#x2463; Upload below for pre-review (optional)</span></div>
 </div>
 </div>
+</div>
+</div>
+
 <div className='space-y-5'>
 {formsData.map((fd,fi)=>{
-const form=forms[fi]||{title:fd.id,titleEs:'',desc:''};
+const form=forms[fi]||{title:fd.uploadLabel,titleEs:'',desc:''};
 return(
-<div key={fd.id} className='rounded-2xl border-2 overflow-hidden transition-all' style={{borderColor:fd.comingSoon?'#e5e7eb':expandedForm===fd.id?'#F5A623':'#e5e7eb',boxShadow:expandedForm===fd.id?'0 8px 30px rgba(27,42,74,0.1)':'0 1px 4px rgba(0,0,0,0.04)',position:'relative'}}>
-{fd.comingSoon&&(
-  <div style={{position:'absolute',inset:0,zIndex:10,borderRadius:14,backdropFilter:'blur(3px)',background:'rgba(248,250,252,0.92)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:10,padding:'1rem'}}>
-    <div style={{background:'linear-gradient(135deg,#F5A623,#F7C948)',borderRadius:999,padding:'6px 20px',display:'inline-flex',alignItems:'center',gap:8,boxShadow:'0 4px 16px rgba(245,166,35,0.35)'}}>
-      <span style={{fontSize:'0.9rem'}}>&#x1F4C5;</span>
-      <span style={{fontFamily:'Fredoka',fontSize:'0.95rem',fontWeight:700,color:'#0F1D3D',letterSpacing:0.5}}>{lang==='es'?'Abre 1 de Mayo':'Opens May 1, 2026'}</span>
-    </div>
-    <p style={{fontFamily:'Fredoka',fontSize:'1rem',fontWeight:700,color:'#1B2D5B',textAlign:'center',maxWidth:240,lineHeight:1.4,margin:0}}>
-      {lang==='es'?'Los cupos se llenan rapido. Contactanos ahora.':'Spots fill fast. Contact us now to get ahead.'}
-    </p>
-    <p style={{fontFamily:'DM Sans',fontSize:'0.75rem',color:'#6B7280',textAlign:'center',maxWidth:220,lineHeight:1.5,margin:0}}>
-      {lang==='es'?'Llama o escribe hoy para asegurar el lugar de tu hijo.':'Call or email today to secure your child\'s place before enrollment opens.'}
-    </p>
-    <div style={{display:'flex',gap:8,flexWrap:'wrap',justifyContent:'center'}}>
-      <a href='tel:6093967171' style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#0F1D3D',background:'linear-gradient(to right,#F7C948,#F5A623)',borderRadius:999,padding:'6px 16px',textDecoration:'none',boxShadow:'0 2px 8px rgba(245,166,35,0.3)'}}>
-        {lang==='es'?'Llama Ahora':'Call Now'}
-      </a>
-      <a href='mailto:lauraspelmanacademy@gmail.com' style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#1B2D5B',background:'#fff',border:'2px solid #1B2D5B',borderRadius:999,padding:'6px 16px',textDecoration:'none'}}>
-        {lang==='es'?'Escribenos':'Email Us'}
-      </a>
-    </div>
-  </div>
-)}
+<div key={fd.id} className='rounded-2xl border-2 overflow-hidden transition-all' style={{borderColor:expandedForm===fd.id?'#F5A623':'#e5e7eb',boxShadow:expandedForm===fd.id?'0 8px 30px rgba(27,42,74,0.1)':'0 1px 4px rgba(0,0,0,0.04)'}}>
 <div className='p-6'>
-<h3 className='font-bold text-lg mb-0.5' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{form.title}</h3>
-<p className='text-sm font-medium mb-2' style={{fontFamily:'DM Sans',color:'#F5A623'}}>{form.titleEs}</p>
-<p className='text-sm mb-4' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{form.desc}</p>
+<h3 className='font-bold text-lg mb-0.5' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{form.title||fd.uploadLabel}</h3>
+<p className='text-sm font-medium mb-2' style={{fontFamily:'DM Sans',color:'#F5A623'}}>{form.titleEs||''}</p>
+<p className='text-sm mb-4' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{form.desc||''}</p>
 <div className='flex gap-3 flex-wrap items-center'>
 {fd.files.map((file,i)=>(
 <a key={i} href={file.href} download target='_blank' rel='noopener noreferrer' className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm text-white hover:opacity-90 transition-all' style={{fontFamily:'DM Sans',background:'#1B2D5B'}}>{String.fromCodePoint(0x2B07)} {t('enrollment.download')} {file.label}</a>
@@ -170,8 +140,9 @@ return(
 <div style={{width:1,height:28,background:'#E5E7EB',margin:'0 4px'}}/>
 <button onClick={()=>toggleUpload(fd.id)} className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border-2 transition-all cursor-pointer' style={{fontFamily:'DM Sans',background:expandedForm===fd.id?'#F5A623':'#FFFFFF',color:'#1B2D5B',borderColor:'#F5A623'}}>{expandedForm===fd.id?t('enrollment.close'):t('enrollment.uploadSigned')}</button>
 </div>
-<div className='mt-2'><span className='text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full' style={{background:'#F3F4F6',color:'#9CA3AF'}}>PDF {String.fromCharCode(183)} {fd.pages} {lang==='es'?'paginas':'pages'}</span></div>
+<div className='mt-2'><span className='text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full' style={{background:'#F3F4F6',color:'#9CA3AF'}}>{fd.pages} {lang==='es'?'paginas':'pages'}</span></div>
 </div>
+
 {expandedForm===fd.id&&(
 <div ref={el=>uploadRefs.current[fd.id]=el} className='p-6 border-t' style={{background:'#F9FAFB',borderColor:'#E5E7EB'}}>
 <div className='rounded-lg p-3 mb-5 flex items-center gap-2' style={{background:'#DCFCE7',border:'1px solid #BBF7D0'}}>
@@ -203,7 +174,7 @@ return(
 <div className='mt-4'>
 <label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.attachForm')} <span style={{color:'#DC2626'}}>*</span></label>
 <div onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} onClick={()=>fileInputRef.current?.click()} className='rounded-xl p-6 text-center cursor-pointer transition-all' style={{border:'2px dashed '+(dragActive?'#2563EB':errors.files?'#DC2626':'#D1D5DB'),background:dragActive?'#DBEAFE':'#FFFFFF'}}>
-<input ref={fileInputRef} type='file' multiple accept='.pdf,.jpg,.jpeg,.png,.heic' onChange={e=>handleFiles(e.target.files)} style={{display:'none'}}/>
+<input ref={fileInputRef} type='file' multiple accept='.pdf,.jpg,.jpeg,.png,.heic,.docx' onChange={e=>handleFiles(e.target.files)} style={{display:'none'}}/>
 <p className='text-sm font-semibold mb-1' style={{color:'#374151'}}>{dragActive?t('enrollment.dropHere'):t('enrollment.dragDrop')}</p>
 <p className='text-xs' style={{color:'#9CA3AF'}}>{t('enrollment.fileTypes')} {String.fromCharCode(183)} Max 10MB {String.fromCharCode(183)} 5 files max</p>
 </div>
@@ -217,11 +188,11 @@ return(
 </div>
 <div className='mt-3'><label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.notes')}</label><textarea value={formData.notes} onChange={e=>setFormData(p=>({...p,notes:e.target.value}))} placeholder={t('enrollment.notesPlaceholder')} rows={2} style={{...inputStyle,resize:'vertical',minHeight:60}}/></div>
 <div className='mt-4 rounded-lg p-3' style={{background:'#EFF6FF',border:'1px solid #BFDBFE'}}>
-  <p style={{fontFamily:'DM Sans',fontSize:'0.8rem',color:'#1E40AF',textAlign:'center',margin:0}}>
-    {lang==='es'
-      ?'&#128161; Recordatorio: La carga es solo para revision previa. Traiga el original firmado a nuestra oficina para completar la inscripcion.'
-      :'&#128161; Reminder: This upload is for pre-review only. Please bring your signed original to our office to complete enrollment.'}
-  </p>
+<p style={{fontFamily:'DM Sans',fontSize:'0.8rem',color:'#1E40AF',textAlign:'center',margin:0}}>
+{lang==='es'
+?'Recordatorio: La carga es solo para revision previa. Traiga el original firmado a nuestra oficina para completar la inscripcion.'
+:'Reminder: This upload is for pre-review only. Please bring your signed original to our office to complete enrollment.'}
+</p>
 </div>
 <div className='mt-5 text-center'>
 <button onClick={()=>handleSubmit(fd.uploadLabel)} disabled={uploadState==='uploading'} className='px-10 py-3 rounded-full font-bold text-base shadow-lg cursor-pointer transition-all hover:-translate-y-0.5' style={{fontFamily:'Fredoka',background:uploadState==='uploading'?'#D1D5DB':'linear-gradient(135deg,#1B2D5B 0%,#2D4A7A 100%)',color:'#FFFFFF',border:'none'}}>{uploadState==='uploading'?t('enrollment.submitting'):t('enrollment.submit')}</button>
@@ -279,3 +250,4 @@ return(
 
 </div>
 );}
+
