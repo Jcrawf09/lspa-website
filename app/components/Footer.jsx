@@ -3,7 +3,7 @@ import Link from "next/link";
 import{useLanguage}from'../i18n/LanguageProvider';
 export default function Footer() {
   const{t,lang}=useLanguage();
-  const links = [{l:t('nav.about'),h:"/about-us"},{l:t('nav.programs'),h:"/#programs"},{l:"Gallery",h:"/gallery"},{l:t('nav.enrollNow'),h:"/enrollment"},{l:t('nav.contact'),h:"/#contact"},{l:t('team.heading')+' '+t('team.headingAccent'),h:"/our-team"},{l:t('careers.heading')+' '+t('careers.headingAccent'),h:"/careers"},{l:t('nav.resources'),h:"/resources"}];
+  const links = [{l:t('nav.about'),h:"/about-us"},{l:t('nav.programs'),h:"/#programs"},{l:"Gallery",h:"/gallery"},{l:t('nav.enrollNow'),h:"/enrollment"},{l:t('nav.contact'),h:"/#contact"},{l:t('careers.heading')+' '+t('careers.headingAccent'),h:"/careers"},{l:t('nav.resources'),h:"/resources"}];
   return (
     <footer className="pt-16 pb-6" style={{background:"#0F1D3D"}}>
       <div className="max-w-6xl mx-auto px-4 md:px-8">
@@ -15,7 +15,6 @@ export default function Footer() {
               <div className="font-bold text-white text-2xl mb-1" style={{fontFamily:"Fredoka"}}>Laura Spelman</div>
               <div className="text-sm font-bold tracking-widest uppercase mb-4" style={{color:"#4BA3E3"}}>Preschool Academy</div>
               <p className="text-sm max-w-xs mb-5" style={{color:"rgba(255,255,255,0.35)"}}>{t('footer.desc')}</p>
-              {/* Social Media Buttons */}
               <div style={{display:"flex",gap:10,alignItems:"center"}}>
                 <a
                   href="https://www.facebook.com/share/1CHFuAPSdE/?mibextid=wwXIfr"
@@ -55,7 +54,7 @@ export default function Footer() {
               </div>
               <div className="mt-5">
                 <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{color:"#F7C948"}}>{t('footer.email')}</div>
-                <a href="mailto:lauraspelmanacademy@verizon.net" className="text-sm" style={{color:"rgba(255,255,255,0.4)"}}>lauraspelmanacademy@verizon.net</a>
+                <a href="mailto:lauraspelmanacademy@gmail.com" className="text-sm" style={{color:"rgba(255,255,255,0.4)"}}>lauraspelmanacademy@verizon.net</a>
               </div>
             </div>
             <div>
@@ -74,7 +73,6 @@ export default function Footer() {
               <Link href="/privacy-policy" className="text-xs hover:underline" style={{color:"rgba(255,255,255,0.25)"}}>{t('footer.privacyPolicy')}</Link>
             </div>
           </div>
-          {/* Powered by MTT */}
           <div style={{textAlign:"center",paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.04)"}}>
             <span style={{fontFamily:"DM Sans,sans-serif",fontSize:"0.68rem",color:"rgba(255,255,255,0.18)",letterSpacing:"0.05em"}}>
               {lang==='es'?'Desarrollado por':'Powered by'}{' '}
@@ -89,9 +87,3 @@ export default function Footer() {
                 Madison Thomas Technologies
               </a>
             </span>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
