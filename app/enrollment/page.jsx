@@ -13,14 +13,26 @@ const formsData=[
     files:[{label:'Download Packet',href:PACKET_URL}],
     pages:'29',
     uploadLabel:'2026-2027 Registration Open Enrollment Packet',
-    comingSoon:false
+    comingSoon:false,
+    banner:{
+      label:'Enrollment Opens May 1, 2026',
+      sub:'Contact us today to get ahead of the rush.',
+      color:'#1B2D5B',
+      accent:'#F7C948'
+    }
   },
   {
     id:'social-media',
     files:[{label:'English / Espanol',href:'/forms/LSPA_Social_Media_Release.pdf'}],
     pages:'1',
     uploadLabel:'Social Media Release Form',
-    comingSoon:false
+    comingSoon:false,
+    banner:{
+      label:'Coming Soon',
+      sub:'This form will be available for download shortly.',
+      color:'#4BA3E3',
+      accent:'#ffffff'
+    }
   },
 ];
 
@@ -166,6 +178,22 @@ return(
 const form=forms[fi]||{title:fd.uploadLabel,titleEs:'',desc:''};
 return(
 <div key={fd.id} className='rounded-2xl border-2 overflow-hidden transition-all' style={{borderColor:expandedForm===fd.id?'#F5A623':'#e5e7eb',boxShadow:expandedForm===fd.id?'0 8px 30px rgba(27,42,74,0.1)':'0 1px 4px rgba(0,0,0,0.04)'}}>
+
+{/* Banner strip */}
+{fd.banner&&(
+<div style={{background:fd.banner.color,padding:'10px 24px',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
+<div style={{display:'flex',alignItems:'center',gap:12}}>
+<div style={{width:6,height:6,borderRadius:'50%',background:fd.banner.accent,flexShrink:0}}/>
+<span style={{fontFamily:'Fredoka',fontSize:'0.95rem',fontWeight:700,color:fd.banner.accent,letterSpacing:0.3}}>
+{fd.banner.label}
+</span>
+</div>
+<span style={{fontFamily:'DM Sans',fontSize:'0.78rem',color:fd.id==='open-enrollment'?'rgba(247,201,72,0.75)':'rgba(255,255,255,0.6)',fontStyle:'italic'}}>
+{fd.banner.sub}
+</span>
+</div>
+)}
+
 <div className='p-6'>
 <h3 className='font-bold text-lg mb-0.5' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{form.title||fd.uploadLabel}</h3>
 <p className='text-sm font-medium mb-2' style={{fontFamily:'DM Sans',color:'#F5A623'}}>{form.titleEs||''}</p>
