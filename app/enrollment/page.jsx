@@ -13,12 +13,10 @@ const formsData=[
     files:[{label:'Download Packet',href:PACKET_URL}],
     pages:'29',
     uploadLabel:'2026-2027 Registration Open Enrollment Packet',
-    comingSoon:false,
-    banner:{
-      label:'Enrollment Opens May 1, 2026',
-      sub:'Contact us today to get ahead of the rush.',
-      color:'#1B2D5B',
-      accent:'#F7C948'
+    overlay:{
+      heading:'Enrollment Opens May 1, 2026',
+      sub:'Spots are limited. Contact us now to secure your child\'s place before registration opens.',
+      cta:true
     }
   },
   {
@@ -26,12 +24,10 @@ const formsData=[
     files:[{label:'English / Espanol',href:'/forms/LSPA_Social_Media_Release.pdf'}],
     pages:'1',
     uploadLabel:'Social Media Release Form',
-    comingSoon:false,
-    banner:{
-      label:'Coming Soon',
-      sub:'This form will be available for download shortly.',
-      color:'#4BA3E3',
-      accent:'#ffffff'
+    overlay:{
+      heading:'Coming Soon',
+      sub:'This form will be available for download in advance of the enrollment period.',
+      cta:false
     }
   },
 ];
@@ -177,136 +173,70 @@ return(
 {formsData.map((fd,fi)=>{
 const form=forms[fi]||{title:fd.uploadLabel,titleEs:'',desc:''};
 return(
-<div key={fd.id} className='rounded-2xl border-2 overflow-hidden transition-all' style={{borderColor:expandedForm===fd.id?'#F5A623':'#e5e7eb',boxShadow:expandedForm===fd.id?'0 8px 30px rgba(27,42,74,0.1)':'0 1px 4px rgba(0,0,0,0.04)'}}>
+<div key={fd.id} style={{position:'relative',borderRadius:16,overflow:'hidden',border:'2px solid #e5e7eb',boxShadow:'0 1px 4px rgba(0,0,0,0.04)'}}>
 
-{/* Banner strip */}
-{fd.banner&&(
-<div style={{background:fd.banner.color,padding:'10px 24px',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:8}}>
-<div style={{display:'flex',alignItems:'center',gap:12}}>
-<div style={{width:6,height:6,borderRadius:'50%',background:fd.banner.accent,flexShrink:0}}/>
-<span style={{fontFamily:'Fredoka',fontSize:'0.95rem',fontWeight:700,color:fd.banner.accent,letterSpacing:0.3}}>
-{fd.banner.label}
-</span>
-</div>
-<span style={{fontFamily:'DM Sans',fontSize:'0.78rem',color:fd.id==='open-enrollment'?'rgba(247,201,72,0.75)':'rgba(255,255,255,0.6)',fontStyle:'italic'}}>
-{fd.banner.sub}
-</span>
-</div>
-)}
-
+{/* Card content — always rendered, greyed underneath overlay */}
+<div style={{opacity:0.35,pointerEvents:'none',userSelect:'none'}}>
 <div className='p-6'>
 <h3 className='font-bold text-lg mb-0.5' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{form.title||fd.uploadLabel}</h3>
 <p className='text-sm font-medium mb-2' style={{fontFamily:'DM Sans',color:'#F5A623'}}>{form.titleEs||''}</p>
 <p className='text-sm mb-4' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{form.desc||''}</p>
 <div className='flex gap-3 flex-wrap items-center'>
 {fd.files.map((file,i)=>(
-<a key={i} href={file.href} download target='_blank' rel='noopener noreferrer' className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm text-white hover:opacity-90 transition-all' style={{fontFamily:'DM Sans',background:'#1B2D5B'}}>
+<div key={i} className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm text-white' style={{fontFamily:'DM Sans',background:'#1B2D5B'}}>
 {String.fromCodePoint(0x2B07)} {t('enrollment.download')} {file.label}
-</a>
+</div>
 ))}
 <div style={{width:1,height:28,background:'#E5E7EB',margin:'0 4px'}}/>
-<button onClick={()=>toggleUpload(fd.id)} className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border-2 transition-all cursor-pointer' style={{fontFamily:'DM Sans',background:expandedForm===fd.id?'#F5A623':'#FFFFFF',color:'#1B2D5B',borderColor:'#F5A623'}}>
-{expandedForm===fd.id?t('enrollment.close'):t('enrollment.uploadSigned')}
-</button>
+<div className='inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold text-sm border-2' style={{fontFamily:'DM Sans',background:'#FFFFFF',color:'#1B2D5B',borderColor:'#F5A623'}}>
+{t('enrollment.uploadSigned')}
+</div>
 </div>
 <div className='mt-2'>
 <span className='text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full' style={{background:'#F3F4F6',color:'#9CA3AF'}}>{fd.pages} {lang==='es'?'paginas':'pages'}</span>
 </div>
 </div>
-
-{expandedForm===fd.id&&(
-<div ref={el=>uploadRefs.current[fd.id]=el} className='p-6 border-t' style={{background:'#F9FAFB',borderColor:'#E5E7EB'}}>
-<div className='rounded-lg p-3 mb-5 flex items-center gap-2' style={{background:'#DCFCE7',border:'1px solid #BBF7D0'}}>
-<span>{String.fromCodePoint(0x1F512)}</span>
-<span className='text-xs' style={{fontFamily:'DM Sans',color:'#374151'}}>
-<strong>{lang==='es'?'Envio seguro':'Secure submission'}</strong> {String.fromCharCode(8212)} {t('enrollment.secureNote').split(String.fromCharCode(8212)).pop()}
-</span>
 </div>
 
-{uploadState==='success'&&(
-<div className='rounded-2xl p-8 text-center border-2' style={{borderColor:'#16A34A',background:'#FFFFFF'}}>
-<div className='w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl' style={{background:'#DCFCE7'}}>{String.fromCodePoint(0x2714)}</div>
-<h3 className='text-lg font-bold mb-1' style={{fontFamily:'Fredoka',color:'#16A34A'}}>{t('enrollment.success')}</h3>
-<p className='text-sm mb-4' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{t('enrollment.successMsg')}</p>
-<button onClick={()=>{setUploadState('idle');setFiles([]);setErrors({});setFormData({parentName:'',parentEmail:'',childName:'',phone:'',notes:''}); }} className='px-6 py-2.5 rounded-lg font-semibold text-sm text-white cursor-pointer' style={{fontFamily:'DM Sans',background:'#1B2D5B',border:'none'}}>{t('enrollment.uploadAnother')}</button>
-</div>
-)}
-
-{uploadState==='error'&&(
-<div className='rounded-xl p-5 text-center mb-4' style={{background:'#FEE2E2',border:'2px solid #DC2626'}}>
-<p className='font-bold text-sm mb-2' style={{color:'#DC2626'}}>{t('enrollment.errorMsg')}</p>
-<button onClick={()=>setUploadState('idle')} className='px-5 py-2 rounded-lg font-semibold text-sm text-white cursor-pointer' style={{fontFamily:'DM Sans',background:'#1B2D5B',border:'none'}}>{t('enrollment.retry')}</button>
-</div>
-)}
-
-{(uploadState==='idle'||uploadState==='uploading')&&(
-<div>
-<div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-<div>
-<label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.parentName')} <span style={{color:'#DC2626'}}>*</span></label>
-<input type='text' value={formData.parentName} onChange={e=>setFormData(p=>({...p,parentName:e.target.value}))} style={{...inputStyle,borderColor:errors.parentName?'#DC2626':'#E5E7EB'}}/>
-{errors.parentName&&<span className='text-xs mt-1 block' style={{color:'#DC2626'}}>{errors.parentName}</span>}
-</div>
-<div>
-<label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.email')} <span style={{color:'#DC2626'}}>*</span></label>
-<input type='email' value={formData.parentEmail} onChange={e=>setFormData(p=>({...p,parentEmail:e.target.value}))} style={{...inputStyle,borderColor:errors.parentEmail?'#DC2626':'#E5E7EB'}}/>
-{errors.parentEmail&&<span className='text-xs mt-1 block' style={{color:'#DC2626'}}>{errors.parentEmail}</span>}
-</div>
-<div>
-<label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.childName')} <span style={{color:'#DC2626'}}>*</span></label>
-<input type='text' value={formData.childName} onChange={e=>setFormData(p=>({...p,childName:e.target.value}))} style={{...inputStyle,borderColor:errors.childName?'#DC2626':'#E5E7EB'}}/>
-{errors.childName&&<span className='text-xs mt-1 block' style={{color:'#DC2626'}}>{errors.childName}</span>}
-</div>
-<div>
-<label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.phone')}</label>
-<input type='tel' value={formData.phone} onChange={e=>setFormData(p=>({...p,phone:e.target.value}))} placeholder='(609) 000-0000' style={inputStyle}/>
-</div>
-</div>
-
-<div className='mt-4'>
-<label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.attachForm')} <span style={{color:'#DC2626'}}>*</span></label>
-<div onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} onClick={()=>fileInputRef.current?.click()} className='rounded-xl p-6 text-center cursor-pointer transition-all' style={{border:'2px dashed '+(dragActive?'#2563EB':errors.files?'#DC2626':'#D1D5DB'),background:dragActive?'#DBEAFE':'#FFFFFF'}}>
-<input ref={fileInputRef} type='file' multiple accept='.pdf,.jpg,.jpeg,.png,.heic,.docx' onChange={e=>handleFiles(e.target.files)} style={{display:'none'}}/>
-<p className='text-sm font-semibold mb-1' style={{color:'#374151'}}>{dragActive?t('enrollment.dropHere'):t('enrollment.dragDrop')}</p>
-<p className='text-xs' style={{color:'#9CA3AF'}}>{t('enrollment.fileTypes')} {String.fromCharCode(183)} Max 10MB {String.fromCharCode(183)} 5 files max</p>
-</div>
-{errors.files&&<span className='text-xs mt-1 block' style={{color:'#DC2626'}}>{errors.files}</span>}
-{files.length>0&&(
-<div className='mt-2 space-y-1.5'>
-{files.map((file,i)=>(
-<div key={i} className='flex items-center gap-2 px-3 py-2 rounded-lg border' style={{borderColor:'#E5E7EB',background:'#FFFFFF'}}>
-<span className='flex-1 text-xs font-medium truncate' style={{color:'#374151'}}>{file.name}</span>
-<span className='text-xs flex-shrink-0' style={{color:'#9CA3AF'}}>{formatSize(file.size)}</span>
-<button type='button' onClick={e=>{e.stopPropagation();removeFile(i);}} className='w-5 h-5 rounded flex items-center justify-center text-xs font-bold flex-shrink-0 cursor-pointer' style={{background:'#FEE2E2',color:'#DC2626',border:'none'}}>{String.fromCodePoint(0x2715)}</button>
-</div>
-))}
-</div>
-)}
+{/* Professional overlay */}
+<div style={{
+  position:'absolute',
+  inset:0,
+  background:'rgba(15,29,61,0.82)',
+  display:'flex',
+  flexDirection:'column',
+  alignItems:'center',
+  justifyContent:'center',
+  padding:'2rem',
+  textAlign:'center',
+  gap:12
+}}>
+  <div style={{
+    display:'inline-block',
+    background:'linear-gradient(to right,#F7C948,#F5A623)',
+    borderRadius:999,
+    padding:'5px 20px',
+    marginBottom:4
+  }}>
+    <span style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#0F1D3D',letterSpacing:0.5}}>
+      {fd.overlay.heading}
+    </span>
+  </div>
+  <p style={{fontFamily:'DM Sans',fontSize:'0.875rem',color:'rgba(255,255,255,0.75)',maxWidth:320,lineHeight:1.6,margin:0}}>
+    {fd.overlay.sub}
+  </p>
+  {fd.overlay.cta&&(
+    <div style={{display:'flex',gap:10,marginTop:4,flexWrap:'wrap',justifyContent:'center'}}>
+      <a href='tel:6093967171' style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#0F1D3D',background:'linear-gradient(to right,#F7C948,#F5A623)',borderRadius:999,padding:'8px 20px',textDecoration:'none',boxShadow:'0 2px 10px rgba(247,201,72,0.3)'}}>
+        Call Now
+      </a>
+      <a href='mailto:lauraspelmanacademy@gmail.com' style={{fontFamily:'Fredoka',fontSize:'0.85rem',fontWeight:700,color:'#ffffff',background:'transparent',border:'2px solid rgba(255,255,255,0.4)',borderRadius:999,padding:'8px 20px',textDecoration:'none'}}>
+        Email Us
+      </a>
+    </div>
+  )}
 </div>
 
-<div className='mt-3'>
-<label className='block text-sm font-semibold mb-1' style={{color:'#374151'}}>{t('enrollment.notes')}</label>
-<textarea value={formData.notes} onChange={e=>setFormData(p=>({...p,notes:e.target.value}))} placeholder={t('enrollment.notesPlaceholder')} rows={2} style={{...inputStyle,resize:'vertical',minHeight:60}}/>
-</div>
-
-<div className='mt-4 rounded-lg p-3' style={{background:'#EFF6FF',border:'1px solid #BFDBFE'}}>
-<p style={{fontFamily:'DM Sans',fontSize:'0.8rem',color:'#1E40AF',textAlign:'center',margin:0}}>
-{lang==='es'
-?'Recordatorio: La carga es solo para revision previa. Traiga el original firmado a nuestra oficina para completar la inscripcion.'
-:'Reminder: This upload is for pre-review only. Please bring your signed original to our office to complete enrollment.'}
-</p>
-</div>
-
-<div className='mt-5 text-center'>
-<button onClick={()=>handleSubmit(fd.uploadLabel)} disabled={uploadState==='uploading'} className='px-10 py-3 rounded-full font-bold text-base shadow-lg cursor-pointer transition-all hover:-translate-y-0.5' style={{fontFamily:'Fredoka',background:uploadState==='uploading'?'#D1D5DB':'linear-gradient(135deg,#1B2D5B 0%,#2D4A7A 100%)',color:'#FFFFFF',border:'none'}}>
-{uploadState==='uploading'?t('enrollment.submitting'):t('enrollment.submit')}
-</button>
-<p className='text-xs mt-2' style={{color:'#9CA3AF'}}>{String.fromCodePoint(0x1F512)} {t('enrollment.encrypted')} {String.fromCharCode(183)} {t('enrollment.sentDirectly')}</p>
-</div>
-</div>
-)}
-</div>
-)}
 </div>
 );
 })}
