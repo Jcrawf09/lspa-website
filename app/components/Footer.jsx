@@ -54,7 +54,7 @@ export default function Footer() {
               </div>
               <div className="mt-5">
                 <div className="text-xs font-bold tracking-widest uppercase mb-2" style={{color:"#F7C948"}}>{t('footer.email')}</div>
-                <a href="mailto:lauraspelmanacademy@gmail.com" className="text-sm" style={{color:"rgba(255,255,255,0.4)"}}>lauraspelmanacademy@verizon.net</a>
+                <a href="mailto:lauraspelmanacademy@gmail.com" className="text-sm" style={{color:"rgba(255,255,255,0.4)"}}>lauraspelmanacademy@gmail.com</a>
               </div>
             </div>
             <div>
@@ -87,3 +87,9 @@ export default function Footer() {
                 Madison Thomas Technologies
               </a>
             </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
