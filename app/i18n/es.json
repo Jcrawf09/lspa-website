@@ -285,5 +285,145 @@
     "english": "English",
     "espanol": "Español",
     "bilingual": "English / Español (Bilingüe)"
+  },
+  "learn": {
+    "meta": {
+      "title": "LSPA Learn — Un Lugar para Niños y Familias",
+      "description": "Juegos de aprendizaje para niños y una biblioteca familiar bilingüe — para las familias de LSPA."
+    },
+    "hub": {
+      "badge": "LSPA LEARN",
+      "heading": "Aprendizaje,",
+      "headingAccent": "para todos",
+      "intro": "Un lugar para que los niños jueguen y crezcan, y un lugar para que los padres encuentren lo que funciona.",
+      "kidsTitle": "Para Niños",
+      "kidsSub": "Letras, colores, números — juegos divertidos para tu hijo.",
+      "kidsCta": "Abrir Juegos",
+      "familyTitle": "Para Familias",
+      "familySub": "Actividades bilingües, guías para padres y apoyo para la transición al kindergarten.",
+      "familyCta": "Abrir Biblioteca"
+    },
+    "library": {
+      "metaTitle": "Biblioteca de Aprendizaje Familiar — LSPA Learn",
+      "metaDesc": "Actividades bilingües para hacer en casa, guías para padres y apoyo para la transición al kindergarten.",
+      "heroBadge": "BIBLIOTECA DE APRENDIZAJE FAMILIAR",
+      "heroHeading": "Aprendan juntos",
+      "heroHeadingAccent": "en casa",
+      "heroSubtitle": "Actividades bilingües, guías para padres y apoyo para la transición al kindergarten — hechas para las familias de LSPA.",
+      "heroSubtitleEs": "Bilingual activities, parent guides, and kindergarten transition support.",
+      "tonightBadge": "SUGERENCIA DE ESTA NOCHE",
+      "tonightHeading": "Prueba esto",
+      "tonightHeadingAccent": "esta noche",
+      "tonightIntro": "Una actividad, escogida para esta noche. Sin buscar. Sin decidir. Solo ábrela y hazla.",
+      "tonightCta": "Abrir esta actividad",
+      "tonightSwitch": "Mañana llega una nueva sugerencia.",
+      "activitiesBadge": "ACTIVIDADES",
+      "activitiesHeading": "Escoge lo que va",
+      "activitiesHeadingAccent": "con tu noche",
+      "activitiesIntro": "Dieciséis actividades. Todas bilingües. Todas en menos de veinte minutos. Todas con cosas que ya tienes en casa.",
+      "filterByDomain": "Habilidad",
+      "filterByAge": "Edad",
+      "filterByTime": "Tiempo",
+      "allDomains": "Todas las habilidades",
+      "allAges": "Todas las edades",
+      "allTimes": "Cualquier tiempo",
+      "searchPlaceholder": "Buscar actividades…",
+      "noResults": "Ninguna actividad coincide. Prueba quitar un filtro.",
+      "clearFilters": "Quitar filtros",
+      "guidesBadge": "GUÍAS PARA PADRES",
+      "guidesHeading": "Respuestas reales para",
+      "guidesHeadingAccent": "noches reales",
+      "guidesIntro": "Cuatro guías bilingües sobre las cosas que todo padre de preescolar pregunta.",
+      "kindergartenBadge": "TRANSICIÓN AL KINDERGARTEN",
+      "kindergartenHeading": "De LSPA al",
+      "kindergartenHeadingAccent": "primer día de tu hijo",
+      "kindergartenIntro": "Todo lo que tu familia necesita entre ahora y septiembre.",
+      "kindergartenCta": "Abrir paquete de transición",
+      "progressBadge": "MI PROGRESO",
+      "progressHeading": "Mira lo que",
+      "progressHeadingAccent": "has hecho",
+      "progressIntro": "Tu progreso vive solo en este dispositivo. Nada se envía a ningún lugar.",
+      "progressCta": "Abrir mi progreso"
+    },
+    "domains": {
+      "literacy": "Alfabetización",
+      "numeracy": "Matemáticas",
+      "socialEmotional": "Socioemocional",
+      "motor": "Motor",
+      "creative": "Creativa",
+      "science": "Ciencia"
+    },
+    "ages": {
+      "p": "3 a 4 años",
+      "k": "5 a 6 años"
+    },
+    "times": {
+      "5": "5 minutos",
+      "10": "10 minutos",
+      "15": "15 minutos",
+      "20": "20 minutos",
+      "daily": "Rutina diaria",
+      "multi": "Varios días"
+    },
+    "card": {
+      "tryIt": "Abrir actividad",
+      "favoriteAdd": "Guardar en favoritos",
+      "favoriteRemove": "Guardada",
+      "completed": "Completada",
+      "markComplete": "Marcar completada"
+    },
+    "activity": {
+      "objective": "Lo que aprenderá tu hijo",
+      "materials": "Lo que necesitas",
+      "steps": "Pasos",
+      "talkingPoints": "Cosas que decir",
+      "extend": "Cuando tengas más tiempo",
+      "classroomNote": "Para el salón de LSPA",
+      "print": "Imprimir esta actividad",
+      "back": "Volver a la biblioteca"
+    },
+    "guides": {
+      "readMore": "Leer esta guía",
+      "tryTonight": "Prueba esto esta noche",
+      "talkToTeacher": "Habla con el maestro de tu hijo en LSPA sobre",
+      "sources": "Fuentes",
+      "back": "Volver a la biblioteca"
+    },
+    "kindergarten": {
+      "openPacket": "Abrir paquete de transición",
+      "downloadPacket": "Descargar paquete imprimible",
+      "section1": "Bienvenida — tu hijo está listo",
+      "section2": "Cómo es el kindergarten en NJ",
+      "section3": "Lista de preparación",
+      "section4": "Cronograma de mayo a septiembre",
+      "section5": "Cómo hablar con tu hijo sobre el cambio",
+      "section6": "Recursos y contactos",
+      "section7": "Una nota del maestro de tu hijo"
+    },
+    "progress": {
+      "activitiesCompleted": "Actividades completadas",
+      "favoritesSaved": "Favoritos guardados",
+      "readinessProgress": "Preparación para kindergarten",
+      "recent": "Actividad reciente",
+      "noActivity": "Aún no hay nada registrado. Abre una actividad y márcala como completada cuando termines.",
+      "resetButton": "Reiniciar mi progreso",
+      "resetConfirm": "Esto borrará todo lo guardado en este dispositivo. ¿Continuar?",
+      "childNameLabel": "Nombre del niño (opcional)",
+      "childNamePlaceholder": "Solo lo usamos en esta pantalla",
+      "saveChildName": "Guardar"
+    },
+    "closing": {
+      "heading": "¿Preguntas?",
+      "headingAccent": "Habla con el maestro de tu hijo.",
+      "desc": "Aún estamos aquí mucho después de septiembre. Mel, Jessica y Joleen quieren saber de ti.",
+      "callCta": "Llama al (609) 396-7171",
+      "emailCta": "Envíanos un correo"
+    },
+    "citations": {
+      "label": "Alineación con estándares",
+      "njStandard": "Estándar de NJ",
+      "ecers": "ECERS-3",
+      "tsGold": "TS GOLD"
+    }
   }
 }
