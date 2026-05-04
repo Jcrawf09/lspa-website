@@ -285,5 +285,145 @@
     "english": "English",
     "espanol": "Español",
     "bilingual": "English / Español (Bilingual)"
+  },
+  "learn": {
+    "meta": {
+      "title": "LSPA Learn — A Place for Kids and Families",
+      "description": "Learning games for kids and a bilingual family library — built for LSPA families."
+    },
+    "hub": {
+      "badge": "LSPA LEARN",
+      "heading": "Learning,",
+      "headingAccent": "for everyone",
+      "intro": "A place for the kids to play and grow, and a place for parents to find what works.",
+      "kidsTitle": "For Kids",
+      "kidsSub": "Letters, colors, counting — fun games your child can play.",
+      "kidsCta": "Open Games",
+      "familyTitle": "For Families",
+      "familySub": "Bilingual activities, parent guides, and kindergarten transition support.",
+      "familyCta": "Open Library"
+    },
+    "library": {
+      "metaTitle": "Family Learning Library — LSPA Learn",
+      "metaDesc": "Bilingual at-home activities, parent guides, and kindergarten transition support for LSPA families.",
+      "heroBadge": "FAMILY LEARNING LIBRARY",
+      "heroHeading": "Learn together",
+      "heroHeadingAccent": "at home",
+      "heroSubtitle": "Bilingual activities, parent guides, and kindergarten transition support — built for LSPA families.",
+      "heroSubtitleEs": "Actividades bilingües, guías para padres y apoyo para la transición al kindergarten.",
+      "tonightBadge": "TONIGHT'S SUGGESTION",
+      "tonightHeading": "Try this",
+      "tonightHeadingAccent": "tonight",
+      "tonightIntro": "One activity, picked for tonight. No scrolling. No deciding. Just open and do.",
+      "tonightCta": "Open this activity",
+      "tonightSwitch": "A new suggestion comes tomorrow.",
+      "activitiesBadge": "ACTIVITIES",
+      "activitiesHeading": "Choose what fits",
+      "activitiesHeadingAccent": "your night",
+      "activitiesIntro": "Sixteen activities. All bilingual. All under twenty minutes. All using things you already have at home.",
+      "filterByDomain": "Skill",
+      "filterByAge": "Age",
+      "filterByTime": "Time",
+      "allDomains": "All skills",
+      "allAges": "All ages",
+      "allTimes": "Any time",
+      "searchPlaceholder": "Search activities…",
+      "noResults": "No activities match those filters. Try clearing one.",
+      "clearFilters": "Clear filters",
+      "guidesBadge": "PARENT GUIDES",
+      "guidesHeading": "Real answers for",
+      "guidesHeadingAccent": "real nights",
+      "guidesIntro": "Four bilingual guides on the things every preschool parent asks about.",
+      "kindergartenBadge": "KINDERGARTEN TRANSITION",
+      "kindergartenHeading": "From LSPA to",
+      "kindergartenHeadingAccent": "your child's first day",
+      "kindergartenIntro": "Everything your family needs between now and September.",
+      "kindergartenCta": "Open transition packet",
+      "progressBadge": "MY PROGRESS",
+      "progressHeading": "Track what",
+      "progressHeadingAccent": "you've done",
+      "progressIntro": "Your progress lives only on this device. Nothing is sent anywhere.",
+      "progressCta": "Open my progress"
+    },
+    "domains": {
+      "literacy": "Literacy",
+      "numeracy": "Numeracy",
+      "socialEmotional": "Social-Emotional",
+      "motor": "Motor",
+      "creative": "Creative",
+      "science": "Science"
+    },
+    "ages": {
+      "p": "Ages 3–4",
+      "k": "Ages 5–6"
+    },
+    "times": {
+      "5": "5 minutes",
+      "10": "10 minutes",
+      "15": "15 minutes",
+      "20": "20 minutes",
+      "daily": "Daily routine",
+      "multi": "Multi-day"
+    },
+    "card": {
+      "tryIt": "Open activity",
+      "favoriteAdd": "Save to favorites",
+      "favoriteRemove": "Saved",
+      "completed": "Completed",
+      "markComplete": "Mark complete"
+    },
+    "activity": {
+      "objective": "What your child will learn",
+      "materials": "What you need",
+      "steps": "Steps",
+      "talkingPoints": "Things to say",
+      "extend": "When you have more time",
+      "classroomNote": "For the LSPA classroom",
+      "print": "Print this activity",
+      "back": "Back to library"
+    },
+    "guides": {
+      "readMore": "Read this guide",
+      "tryTonight": "Try this tonight",
+      "talkToTeacher": "Talk to your child's LSPA teacher about",
+      "sources": "Sources",
+      "back": "Back to library"
+    },
+    "kindergarten": {
+      "openPacket": "Open transition packet",
+      "downloadPacket": "Download printable packet",
+      "section1": "Welcome — your child is ready",
+      "section2": "What kindergarten looks like in NJ",
+      "section3": "Readiness checklist",
+      "section4": "May-to-September timeline",
+      "section5": "How to talk to your child about the change",
+      "section6": "Resources & contacts",
+      "section7": "A note from your child's teacher"
+    },
+    "progress": {
+      "activitiesCompleted": "Activities completed",
+      "favoritesSaved": "Favorites saved",
+      "readinessProgress": "Kindergarten readiness",
+      "recent": "Recent activity",
+      "noActivity": "Nothing tracked yet. Open an activity and mark it complete when you're done.",
+      "resetButton": "Reset my progress",
+      "resetConfirm": "This will clear everything saved on this device. Continue?",
+      "childNameLabel": "Child's first name (optional)",
+      "childNamePlaceholder": "We use this only on this screen",
+      "saveChildName": "Save"
+    },
+    "closing": {
+      "heading": "Questions?",
+      "headingAccent": "Talk to your child's teacher.",
+      "desc": "We are still here long after September. Mel, Jessica, and Joleen want to hear from you.",
+      "callCta": "Call (609) 396-7171",
+      "emailCta": "Email Us"
+    },
+    "citations": {
+      "label": "Standards alignment",
+      "njStandard": "NJ Standard",
+      "ecers": "ECERS-3",
+      "tsGold": "TS GOLD"
+    }
   }
 }
