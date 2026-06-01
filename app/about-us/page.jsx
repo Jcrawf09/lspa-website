@@ -65,7 +65,8 @@ function AboutHero() {
           About Laura Spelman<br />Preschool Academy
         </h1>
         <p style={{ fontFamily:'DM Sans', fontSize:18, color:'rgba(255,255,255,0.82)', lineHeight:1.6, maxWidth:560, margin:'0 auto' }}>
-          Laura Spelman Preschool Academy is a district-partnered preschool operating under contract with Trenton Public Schools Office of Early Childhood. We provide free, high-quality preschool education to families across the city.
+          A district-partnered preschool committed to nurturing every child&rsquo;s
+          potential through innovative, research-based early education.
         </p>
       </div>
     </section>
