@@ -1,111 +1,283 @@
 'use client';
-import{useEffect,useRef,useState}from'react';
-import{useLanguage}from'../i18n/LanguageProvider';
+import { useState, useEffect, useRef } from 'react';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
-const timeline2526=[
-'Upgraded classroom learning materials and furniture across both campuses',
-'Enhanced outdoor play areas with new age-appropriate equipment',
-'Implemented enriched Creative Curriculum units aligned with NJ Preschool Teaching and Learning Standards',
-'Launched new parent communication tools and school website',
-'Strengthened teacher professional development with district coaching partnerships',
-'Expanded bilingual family resources for English and Spanish-speaking households'
+/* ───────────────────────────────────────────────
+   ABOUT LSPA — /about-us
+   Sections: Hero · Founder · Timeline · By the Numbers · Vision
+   ─────────────────────────────────────────────── */
+
+// Fade-in on scroll hook
+function useFadeIn() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { el.style.opacity = 1; el.style.transform = 'translateY(0)'; } },
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+function FadeIn({ children, delay = 0, style = {} }) {
+  const ref = useFadeIn();
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: 0,
+        transform: 'translateY(32px)',
+        transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ─── HERO ─── */
+function AboutHero() {
+  return (
+    <section style={{
+      position: 'relative',
+      minHeight: 420,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #1a5c3a 0%, #2e7d52 40%, #48a870 100%)',
+      overflow: 'hidden',
+    }}>
+      {/* decorative circles */}
+      <div style={{ position:'absolute', width:320, height:320, borderRadius:'50%', border:'1px solid rgba(255,255,255,0.08)', top:-80, right:-60 }} />
+      <div style={{ position:'absolute', width:200, height:200, borderRadius:'50%', border:'1px solid rgba(255,255,255,0.06)', bottom:-40, left:'10%' }} />
+
+      <div style={{ position:'relative', zIndex:2, textAlign:'center', padding:'80px 24px 60px', maxWidth:720 }}>
+        <p style={{ fontFamily:'DM Sans', fontSize:13, fontWeight:600, letterSpacing:3, textTransform:'uppercase', color:'rgba(255,255,255,0.65)', marginBottom:16 }}>
+          Our Story
+        </p>
+        <h1 style={{ fontFamily:'DM Sans', fontSize:'clamp(32px, 5vw, 52px)', fontWeight:700, color:'#fff', lineHeight:1.15, margin:'0 0 20px' }}>
+          About Laura Spelman<br />Preschool Academy
+        </h1>
+        <p style={{ fontFamily:'DM Sans', fontSize:18, color:'rgba(255,255,255,0.82)', lineHeight:1.6, maxWidth:560, margin:'0 auto' }}>
+          Laura Spelman Preschool Academy is a district-partnered preschool operating under contract with Trenton Public Schools Office of Early Childhood. We provide free, high-quality preschool education to families across the city.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ─── FOUNDER / MELODY ─── */
+function FounderSection() {
+  return (
+    <section style={{ padding:'80px 24px', background:'#fff' }}>
+      <div style={{ maxWidth:960, margin:'0 auto', display:'flex', flexWrap:'wrap', gap:48, alignItems:'center' }}>
+        {/* placeholder portrait */}
+        <FadeIn style={{ flex:'1 1 280px', minWidth:260 }}>
+          <div style={{
+            width:'100%', aspectRatio:'3/4', maxWidth:340,
+            borderRadius:16,
+            background:'linear-gradient(160deg, #d4edda 0%, #a8d8b9 100%)',
+            display:'flex', alignItems:'center', justifyContent:'center',
+            boxShadow:'0 12px 40px rgba(30,90,58,0.12)',
+          }}>
+            <span style={{ fontFamily:'DM Sans', fontSize:14, color:'#2e7d52', fontWeight:600, letterSpacing:1, textTransform:'uppercase' }}>
+              Founder Photo
+            </span>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.15} style={{ flex:'1 1 360px' }}>
+          <p style={{ fontFamily:'DM Sans', fontSize:12, fontWeight:700, letterSpacing:3, textTransform:'uppercase', color:'#48a870', marginBottom:12 }}>
+            Our Founder
+          </p>
+          <h2 style={{ fontFamily:'DM Sans', fontSize:36, fontWeight:700, color:'#1a3a2a', lineHeight:1.2, margin:'0 0 20px' }}>
+            Melody Crawford-Cannon
+          </h2>
+          <p style={{ fontFamily:'DM Sans', fontSize:16, color:'#4a6355', lineHeight:1.75, margin:'0 0 16px' }}>
+            Melody Crawford-Cannon founded Laura Spelman Preschool Academy with a
+            simple but powerful belief: every child in Trenton deserves access to a
+            world-class early education. With deep roots in the community and a
+            background in business operations, Melody built LSPA from a single
+            classroom into a two-campus program serving families across the city.
+          </p>
+          <p style={{ fontFamily:'DM Sans', fontSize:16, color:'#4a6355', lineHeight:1.75, margin:0 }}>
+            Under her leadership, LSPA became a trusted district partner through
+            Trenton Public Schools&rsquo; Office of Early Childhood &mdash; providing
+            high-quality, state-funded preschool programming that meets or exceeds
+            NJDOE standards. Melody&rsquo;s vision has always been clear: build
+            something that lasts, and build it for the children who need it most.
+          </p>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ─── TIMELINE ─── */
+const milestones = [
+  { year: '2015', title: 'The Beginning', text: 'Laura Spelman Preschool Academy opens its doors at 540 N. Olden Avenue in Trenton, welcoming its first class of preschool students.' },
+  { year: '2017', title: 'District Partnership', text: 'LSPA establishes a formal contract with Trenton Public Schools\u2019 Office of Early Childhood, becoming a district-partnered preschool provider.' },
+  { year: '2019', title: 'Expanding Our Reach', text: 'A second campus opens at 1040 Spruce Street in Lawrence, broadening access for families throughout the greater Trenton area.' },
+  { year: '2023', title: 'Curriculum Excellence', text: 'LSPA adopts a research-based curriculum aligned with the New Jersey Preschool Teaching and Learning Standards, earning recognition from district coaches.' },
+  { year: '2026', title: 'Growth & Innovation', text: 'Planning begins for a fourth classroom at the Spruce Street campus, alongside a new digital platform to strengthen family engagement.' },
 ];
-const timeline2526es=[
-'Materiales de aprendizaje y muebles mejorados en ambos campus',
-'Areas de juego al aire libre mejoradas con equipo apropiado para la edad',
-'Implementacion de unidades enriquecidas del Creative Curriculum alineadas con los Estandares de NJ',
-'Ampliando el acceso a herramientas de aprendizaje en linea y recursos digitales para las familias',
-'Fortalecimiento del desarrollo profesional de maestros con alianzas de coaching del distrito',
-'Expansion de recursos bilingues para familias de habla inglesa y espanola'
+
+function TimelineSection() {
+  return (
+    <section style={{ padding:'80px 24px', background:'#f7faf8' }}>
+      <div style={{ maxWidth:800, margin:'0 auto' }}>
+        <FadeIn>
+          <p style={{ fontFamily:'DM Sans', fontSize:12, fontWeight:700, letterSpacing:3, textTransform:'uppercase', color:'#48a870', textAlign:'center', marginBottom:12 }}>
+            Our Journey
+          </p>
+          <h2 style={{ fontFamily:'DM Sans', fontSize:36, fontWeight:700, color:'#1a3a2a', textAlign:'center', margin:'0 0 48px' }}>
+            A Decade of Impact
+          </h2>
+        </FadeIn>
+
+        <div style={{ position:'relative', paddingLeft:36 }}>
+          {/* vertical line */}
+          <div style={{ position:'absolute', left:11, top:8, bottom:8, width:2, background:'linear-gradient(180deg, #48a870, #d4edda)' }} />
+
+          {milestones.map((m, i) => (
+            <FadeIn key={i} delay={i * 0.1}>
+              <div style={{ position:'relative', marginBottom: i < milestones.length - 1 ? 40 : 0 }}>
+                {/* dot */}
+                <div style={{
+                  position:'absolute', left:-36, top:6,
+                  width:24, height:24, borderRadius:'50%',
+                  background:'#fff', border:'3px solid #48a870',
+                  display:'flex', alignItems:'center', justifyContent:'center',
+                }}>
+                  <div style={{ width:8, height:8, borderRadius:'50%', background:'#2e7d52' }} />
+                </div>
+
+                <p style={{ fontFamily:'DM Sans', fontSize:13, fontWeight:700, letterSpacing:2, color:'#48a870', margin:'0 0 4px' }}>{m.year}</p>
+                <h3 style={{ fontFamily:'DM Sans', fontSize:20, fontWeight:700, color:'#1a3a2a', margin:'0 0 8px' }}>{m.title}</h3>
+                <p style={{ fontFamily:'DM Sans', fontSize:15, color:'#4a6355', lineHeight:1.7, margin:0 }}>{m.text}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── BY THE NUMBERS ─── */
+const stats = [
+  { number: '2', label: 'Campuses', sub: 'Trenton & Lawrence' },
+  { number: '120+', label: 'Students', sub: 'Enrolled annually' },
+  { number: '6', label: 'Classrooms', sub: 'Across both locations' },
+  { number: '10+', label: 'Years', sub: 'Serving Trenton families' },
 ];
-const timeline2627=[
-'Expanding classroom capacity to serve more Trenton families',
-'Introducing Learning Strategies-based enrichment activities',
-'Developing a mobile app for real-time family updates',
-'Expanding access to online learning tools and digital resources for families',
-'Building new community partnerships for family support services',
-'Investing in advanced teacher training and leadership development'
-];
-const timeline2627es=[
-'Expansion de la capacidad de los salones para servir a mas familias de Trenton',
-'Introduccion de actividades de enriquecimiento basadas en Estrategias de Aprendizaje',
-'Desarrollo de una aplicacion movil para actualizaciones en tiempo real',
-'Ampliando el acceso a herramientas de aprendizaje en linea y recursos digitales para las familias',
-'Construccion de nuevas alianzas comunitarias para servicios de apoyo familiar',
-'Inversion en capacitacion avanzada de maestros y desarrollo de liderazgo'
-];
 
-export default function AboutUs(){
-const{t,lang}=useLanguage();
-const ref=useRef(null);
-const[visible,setVisible]=useState(false);
-useEffect(()=>{const o=new IntersectionObserver(([e])=>{if(e.isIntersecting)setVisible(true);},{threshold:0.1});if(ref.current)o.observe(ref.current);return()=>o.disconnect();},[]);
-const fade=(d)=>({opacity:visible?1:0,transform:visible?'translateY(0)':'translateY(28px)',transition:'all 0.7s cubic-bezier(0.16,1,0.3,1) '+d+'s'});
+function StatsSection() {
+  return (
+    <section style={{ padding:'80px 24px', background:'linear-gradient(135deg, #1a5c3a 0%, #2e7d52 100%)' }}>
+      <div style={{ maxWidth:960, margin:'0 auto' }}>
+        <FadeIn>
+          <h2 style={{ fontFamily:'DM Sans', fontSize:36, fontWeight:700, color:'#fff', textAlign:'center', margin:'0 0 48px' }}>
+            LSPA by the Numbers
+          </h2>
+        </FadeIn>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:32 }}>
+          {stats.map((s, i) => (
+            <FadeIn key={i} delay={i * 0.1}>
+              <div style={{
+                background:'rgba(255,255,255,0.1)',
+                borderRadius:16, padding:'36px 24px', textAlign:'center',
+                backdropFilter:'blur(4px)',
+                border:'1px solid rgba(255,255,255,0.12)',
+              }}>
+                <p style={{ fontFamily:'DM Sans', fontSize:44, fontWeight:800, color:'#fff', margin:'0 0 4px', lineHeight:1 }}>{s.number}</p>
+                <p style={{ fontFamily:'DM Sans', fontSize:16, fontWeight:600, color:'rgba(255,255,255,0.9)', margin:'0 0 4px' }}>{s.label}</p>
+                <p style={{ fontFamily:'DM Sans', fontSize:13, color:'rgba(255,255,255,0.55)', margin:0 }}>{s.sub}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-const items2526=lang==='es'?timeline2526es:timeline2526;
-const items2627=lang==='es'?timeline2627es:timeline2627;
-const aboutDesc=lang==='es'?'Laura Spelman Preschool Academy es un preescolar asociado al distrito que opera bajo contrato con la Oficina de Primera Infancia de las Escuelas Publicas de Trenton. Proveemos educacion preescolar gratuita y de alta calidad a familias de toda la ciudad.':'Laura Spelman Preschool Academy is a district-partnered preschool operating under contract with Trenton Public Schools Office of Early Childhood. We provide free, high-quality preschool education to families across the city.';
-const buildingTitle=lang==='es'?'Construyendo Algo':'Building Something';
-const buildingAccent=lang==='es'?'Que Perdura':'That Lasts';
+/* ─── VISION ─── */
+function VisionSection() {
+  return (
+    <section style={{ padding:'80px 24px', background:'#fff' }}>
+      <div style={{ maxWidth:760, margin:'0 auto', textAlign:'center' }}>
+        <FadeIn>
+          <p style={{ fontFamily:'DM Sans', fontSize:12, fontWeight:700, letterSpacing:3, textTransform:'uppercase', color:'#48a870', marginBottom:12 }}>
+            Looking Ahead
+          </p>
+          <h2 style={{ fontFamily:'DM Sans', fontSize:36, fontWeight:700, color:'#1a3a2a', margin:'0 0 24px' }}>
+            Our Vision for the Future
+          </h2>
+          <p style={{ fontFamily:'DM Sans', fontSize:17, color:'#4a6355', lineHeight:1.8, margin:'0 0 20px' }}>
+            Laura Spelman Preschool Academy is growing. With plans for a fourth
+            classroom at our Spruce Street campus, an expanded digital platform for
+            families, and continued investment in teacher development, we&rsquo;re
+            building the foundation for the next decade of impact.
+          </p>
+          <p style={{ fontFamily:'DM Sans', fontSize:17, color:'#4a6355', lineHeight:1.8, margin:0 }}>
+            Our commitment remains the same: provide Trenton&rsquo;s youngest
+            learners with the safe, stimulating, and joyful environment they need to
+            thrive &mdash; from their very first classroom to kindergarten and beyond.
+          </p>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
 
-return(
-<div style={{minHeight:'100vh'}}>
-<section className='relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden' style={{background:'linear-gradient(135deg,#1B2D5B 0%,#1B4A6B 50%,#2A5451 100%)'}}>
-<div className='absolute inset-0' style={{background:'radial-gradient(ellipse at 30% 50%,rgba(75,163,227,0.08),transparent 60%)'}}/>
-<div className='max-w-3xl mx-auto px-4 md:px-8 text-center relative z-10'>
-<div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6' style={{background:'rgba(75,163,227,0.1)',border:'1px solid rgba(75,163,227,0.2)'}}><span className='text-xs font-bold tracking-[2.5px] uppercase' style={{fontFamily:'DM Sans',color:'#4BA3E3'}}>ABOUT LSPA</span></div>
-<h1 className='font-bold text-white mb-4' style={{fontFamily:'Fredoka',fontSize:'clamp(32px,5vw,56px)'}}>{t('about.heading')} <span style={{color:'#F5A623'}}>{t('about.headingAccent')}</span></h1>
-<p className='text-lg' style={{fontFamily:'DM Sans',color:'rgba(255,255,255,0.7)',maxWidth:600,margin:'0 auto'}}>{aboutDesc}</p>
-</div>
-</section>
+/* ─── LSPA BADGE ─── */
+function LogoBadge() {
+  return (
+    <div style={{
+      padding:'48px 24px 64px', background:'#f7faf8',
+      display:'flex', flexDirection:'column', alignItems:'center',
+    }}>
+      <div style={{
+        width:72, height:72, borderRadius:'50%',
+        background:'linear-gradient(135deg, #2e7d52, #48a870)',
+        display:'flex', alignItems:'center', justifyContent:'center',
+        boxShadow:'0 8px 24px rgba(30,90,58,0.15)',
+        marginBottom:16,
+      }}>
+        <span style={{ fontFamily:'DM Sans', fontSize:24, fontWeight:800, color:'#fff' }}>LS</span>
+      </div>
+      <p style={{ fontFamily:'DM Sans', fontSize:11, fontWeight:700, letterSpacing:3, textTransform:'uppercase', color:'#2e7d52', margin:'0 0 8px' }}>
+        Laura Spelman
+      </p>
+      <p style={{ fontFamily:'DM Sans', fontSize:10, fontWeight:700, letterSpacing:2, textTransform:'uppercase', color:'#48a870', margin:'0 0 12px' }}>
+        Preschool Academy
+      </p>
+      <p style={{ fontFamily:'DM Sans', fontSize:12, color:'#8aa69a', margin:0 }}>
+        540 N. Olden Avenue, Trenton, NJ 08638 &nbsp;&middot;&nbsp; 1040 Spruce Street, Lawrence, NJ 08648
+      </p>
+    </div>
+  );
+}
 
-<section className='py-6' style={{background:'#FFFFFF'}}>
-<div className='max-w-4xl mx-auto px-4 md:px-8'>
-<div className='grid grid-cols-4 gap-4 text-center'>
-{[{num:'2',label:t('about.stats.campuses')},{num:'30+',label:t('about.stats.years')},{num:'100+',label:t('about.stats.families')},{num:t('about.stats.cost'),label:''}].map((s,i)=>(
-<div key={i} className='py-4'><div className='text-2xl md:text-3xl font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{s.num}</div>{s.label&&<div className='text-xs mt-1' style={{fontFamily:'DM Sans',color:'#9CA3AF'}}>{s.label}</div>}</div>
-))}
-</div>
-</div>
-</section>
-
-<section ref={ref} className='py-16 md:py-24' style={{background:'#F8FAFB'}}>
-<div className='max-w-4xl mx-auto px-4 md:px-8'>
-<div className='text-center mb-12' style={fade(0)}>
-<h2 className='font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B',fontSize:'clamp(28px,4vw,44px)'}}>{buildingTitle} <span style={{color:'#F5A623'}}>{buildingAccent}</span></h2>
-</div>
-
-<div className='space-y-8'>
-<div className='rounded-3xl border-2 p-8 relative overflow-hidden' style={{borderColor:'#4BA3E320',background:'#FFFFFF',...fade(0.1)}}>
-<div className='absolute top-0 left-0 right-0 h-1.5' style={{background:'linear-gradient(to right,#4BA3E3,#4BA3E388)'}}/>
-<div className='flex items-center gap-3 mb-6'>
-<div className='w-10 h-10 rounded-full flex items-center justify-center' style={{background:'#EBF5FB'}}><span className='text-sm font-bold' style={{color:'#4BA3E3'}}>{t('about.timelineNow')}</span></div>
-<div><div className='text-xs font-bold tracking-wider uppercase' style={{color:'#4BA3E3'}}>2025-2026</div><div className='text-lg font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{t('about.timeline2526')}</div></div>
-</div>
-<div className='grid md:grid-cols-2 gap-4'>
-{items2526.map((item,i)=>(<div key={i} className='flex items-start gap-3'><div className='w-2 h-2 rounded-full mt-2 flex-shrink-0' style={{background:'#4BA3E3'}}/><span className='text-sm' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{item}</span></div>))}
-</div>
-</div>
-
-<div className='rounded-3xl border-2 p-8 relative overflow-hidden' style={{borderColor:'#4CAF5020',background:'#FFFFFF',...fade(0.2)}}>
-<div className='absolute top-0 left-0 right-0 h-1.5' style={{background:'linear-gradient(to right,#4CAF50,#4CAF5088)'}}/>
-<div className='flex items-center gap-3 mb-6'>
-<div className='w-10 h-10 rounded-full flex items-center justify-center' style={{background:'#E8F5E9'}}><span className='text-sm font-bold' style={{color:'#4CAF50'}}>{t('about.timelineNext')}</span></div>
-<div><div className='text-xs font-bold tracking-wider uppercase' style={{color:'#4CAF50'}}>2026-2027</div><div className='text-lg font-bold' style={{fontFamily:'Fredoka',color:'#1B2D5B'}}>{t('about.timeline2627')}</div></div>
-</div>
-<div className='grid md:grid-cols-2 gap-4'>
-{items2627.map((item,i)=>(<div key={i} className='flex items-start gap-3'><div className='w-2 h-2 rounded-full mt-2 flex-shrink-0' style={{background:'#4CAF50'}}/><span className='text-sm' style={{fontFamily:'DM Sans',color:'#6B7280'}}>{item}</span></div>))}
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<section className='py-16 md:py-24' style={{background:'#0F1D3D'}}>
-<div className='max-w-3xl mx-auto px-4 md:px-8 text-center'>
-<div className='text-xs font-bold tracking-[3px] uppercase mb-4' style={{color:'#F7C948'}}>{t('about.missionLabel')}</div>
-<p className='text-xl md:text-2xl font-medium leading-relaxed' style={{fontFamily:'Fredoka',color:'#FFFFFF'}}>{t('about.missionText')}</p>
-</div>
-</section>
-</div>
-);}
+/* ─── PAGE ─── */
+export default function AboutPage() {
+  return (
+    <main style={{ fontFamily:'DM Sans, sans-serif' }}>
+      <Nav />
+      <AboutHero />
+      <FounderSection />
+      <TimelineSection />
+      <StatsSection />
+      <VisionSection />
+      <LogoBadge />
+      <Footer />
+    </main>
+  );
+}
