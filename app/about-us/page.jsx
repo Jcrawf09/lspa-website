@@ -44,7 +44,7 @@ const fade=(d)=>({opacity:visible?1:0,transform:visible?'translateY(0)':'transla
 
 const items2526=lang==='es'?timeline2526es:timeline2526;
 const items2627=lang==='es'?timeline2627es:timeline2627;
-const aboutDesc=lang==='es'?'Laura Spelman Preschool Academy es un preescolar asociado al distrito que opera bajo contrato con la Oficina de Primera Infancia de las Escuelas Publicas de Trenton. Proveemos educacion preescolar gratuita y de alta calidad a familias de toda la ciudad.':'Laura Spelman Preschool Academy is a district-partnered preschool operating under contract with Trenton Public Schools Office of Early Childhood. We provide free, high-quality preschool education to families across the city.';
+const aboutDesc=lang==='es'?'Laura Spelman Preschool Academy es un preescolar asociado al distrito que opera en contrato con las Escuelas Publicas de Trenton y la Oficina de Primera Infancia. Proveemos educacion preescolar gratuita y de alta calidad a familias de toda la ciudad.':'Laura Spelman Preschool Academy is a district-partnered preschool operating in contract with Trenton Public Schools and the Office of Early Childhood. We provide free, high-quality preschool education to families across the city.';
 const buildingTitle=lang==='es'?'Construyendo Algo':'Building Something';
 const buildingAccent=lang==='es'?'Que Perdura':'That Lasts';
 
